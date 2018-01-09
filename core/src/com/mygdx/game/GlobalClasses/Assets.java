@@ -77,6 +77,51 @@ public class Assets {
 			= new AssetDescriptor<Texture>("car_sprite/damage/j_oldal.png",Texture.class);
 
 */
+
+	//Autó 2 ép
+	public static final AssetDescriptor<Texture> KEK_B_ELSO_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/bal_elso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_ORR_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/bal_hatso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_HATSO_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/bal_kozep.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_SEGG_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/bal_orr.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_OLDAL_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/bal_segg.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_ELSO_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/jobb_elso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_ORR_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/jobb_hatso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_HATSO_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/jobb_kozep.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_SEGG_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/jobb_orr.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_OLDAL_EP
+			= new AssetDescriptor<Texture>("car2_sprite/intact/jobb_segg.png",Texture.class);
+
+	//Autó 2 törött
+	public static final AssetDescriptor<Texture> KEK_B_ELSO_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/bal_elso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_ORR_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/bal_hatso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_HATSO_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/bal_kozep.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_SEGG_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/bal_orr.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_B_OLDAL_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/bal_segg.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_ELSO_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/jobb_elso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_ORR_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/jobb_hatso.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_HATSO_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/jobb_kozep.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_SEGG_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/jobb_orr.png",Texture.class);
+	public static final AssetDescriptor<Texture> KEK_J_OLDAL_TOROTT
+			= new AssetDescriptor<Texture>("car2_sprite/damage/jobb_segg.png",Texture.class);
+
 	public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
@@ -113,7 +158,32 @@ public class Assets {
 		manager.load(J_ELSO_TOROTT);
 		manager.load(J_HATSO_TOROTT);
 		manager.load(J_OLDAL_TOROTT);
-	*/
+		*/
+
+		//Autó Kék(2) ép
+		manager.load(KEK_B_ELSO_EP);
+		manager.load(KEK_B_ORR_EP);
+		manager.load(KEK_B_HATSO_EP);
+		manager.load(KEK_B_SEGG_EP);
+		manager.load(KEK_B_OLDAL_EP);
+		manager.load(KEK_J_ELSO_EP);
+		manager.load(KEK_J_ORR_EP);
+		manager.load(KEK_J_HATSO_EP);
+		manager.load(KEK_J_SEGG_EP);
+		manager.load(KEK_J_OLDAL_EP);
+
+		//Autó Kék(2) törött
+		manager.load(KEK_B_ELSO_TOROTT);
+		manager.load(KEK_B_ORR_TOROTT);
+		manager.load(KEK_B_HATSO_TOROTT);
+		manager.load(KEK_B_SEGG_TOROTT);
+		manager.load(KEK_B_OLDAL_TOROTT);
+		manager.load(KEK_J_ELSO_TOROTT);
+		manager.load(KEK_J_ORR_TOROTT);
+		manager.load(KEK_J_HATSO_TOROTT);
+		manager.load(KEK_J_SEGG_TOROTT);
+		manager.load(KEK_J_OLDAL_TOROTT);
+
 	}
 
     public static void afterLoaded() {
