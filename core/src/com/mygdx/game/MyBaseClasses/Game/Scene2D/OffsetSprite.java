@@ -11,11 +11,50 @@ import com.badlogic.gdx.math.Vector2;
 public class OffsetSprite extends Sprite {
     private Vector2 offsetVector;
     static protected float PI = (float) Math.PI;
+    int azonosito;
+    float originalWidth, originalHeight;
+    float originalY, Ychange;
 
-
-    public OffsetSprite(Texture texture, float xOffset, float yOffset) {
+    public OffsetSprite(Texture texture, float xOffset, float yOffset, int azonosito) {
         super(texture);
         offsetVector = new Vector2(xOffset, yOffset);
+        this.azonosito=azonosito;
+    }
+
+    public int getAzonosito() {
+        return azonosito;
+    }
+
+    public float getYchange() {
+        return Ychange;
+    }
+
+    public void setYchange(float ychange) {
+        Ychange = ychange;
+    }
+
+    public float getOriginalWidth() {
+        return originalWidth;
+    }
+
+    public float getOriginalY() {
+        return originalY;
+    }
+
+    public void setOriginalY(float originalY) {
+        this.originalY = originalY;
+    }
+
+    public void setOriginalWidth(float originalWidth) {
+        this.originalWidth = originalWidth;
+    }
+
+    public float getOriginalHeight() {
+        return originalHeight;
+    }
+
+    public void setOriginalHeight(float originalHeight) {
+        this.originalHeight = originalHeight;
     }
 
     public Vector2 getOffsetVector() {

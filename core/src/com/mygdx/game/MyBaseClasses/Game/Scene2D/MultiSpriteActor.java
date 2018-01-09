@@ -53,19 +53,121 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
         }
     }
 
+    float getXByOrigin(){
+        if(getX()>getOriginX()) return getX()-getOriginX();
+        return getOriginX()-getX();
+    }
+
+    float getYByOrigin(){
+        if(getY()>getOriginY()) return getY()-getOriginY();
+        return getOriginY()-getY();
+    }
+
     @Override
     public void setSize(float width, float height) {
         float changedWidthRatio = getWidth()/width;
         float changedHeightRatio = getHeight()/height;
+        float widthChange = Math.abs(getWidth()-width);
+        float heightChange = Math.abs(getHeight()-height);
+        float originalHeight = getHeight();
+        float originalWidth = getWidth();
         setWidth2(width);
         setHeight2(height);
         float spriteWidth, spriteHeight;
         for (OffsetSprite sprite : spriteMap.values()) {
             spriteWidth = sprite.getWidth();
             spriteHeight = sprite.getHeight();
+            sprite.setOriginalHeight(spriteHeight);
+            sprite.setOriginalWidth(spriteWidth);
             sprite.setSize(spriteWidth/changedWidthRatio,spriteHeight/changedHeightRatio);
+            if(sprite.getX()!=0) sprite.setX(sprite.getX()-widthChange/2);
+        }
+        for(OffsetSprite sprite : spriteMap.values()){
+
+            if(sprite.getAzonosito()==7) {
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY() - (getSpriteByAzonosito(1).getOriginalHeight() - getSpriteByAzonosito(1).getOriginalHeight() / changedHeightRatio));
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+
         }
 
+        for(OffsetSprite sprite : spriteMap.values()){
+
+            if(sprite.getAzonosito()==10) {
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY() - (getSpriteByAzonosito(8).getOriginalHeight() - getSpriteByAzonosito(8).getOriginalHeight() / changedHeightRatio));
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+
+        }
+
+        for(OffsetSprite sprite : spriteMap.values()){
+
+            if(sprite.getAzonosito()==2) {
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY()-(getSpriteByAzonosito(10).getOriginalHeight()-getSpriteByAzonosito(10).getOriginalHeight()/changedHeightRatio)-getSpriteByAzonosito(10).getYchange());
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+
+        }
+
+        for(OffsetSprite sprite: spriteMap.values()){
+            if(sprite.getAzonosito()==5){
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY()-(getSpriteByAzonosito(7).getOriginalHeight()-getSpriteByAzonosito(7).getOriginalHeight()/changedHeightRatio)-getSpriteByAzonosito(7).getYchange());
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+        }
+
+        for(OffsetSprite sprite: spriteMap.values()){
+            if(sprite.getAzonosito()==6){
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY()-(getSpriteByAzonosito(5).getOriginalHeight()-getSpriteByAzonosito(5).getOriginalHeight()/changedHeightRatio)-getSpriteByAzonosito(5).getYchange());
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+        }
+
+        for(OffsetSprite sprite: spriteMap.values()){
+            if(sprite.getAzonosito()==3){
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY()-(getSpriteByAzonosito(2).getOriginalHeight()-getSpriteByAzonosito(2).getOriginalHeight()/changedHeightRatio)-getSpriteByAzonosito(2).getYchange());
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+        }
+
+        for(OffsetSprite sprite: spriteMap.values()){
+            if(sprite.getAzonosito()==9){
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY()-(getSpriteByAzonosito(3).getOriginalHeight()-getSpriteByAzonosito(3).getOriginalHeight()/changedHeightRatio)-getSpriteByAzonosito(3).getYchange());
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+        }
+
+        for(OffsetSprite sprite: spriteMap.values()){
+            if(sprite.getAzonosito()==4){
+                sprite.setOriginalY(sprite.getY());
+                sprite.setY(sprite.getY()-(getSpriteByAzonosito(6).getOriginalHeight()-getSpriteByAzonosito(6).getOriginalHeight()/changedHeightRatio)-getSpriteByAzonosito(6).getYchange());
+                sprite.setYchange(sprite.getOriginalY() - sprite.getY());
+                break;
+            }
+        }
+    }
+
+    public OffsetSprite getSpriteByAzonosito(int azonosito){
+        for(OffsetSprite sprite : spriteMap.values()){
+            if(sprite.getAzonosito()==azonosito){
+                return sprite;
+            }
+        }
+        return null;
     }
 
     public void setWidth2(float width){
@@ -120,6 +222,22 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
         sprite.setOrigin(getOriginX() - sprite.getOffsetVector().x, getOriginY() - sprite.getOffsetVector().y);
         //addCollisionShape("SpriteRect"+ spriteMap.size(), new MyRectangle(sprite.getOffsetVector().x, sprite.getOffsetVector().y, sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), getOriginX(), getOriginY()));
     }
+
+    public void changeSprite(String key, OffsetSprite sprite){
+        for(OffsetSprite offsetSprite : spriteMap.values()){
+            if(getSprite(key)==offsetSprite){
+                float y = offsetSprite.getY();
+                float x = offsetSprite.getX();
+                float height = offsetSprite.getHeight();
+                float width = offsetSprite.getWidth();
+                offsetSprite.set(sprite);
+                offsetSprite.setSize(width, height);
+                offsetSprite.setPosition(x,y);
+            }
+        }
+    }
+
+
 
     public void removeSprite(String key) {
         if(spriteMap.containsKey(key)){

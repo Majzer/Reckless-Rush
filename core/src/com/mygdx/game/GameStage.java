@@ -10,6 +10,7 @@ import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyStage;
  */
 
 public class GameStage extends MyStage {
+    protected int i =0;
 
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024,768), batch, game);
