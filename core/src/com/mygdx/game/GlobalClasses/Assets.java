@@ -39,6 +39,10 @@ public class Assets {
 	public static final AssetDescriptor<BitmapFont> ARIAL_30_FONT
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
 
+	//Animáciok
+	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
+			= new AssetDescriptor<TextureAtlas>("pedestrian_project/walk.atlas", TextureAtlas.class);
+
 	//Autó ép
 	public static final AssetDescriptor<Texture> B_ELSO_EP
 			= new AssetDescriptor<Texture>("car_sprite/intact/elso_bal.png",Texture.class);
@@ -191,6 +195,9 @@ public class Assets {
 
 
 		manager.load(ARIAL_30_FONT);
+
+		//Animáciok
+		manager.load(WALK_TEXTURE);
 
 		//Autó ép
 		manager.load(B_ELSO_EP);
