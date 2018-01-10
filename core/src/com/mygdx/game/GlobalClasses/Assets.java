@@ -127,6 +127,10 @@ public class Assets {
     public static final AssetDescriptor<Texture> KEK_J_OLDAL_TOROTT
             = new AssetDescriptor<Texture>("car2_sprite/damage/jobb_segg.png",Texture.class);
 
+    //Teszt
+	public static final AssetDescriptor<Texture> TESZT_TEXTURE
+			= new AssetDescriptor<Texture>("test.png",Texture.class);
+
 
     public static void prepare() {
 		manager = new AssetManager();
@@ -193,6 +197,8 @@ public class Assets {
 		manager.load(KEK_J_SEGG_TOROTT);
 		manager.load(KEK_J_OLDAL_TOROTT);
 
+		//Teszt
+		manager.load(TESZT_TEXTURE);
 
 	}
 

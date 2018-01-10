@@ -196,6 +196,8 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
         }
     }
 
+
+
     @Override
     protected void originChanged() {
         super.originChanged();
@@ -251,6 +253,13 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     public OffsetSprite getSprite(String key ){
         if(spriteMap.containsKey(key)) return spriteMap.get(key);
         else return null;
+    }
+
+    public OffsetSprite getSprite(int key ){
+        for (OffsetSprite sprite:spriteMap.values()) {
+            if(sprite.azonosito==key) return sprite;
+        }
+        return null;
     }
 
     public HashMap<String, OffsetSprite> getSpritesMap() {

@@ -14,7 +14,7 @@ public class GameStage extends MyStage {
 
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024,768), batch, game);
-    addActor(new CarActor());
+    addActor(new CarActor(this));
 
 
         fitWorldToWidth();
