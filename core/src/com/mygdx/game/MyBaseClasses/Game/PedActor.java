@@ -14,7 +14,7 @@ public class PedActor extends OneSpriteAnimatedActor {
 
     public PedActor(GameStage gameStage) {
         super(Assets.manager.get(Assets.WALK_TEXTURE));
-        setFps(13);
+        setFps(11);
         this.gameStage = gameStage;
     }
 

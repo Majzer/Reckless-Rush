@@ -41,7 +41,7 @@ public class Assets {
 
 	//Animáciok
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
-			= new AssetDescriptor<TextureAtlas>("pedestrian_project/walk.atlas", TextureAtlas.class);
+			= new AssetDescriptor<TextureAtlas>("pedestrian_project/no2/walk.atlas", TextureAtlas.class);
 
 	//Autó ép
 	public static final AssetDescriptor<Texture> B_ELSO_EP
