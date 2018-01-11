@@ -175,6 +175,16 @@ public class Assets {
 	public static final AssetDescriptor<Texture> KAMION_J_OLDAL_TOROTT
 			= new AssetDescriptor<Texture>("truck_sprite/damage/jobb_segg.png",Texture.class);
 
+	//Háttér
+	public static final AssetDescriptor<Texture> HATTER_TEXTURE
+			=new AssetDescriptor<Texture>("sprites/road_background.png",Texture.class);
+
+	//Bokor
+	public static final AssetDescriptor<Texture> BOKOR_EP_TEXTURE
+			=new AssetDescriptor<Texture>("sprites/bush_project.png",Texture.class);
+	public static final AssetDescriptor<Texture> BOKOR_LAPOS_TEXTURE
+			=new AssetDescriptor<Texture>("sprites/damaged_bush_project.png",Texture.class);
+
 
     public static void prepare() {
 		manager = new AssetManager();
@@ -267,6 +277,13 @@ public class Assets {
 
 		//Teszt
 		manager.load(TESZT_TEXTURE);
+
+		//Háttér
+		manager.load(HATTER_TEXTURE);
+
+		//Bokor
+		manager.load(BOKOR_EP_TEXTURE);
+		manager.load(BOKOR_LAPOS_TEXTURE);
 
 	}
 
