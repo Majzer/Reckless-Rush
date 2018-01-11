@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.Game.PedActor;
 import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Game.Scene2D.OneSpriteStaticActor;
 
@@ -34,6 +35,7 @@ public class GameStage extends MyStage {
         addActor(bg2 =new BackgroundActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,715));
         //addActor(bg3 =new BackgroundActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1430));
         addActor(car=new CarActor(this));
+        addActor(new PedActor(this));
 
         addListener(new ClickListener(){
             @Override
@@ -42,7 +44,7 @@ public class GameStage extends MyStage {
                 System.out.println("y = " + y);
             }
         });
-        
+
         fitWorldToWidth();
     }
 
