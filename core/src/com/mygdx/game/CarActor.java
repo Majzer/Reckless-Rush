@@ -19,11 +19,14 @@ import java.util.Vector;
 
 public class CarActor extends MultiSpriteActor {
 
+    GameStage gameStage;
+
     public CarActor(GameStage gameStage) {
         super();
+        this.gameStage=gameStage;
         setSize(114,214);
-        float x = getWidth()/2, y=getHeight()/2;
-        setPosition(300,gameStage.getHeight()/2);
+        float x = getWidth()/2, y=gameStage.getViewport().getScreenHeight()/2;
+        setPosition(destinations[2],gameStage.getHeight()/2);
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0,8),"BAL_SEGG_");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_HATSO_EP),0,11,10),"BAL_HATSO_");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_EP),0,72,2),"BAL_OLDAL");
@@ -70,7 +73,7 @@ public class CarActor extends MultiSpriteActor {
 
     }
 
-    int[] destinations = new int[]{100,200,300,400,500};
+    int[] destinations = new int[]{171-57,377-57,642-57,850-57};
     int mostani=2;
     boolean mehetBalra=false;
     boolean mehetJobbra=false;
@@ -86,12 +89,19 @@ public class CarActor extends MultiSpriteActor {
             mehetBalra=true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            if(mostani<4&&!mehetBalra)
+            if(mostani<3&&!mehetBalra)
            mehetJobbra=true;
-        }if(mehetBalra){
+        }
+        if(mehetBalra){
             if(getRotation()<10) rotateBy(1);
             if(getX()>destinations[mostani-1]){
-                setX(getX()-5);
+                System.out.println(getX());
+                for (int aaa = 0; aaa<5;aaa++){
+                    setX(getX()-1);
+                    if(getX()==destinations[mostani-1]){
+                        break;
+                    }
+                }
             }
             else {
                 mehetBalra=false;
@@ -101,7 +111,13 @@ public class CarActor extends MultiSpriteActor {
         if(mehetJobbra){
             if(getRotation()>-10) rotateBy(-1);
             if(getX()<destinations[mostani+1]){
-                setX(getX()+5);
+                System.out.println(getX());
+                for (int aaa = 0; aaa<5;aaa++){
+                    setX(getX()+1);
+                    if(getX()==destinations[mostani+1]){
+                        break;
+                    }
+                }
             }
             else {
                 mehetJobbra=false;
