@@ -22,6 +22,7 @@ public class GameStage extends MyStage {
     boolean egyes=false,kettes=false;
     int db1=0, db2=0, db3;
     TruckActor truckActor;
+    BlueCarActor blueCarActor;
 
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024,768), batch, game);
@@ -33,6 +34,8 @@ public class GameStage extends MyStage {
         //addActor(bg3 =new BackgroundActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1430));
         addActor(car=new CarActor(this));
         car.setSpeed(8);
+        addActor(blueCarActor=new BlueCarActor(1000));
+        blueCarActor.setSpeed(6.5f);
         addActor(pedActor=new PedActor(this));car.setZIndex(10);
         pedActor.setZIndex(10);
         addActor(truckActor = new TruckActor(500));
@@ -71,6 +74,10 @@ public class GameStage extends MyStage {
 
         if(truckActor!=null){
             truckActor.setY(truckActor.getY()+truckActor.getSpeed());
+        }
+
+        if(blueCarActor!=null){
+            blueCarActor.setY(blueCarActor.getY()+blueCarActor.getSpeed());
         }
 
         // TODO: 2018. 01. 11. mind3 bokor szépen jelenjen meg és tünjön el
