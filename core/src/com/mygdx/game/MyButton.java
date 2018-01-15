@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
+import com.mygdx.game.MyBaseClasses.InitableInterface;
 
 /**
  * Created by tanulo on 2018. 01. 15..

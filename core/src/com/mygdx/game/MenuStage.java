@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyStage;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 
 /**
  * Created by tanulo on 2018. 01. 15..

@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyScreen;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyScreen;
 
 /**
  * Created by tanulo on 2018. 01. 15..
