@@ -6,7 +6,6 @@ import com.mygdx.game.GlobalClasses.*;
 import com.mygdx.game.MainScreen;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyScreen;
 import com.mygdx.game.MenuScreen;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyScreen;
 import com.mygdx.game.RecklessRush;
 
 
