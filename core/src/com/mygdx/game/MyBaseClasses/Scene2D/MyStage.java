@@ -1,4 +1,4 @@
-package com.mygdx.game.MyBaseClasses.Game.Scene2D;
+package com.mygdx.game.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MyBaseClasses.Game.InitableInterface;
+import com.mygdx.game.MyBaseClasses.InitableInterface;
 import com.mygdx.game.RecklessRush;
 
 import java.util.ArrayList;
