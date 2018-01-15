@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.GlobalClasses.*;
 import com.mygdx.game.MainScreen;
+import com.mygdx.game.MenuScreen;
 import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyScreen;
 import com.mygdx.game.RecklessRush;
 
@@ -31,7 +32,7 @@ public class LoadingScreen extends MyScreen {
 		spriteBatch.end();
 		if (Assets.manager.update()) {
 			Assets.afterLoaded();
-			game.setScreen(new MainScreen(game));
+			game.setScreen(new MenuScreen(game));
 		}
 	}
 

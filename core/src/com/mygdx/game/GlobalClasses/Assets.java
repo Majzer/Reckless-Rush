@@ -43,6 +43,18 @@ public class Assets {
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("pedestrian_project/no2/walk.atlas", TextureAtlas.class);
 
+	public static final AssetDescriptor<Texture> BTN_START_TEXTURE
+			= new AssetDescriptor<Texture>("menu/btn_start.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_START_DOWN_TEXTURE
+			= new AssetDescriptor<Texture>("menu/btn_start2.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_EXIT_TEXTURE
+			= new AssetDescriptor<Texture>("menu/btn_exit2.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_EXIT_DOWN_TEXTURE
+			= new AssetDescriptor<Texture>("menu/btn_exit.png", Texture.class);
+
 	//Autó ép
 	public static final AssetDescriptor<Texture> B_ELSO_EP
 			= new AssetDescriptor<Texture>("car_sprite/intact/elso_bal.png",Texture.class);
@@ -208,6 +220,10 @@ public class Assets {
 
 		//Animáciok
 		manager.load(WALK_TEXTURE);
+		manager.load(BTN_START_TEXTURE);
+		manager.load(BTN_START_DOWN_TEXTURE);
+		manager.load(BTN_EXIT_TEXTURE);
+		manager.load(BTN_EXIT_DOWN_TEXTURE);
 
 		//Autó ép
 		manager.load(B_ELSO_EP);
