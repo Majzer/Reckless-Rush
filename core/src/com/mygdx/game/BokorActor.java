@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.OneSpriteStaticActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
  * Created by tanulo on 2018. 01. 11..

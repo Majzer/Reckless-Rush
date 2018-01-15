@@ -2,14 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetDescriptor;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.MultiSpriteActor;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.OffsetSprite;
-
-import java.util.Vector;
+import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 /**
  * Created by tanulo on 2018. 01. 08..
@@ -20,24 +15,24 @@ import java.util.Vector;
 public class CarActor extends MultiSpriteActor {
 
     GameStage gameStage;
+    float speed=10;
 
     public CarActor(GameStage gameStage) {
-        super();
+        super(566,1068);
         this.gameStage=gameStage;
-        setSize(114,214);
-        float x = getWidth()/2, y=gameStage.getViewport().getScreenHeight()/2;
-        setPosition(destinations[2],gameStage.getHeight()/2);
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0,8),"BAL_SEGG_");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_HATSO_EP),0,11,10),"BAL_HATSO_");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_EP),0,72,2),"BAL_OLDAL");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ELSO_EP),0,149,3),"BAL_ELSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ORR_EP),0,203,9),"BAL_ORR");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_ELSO_EP),57,149,6),"JOBB_ELSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_ORR_EP),57,203,4),"JOBB_ORR");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),57,72,5),"JOBB_OLDAL");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_SEGG_EP),57,0,1),"JOBB_SEGG");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_HATSO_EP),57,11,7),"JOBB_HATSO");
-        setOrigin(x,y);
+        setPosition(destinations[2],gameStage.getViewport().getScreenHeight()/3);
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0),"BAL_SEGG_");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_HATSO_EP),0,11),"BAL_HATSO_");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_EP),0,72),"BAL_OLDAL");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ELSO_EP),0,149),"BAL_ELSO");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ORR_EP),0,203),"BAL_ORR");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_ELSO_EP),57,149),"JOBB_ELSO");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_ORR_EP),57,203),"JOBB_ORR");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),57,72),"JOBB_OLDAL");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_SEGG_EP),57,0),"JOBB_SEGG");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_HATSO_EP),57,11),"JOBB_HATSO");
+        setSize(getWidth()/4,getHeight()/4);
+        setOrigintoCenter();
         /*
         System.out.println("x = " + x);
         System.out.println("y = " + y);
@@ -54,18 +49,26 @@ public class CarActor extends MultiSpriteActor {
         //removeSprite("JOBB_OLDAL_EP");
         //addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),283,361,5),"JOBB_OLDAL_");
 
-        changeSprite("BAL_SEGG_",new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0,8));
-        changeSprite("BAL_HATSO_",new OffsetSprite(Assets.manager.get(Assets.B_HATSO_TOROTT),0,11,10));
-        changeSprite("BAL_OLDAL",new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_TOROTT),0,72,2));
-        changeSprite("BAL_ELSO",new OffsetSprite(Assets.manager.get(Assets.B_ELSO_TOROTT),0,149,3));
-        changeSprite("BAL_ORR",new OffsetSprite(Assets.manager.get(Assets.B_ORR_TOROTT),0,203,9));
-        changeSprite("JOBB_ELSO",new OffsetSprite(Assets.manager.get(Assets.J_ELSO_TOROTT),57,149,6));
-        changeSprite("JOBB_ORR",new OffsetSprite(Assets.manager.get(Assets.J_ORR_TOROTT),57,203,4));
-        changeSprite("JOBB_OLDAL",new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_TOROTT),57,72,5));
-        changeSprite("JOBB_SEGG",new OffsetSprite(Assets.manager.get(Assets.J_SEGG_TOROTT),57,0,1));
-        changeSprite("JOBB_HATSO",new OffsetSprite(Assets.manager.get(Assets.J_HATSO_TOROTT),57,11,7));
+        changeSprite("BAL_SEGG_",new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
+        changeSprite("BAL_HATSO_",new OffsetSprite(Assets.manager.get(Assets.B_HATSO_TOROTT),0,11));
+        changeSprite("BAL_OLDAL",new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_TOROTT),0,72));
+        changeSprite("BAL_ELSO",new OffsetSprite(Assets.manager.get(Assets.B_ELSO_TOROTT),0,149));
+        changeSprite("BAL_ORR",new OffsetSprite(Assets.manager.get(Assets.B_ORR_TOROTT),0,203));
+        changeSprite("JOBB_ELSO",new OffsetSprite(Assets.manager.get(Assets.J_ELSO_TOROTT),57,149));
+        changeSprite("JOBB_ORR",new OffsetSprite(Assets.manager.get(Assets.J_ORR_TOROTT),57,203));
+        changeSprite("JOBB_OLDAL",new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_TOROTT),57,72));
+        changeSprite("JOBB_SEGG",new OffsetSprite(Assets.manager.get(Assets.J_SEGG_TOROTT),57,0));
+        changeSprite("JOBB_HATSO",new OffsetSprite(Assets.manager.get(Assets.J_HATSO_TOROTT),57,11));
         super.originChanged();
 
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     @Override

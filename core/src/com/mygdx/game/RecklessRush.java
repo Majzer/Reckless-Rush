@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.DemoLoading.LoadingScreen;
-import com.mygdx.game.MyBaseClasses.Game.MyGame;
+import com.mygdx.game.MyBaseClasses.MyGame;
 import com.mygdx.game.GlobalClasses.Assets;
 
 public class RecklessRush extends MyGame {
