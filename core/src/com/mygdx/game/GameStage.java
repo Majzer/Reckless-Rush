@@ -27,7 +27,7 @@ public class GameStage extends MyStage {
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024,768), batch, game);
         addActor(bg =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1));
-        addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,715));
+        addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,getViewport().getScreenHeight()-getViewport().getScreenHeight()*0.0069444444444444f));
         addActor(ba1 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()));
         addActor(ba2 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470, bg.getY()+250));
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));
@@ -81,12 +81,12 @@ public class GameStage extends MyStage {
         }
 
         if(!(bg.isInFrustum())){
-            bg2.setY(bg.getY()+500);
+            bg2.setY(bg.getY()+getViewport().getScreenHeight()/1.44f);
             bg2.setZIndex(0);
         }
 
         if(!(bg2.isInFrustum())) {
-            bg.setY(bg2.getY() + 500);
+            bg.setY(bg2.getY() + getViewport().getScreenHeight()/1.44f);
             bg.setZIndex(0);
         }
 
