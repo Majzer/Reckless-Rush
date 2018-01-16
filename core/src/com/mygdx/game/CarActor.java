@@ -48,7 +48,7 @@ public class CarActor extends MultiSpriteActor {
         //setSize(getWidth()/5,getHeight()/5);
         //removeSprite("JOBB_OLDAL_EP");
         //addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),283,361,5),"JOBB_OLDAL_");
-/*
+
         changeSprite("BAL_SEGG_",new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
         changeSprite("BAL_HATSO_",new OffsetSprite(Assets.manager.get(Assets.B_HATSO_TOROTT),0,11));
         changeSprite("BAL_OLDAL",new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_TOROTT),0,72));
@@ -60,7 +60,7 @@ public class CarActor extends MultiSpriteActor {
         changeSprite("JOBB_SEGG",new OffsetSprite(Assets.manager.get(Assets.J_SEGG_TOROTT),57,0));
         changeSprite("JOBB_HATSO",new OffsetSprite(Assets.manager.get(Assets.J_HATSO_TOROTT),57,11));
         super.originChanged();
-*/
+
     }
 
     public float getSpeed() {
@@ -96,7 +96,7 @@ public class CarActor extends MultiSpriteActor {
            mehetJobbra=true;
         }
         if(mehetBalra){
-            if(getRotation()<10) rotateBy(1);
+            if(getRotation()<20) rotateBy(1);
             if(getX()>destinations[mostani-1]){
                 System.out.println(getX());
                 for (int aaa = 0; aaa<5;aaa++){
@@ -112,7 +112,7 @@ public class CarActor extends MultiSpriteActor {
             }
         }
         if(mehetJobbra){
-            if(getRotation()>-10) rotateBy(-1);
+            if(getRotation()>-20) rotateBy(-1);
             if(getX()<destinations[mostani+1]){
                 System.out.println(getX());
                 for (int aaa = 0; aaa<5;aaa++){

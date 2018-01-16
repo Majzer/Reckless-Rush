@@ -3,7 +3,7 @@ package com.mygdx.game.MyBaseClasses;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.mygdx.game.MyBaseClasses.Game.Scene2D.MyScreen;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyScreen;
 import com.mygdx.game.RecklessRush;
 
 import java.lang.reflect.InvocationTargetException;
