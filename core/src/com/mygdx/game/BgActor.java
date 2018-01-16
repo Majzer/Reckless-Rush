@@ -7,9 +7,9 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
  * Created by tanulo on 2018. 01. 11..
  */
 
-public class BackgroundActor extends OneSpriteStaticActor {
+public class BgActor extends OneSpriteStaticActor {
 
-    public BackgroundActor(Texture texture, float x, float y) {
+    public BgActor(Texture texture, float x, float y) {
         super(texture);
         setPosition(x,y);
     }
