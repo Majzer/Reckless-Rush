@@ -8,6 +8,8 @@ import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.PedActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 
+import java.util.Random;
+
 /**
  * Created by tanulo on 2018. 01. 08..
  */
@@ -21,24 +23,32 @@ public class GameStage extends MyStage {
     BgActor bg, bg3;
     boolean egyes=false,kettes=false;
     int db1=0, db2=0, db3;
-    TruckActor truckActor;
-    BlueCarActor blueCarActor;
+    TruckActor truckActor, truckActor2;
+    BlueCarActor blueCarActor, blueCarActor2;
+    Random rand;
 
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024,768), batch, game);
-        addActor(bg =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1));
-        addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,getViewport().getScreenHeight()-getViewport().getScreenHeight()*0.0069444444444444f));
+        rand = new Random();
+        addActor(bg =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,100));
+        addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,bg.getY()+bg.getHeight()/1.5f));
+        System.out.println(bg.getY());
+        System.out.println(bg.isInFrustum());
         addActor(ba1 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()));
         addActor(ba2 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470, bg.getY()+250));
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1430));
         addActor(car=new CarActor(this));
         car.setSpeed(8);
-        addActor(blueCarActor=new BlueCarActor(1000));
+        addActor(blueCarActor=new BlueCarActor(1000,rand.nextBoolean()));
         blueCarActor.setSpeed(6.5f);
-        addActor(pedActor=new PedActor(this));car.setZIndex(10);
+        addActor(blueCarActor2=new BlueCarActor(1200, rand.nextBoolean()));
+        blueCarActor2.setSpeed(6.5f);
+        addActor(pedActor=new PedActor(this));
+        car.setZIndex(10);
         pedActor.setZIndex(10);
-        addActor(truckActor = new TruckActor(500));
+        addActor(truckActor = new TruckActor(500,rand.nextBoolean()));
+        addActor(truckActor2 = new TruckActor(900,rand.nextBoolean()));
         truckActor.setSpeed(5);
         addListener(new ClickListener(){
             @Override
@@ -50,7 +60,7 @@ public class GameStage extends MyStage {
 
 
 
-        fitWorldToWidth();
+        //fitWorldToWidth();
     }
 
     @Override
@@ -69,24 +79,64 @@ public class GameStage extends MyStage {
         super.act(delta);
         if(car!=null){
             car.setY(car.getY()+car.getSpeed());
-            setCameraMoveToY(car.getY()+210);
+            setCameraMoveToY(car.getY()+getViewport().getScreenHeight()/2.5f);
         }
 
         if(truckActor!=null){
-            truckActor.setY(truckActor.getY()+truckActor.getSpeed());
+            if(!(truckActor.isSzembe()))truckActor.setY(truckActor.getY()+truckActor.getSpeed());
+            else truckActor.setY(truckActor.getY()-truckActor.getSpeed());
+        }
+
+        if(truckActor2!=null){
+            if(!(truckActor2.isSzembe()))truckActor2.setY(truckActor2.getY()+truckActor2.getSpeed());
+            else truckActor2.setY(truckActor2.getY()-truckActor2.getSpeed());
         }
 
         if(blueCarActor!=null){
-            blueCarActor.setY(blueCarActor.getY()+blueCarActor.getSpeed());
+            if(!(blueCarActor.isSzembe()))blueCarActor.setY(blueCarActor.getY()+blueCarActor.getSpeed());
+            else blueCarActor.setY(blueCarActor.getY()-blueCarActor.getSpeed());
         }
 
+        if(blueCarActor2!=null){
+            if(!(blueCarActor2.isSzembe()))blueCarActor2.setY(blueCarActor2.getY()+blueCarActor2.getSpeed());
+            else blueCarActor2.setY(blueCarActor2.getY()-blueCarActor2.getSpeed());
+        }
+
+        if(blueCarActor.getY()+getViewport().getScreenHeight()<car.getY()){
+            blueCarActor.setY(car.getY()+getViewport().getScreenHeight());
+            blueCarActor.setMagas(blueCarActor.getY());
+            blueCarActor.setSzembe(rand.nextBoolean());
+        }
+
+        if(blueCarActor2.getY()+getViewport().getScreenHeight()<car.getY()){
+            blueCarActor2.setY(car.getY()+getViewport().getScreenHeight());
+            blueCarActor2.setMagas(blueCarActor2.getY());
+            blueCarActor2.setSzembe(rand.nextBoolean());
+        }
+
+        if(truckActor.getY()+getViewport().getScreenHeight()<car.getY()){
+            truckActor.setY(car.getY()+getViewport().getScreenHeight());
+            truckActor.setMagas(truckActor.getY());
+            truckActor.setSzembe(rand.nextBoolean());
+        }
+
+        if(truckActor2.getY()+getViewport().getScreenHeight()<car.getY()){
+            truckActor2.setY(car.getY()+getViewport().getScreenHeight());
+            truckActor2.setMagas(truckActor2.getY());
+            truckActor2.setSzembe(rand.nextBoolean());
+        }
+
+        //TODO: Csak egy egyik út ugrál az autó mögött
+
         if(!(bg.isInFrustum())){
-            bg2.setY(bg.getY()+getViewport().getScreenHeight()/1.44f);
+            //System.out.println("1 kint");
+            bg2.setY(bg.getY()+(bg.getHeight()));
             bg2.setZIndex(0);
         }
 
         if(!(bg2.isInFrustum())) {
-            bg.setY(bg2.getY() + getViewport().getScreenHeight()/1.44f);
+            //System.out.println("2 kint");
+            bg.setY(bg2.getY() + (bg.getHeight()));
             bg.setZIndex(0);
         }
 
