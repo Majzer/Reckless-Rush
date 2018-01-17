@@ -44,16 +44,16 @@ public class Assets {
 			= new AssetDescriptor<TextureAtlas>("pedestrian_project/no2/walk.atlas", TextureAtlas.class);
 
 	public static final AssetDescriptor<Texture> BTN_START_TEXTURE
-			= new AssetDescriptor<Texture>("menu/btn_start.png", Texture.class);
+			= new AssetDescriptor<Texture>("menu/btn_start_vol2.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> BTN_START_DOWN_TEXTURE
-			= new AssetDescriptor<Texture>("menu/btn_start2.png", Texture.class);
+			= new AssetDescriptor<Texture>("menu/btn_start2_vol2.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> BTN_EXIT_TEXTURE
-			= new AssetDescriptor<Texture>("menu/btn_exit2.png", Texture.class);
+			= new AssetDescriptor<Texture>("menu/btn_exit2_vol2.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> BTN_EXIT_DOWN_TEXTURE
-			= new AssetDescriptor<Texture>("menu/btn_exit.png", Texture.class);
+			= new AssetDescriptor<Texture>("menu/btn_exit_vol2.png", Texture.class);
 
 	//Autó ép
 	public static final AssetDescriptor<Texture> B_ELSO_EP
@@ -195,6 +195,9 @@ public class Assets {
 	public static final AssetDescriptor<Texture> HATTER_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/road_background_vol2.png",Texture.class);
 
+	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
+			=new AssetDescriptor<Texture>("sprites/menubg.png",Texture.class);
+
 	//Bokor
 	public static final AssetDescriptor<Texture> BOKOR_EP_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/bush_project.png",Texture.class);
@@ -303,6 +306,7 @@ public class Assets {
 
 		//Háttér
 		manager.load(HATTER_TEXTURE);
+		manager.load(MENU_HATTER_TEXTURE);
 
 		//Bokor
 		manager.load(BOKOR_EP_TEXTURE);

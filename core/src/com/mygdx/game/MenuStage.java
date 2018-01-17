@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
+import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
  * Created by tanulo on 2018. 01. 15..
@@ -16,9 +18,21 @@ import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 public class MenuStage extends MyStage {
 
     TextButton btnStart, btnExit;
+    OneSpriteStaticActor bg;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
+        addActor(bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_HATTER_TEXTURE)));
+        bg.setZIndex(0);
+        setDebugAll(true);
+    }
+
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
+            btnStart.setRotation(90);
 
     }
 
@@ -33,7 +47,8 @@ public class MenuStage extends MyStage {
             }
         });
         addActor(btnStart);
-        btnStart.setPosition(350,550);
+        btnStart.setZIndex(2);
+        btnStart.setPosition((getViewport().getScreenWidth()/2)-(btnStart.getWidth()/2),(getViewport().getScreenHeight()/2)-150);
 
 
         btnExit = new MyButton("", game.btnExit());
@@ -45,7 +60,8 @@ public class MenuStage extends MyStage {
             }
         });
         addActor(btnExit);
-        btnExit.setPosition(350, btnStart.getY()-150);
+        btnExit.setZIndex(2);
+        btnExit.setPosition((getViewport().getScreenWidth()/2)-(btnExit.getWidth()/2), btnStart.getY()-170);
     }
 
     @Override
