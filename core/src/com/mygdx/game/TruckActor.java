@@ -13,13 +13,17 @@ public class TruckActor extends MultiSpriteActor {
 
     int[] destinations;
     Random rand;
-    float speed=10;
+    float speed=10, magas;
+    boolean szembe;
 
-    public TruckActor(float y) {
+    public TruckActor(float y, boolean szembe) {
         super(523,1003);
         rand = new Random();
+        this.szembe = szembe;
+        this.magas = y;
         destinations = new int[]{171-57,377-57,642-57,850-57};
-        setPosition(destinations[rand.nextInt(4)],y);
+        if (szembe)setPosition(destinations[rand.nextInt(2)],y);
+        else setPosition(destinations[rand.nextInt(2)+2],y);
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_SEGG_EP),0,0),"BAL_SEGG");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_HATSO_EP),0,46),"BAl HÁTSÓ");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_OLDAL_EP),0,435),"BAL OLDAL");
@@ -31,10 +35,32 @@ public class TruckActor extends MultiSpriteActor {
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_ELSO_EP),262,727),"JOBB ELSO");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_ORR_EP),262,966),"JOBB ORR");
         setSize(getWidth()/4,getHeight()/4);
+        setOrigintoCenter();
+        if(szembe) setRotation(180);
     }
 
     public float getSpeed() {
         return speed;
+    }
+
+    public void setSzembe(boolean szembe) {
+        this.szembe = szembe;
+        if(szembe){
+            setPosition(destinations[rand.nextInt(2)],magas);
+            setRotation(180);
+        }
+        else {
+            setPosition(destinations[rand.nextInt(2)+2],magas);
+            setRotation(0);
+        }
+    }
+
+    public void setMagas(float magas) {
+        this.magas = magas;
+    }
+
+    public boolean isSzembe() {
+        return szembe;
     }
 
     public void setSpeed(float speed) {
