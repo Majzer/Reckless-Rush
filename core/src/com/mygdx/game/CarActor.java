@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 /**
@@ -19,6 +20,9 @@ public class CarActor extends MultiSpriteActor {
 
     public CarActor(GameStage gameStage) {
         super(566,1068);
+        setOrigintoCenter();
+        addCollisionShape("Frustum", new MyRectangle(1024,22048,-256,-256,getOriginX(), getOriginY()));
+
         this.gameStage=gameStage;
         setPosition(destinations[2],gameStage.getViewport().getScreenHeight()/3);
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0),"BAL_SEGG_");
@@ -32,7 +36,7 @@ public class CarActor extends MultiSpriteActor {
         addSprite(new OffsetSprite(Assets.manager.get(Assets.J_SEGG_EP),283,0),"JOBB_SEGG");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.J_HATSO_EP),283,55),"JOBB_HATSO");
         setSize(getWidth()/5.5f,getHeight()/5.5f);
-        setOrigintoCenter();
+        //setOrigintoCenter();
         /*
         System.out.println("x = " + x);
         System.out.println("y = " + y);

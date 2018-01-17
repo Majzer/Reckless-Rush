@@ -1,14 +1,23 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.PedActor;
+import com.mygdx.game.MyBaseClasses.RoadFrame;
+import com.mygdx.game.MyBaseClasses.RoadFrameActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.City;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import sun.misc.Queue;
 
 /**
  * Created by tanulo on 2018. 01. 08..
@@ -27,16 +36,54 @@ public class GameStage extends MyStage {
     BlueCarActor blueCarActor, blueCarActor2;
     Random rand;
 
+    Queue<RoadFrame> roadFrames;
+    RoadFrameActor lastRoadFrameActor = null;
+
+    public Queue<RoadFrame> generateMap(City a, City b){
+        Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
+        for (int i = 0; i<5; i++) {
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.csaladi));
+        }
+        RoadFrame roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.bokros);
+        roadFrame.telepulestabla = a.nev;
+        roadFrame.telepulestablavege = true;
+        roadFrames.enqueue(roadFrame);
+        for (int i = 0; i<5; i++) {
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.bokros));
+        }
+
+        return roadFrames;
+    }
+
+    private void addRoadFromQueue(){
+        try {
+            RoadFrameActor newRoadFrameActor = new RoadFrameActor(roadFrames.dequeue());
+            addActor(newRoadFrameActor);
+            if (lastRoadFrameActor != null){
+                newRoadFrameActor.setPosition(lastRoadFrameActor.getX(), lastRoadFrameActor.getY() + lastRoadFrameActor.getHeight());
+            }
+            lastRoadFrameActor = newRoadFrameActor;
+        } catch (InterruptedException e) {
+            //e.printStackTrace();
+        }
+    }
+
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024,768), batch, game);
         rand = new Random();
-        addActor(bg =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,100));
-        addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,bg.getY()+bg.getHeight()/1.5f));
-        System.out.println(bg.getY());
-        System.out.println(bg.isInFrustum());
-        addActor(ba1 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()));
+
+        City a = new City("Zalaegerszeg", City.Varostipus.megyeszekhely);
+        City b = new City("Keszthely", City.Varostipus.kisvaros);
+        roadFrames = generateMap(a,b);
+
+        //addActor(bg =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,100));
+        //addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,bg.getY()+bg.getHeight()/1.5f));
+
+//        System.out.println(bg.getY());
+//        System.out.println(bg.isInFrustum());
+/*        addActor(ba1 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()));
         addActor(ba2 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470, bg.getY()+250));
-        addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));
+        addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1430));
         addActor(car=new CarActor(this));
         car.setSpeed(8);
@@ -58,8 +105,7 @@ public class GameStage extends MyStage {
             }
         });
 
-
-
+        addRoadFromQueue();
         //fitWorldToWidth();
     }
 
@@ -127,14 +173,14 @@ public class GameStage extends MyStage {
         }
 
         //TODO: Csak egy egyik út ugrál az autó mögött
-
-        if(!(bg.isInFrustum())){
+/*
+        if(!(bg.isInFrustum(2))){
             //System.out.println("1 kint");
             bg2.setY(bg.getY()+(bg.getHeight()));
             bg2.setZIndex(0);
         }
 
-        if(!(bg2.isInFrustum())) {
+        if(!(bg2.isInFrustum(2))) {
             //System.out.println("2 kint");
             bg.setY(bg2.getY() + (bg.getHeight()));
             bg.setZIndex(0);
@@ -150,9 +196,32 @@ public class GameStage extends MyStage {
         if(!(ba3.isInFrustum(1.3f))){
             ba3.setY(ba3.getY()+bg.getHeight()+60);
         }
-
+*/
         if(!(truckActor.isInFrustum(1.3f))){
 
         }
+
+        while (!roadFrames.isEmpty() && lastRoadFrameActor.isInFrustum(2)){
+            addRoadFromQueue();
+        }
+        if (roadFrames.isEmpty()){
+            //TODO: Új térképet generálni az alapértelmezett út fele
+        }
+
+        Array<Actor> actors = getActors();
+
+        ArrayList<Actor> deleteActor = new ArrayList<>();
+        for(Actor a : actors){
+            if (a instanceof RoadFrameActor){
+                if (!car.overlaps((MyActor)a)){
+                    deleteActor.add(a);
+                }
+            }
+        }
+        for (Actor a: deleteActor) {
+            actors.removeValue(a,true);
+        }
+
+
     }
 }
