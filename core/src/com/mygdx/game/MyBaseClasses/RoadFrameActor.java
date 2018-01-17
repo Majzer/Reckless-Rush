@@ -15,6 +15,14 @@ public class RoadFrameActor extends MultiSpriteActor {
     public RoadFrameActor(RoadFrame roadFrame) {
         super(1024, 720);
         this.roadFrame = roadFrame;
+        switch (roadFrame.utminoseg){
+            case joegysavos:
+                break;
+            case joketsavos:
+                break;
+            case rosszegysavos:
+                break;
+        }
         addSprite(new OffsetSprite(Assets.manager.get(Assets.HATTER_TEXTURE),0,0));
         addBaseCollisionRectangleShape();
     }

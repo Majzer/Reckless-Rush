@@ -24,6 +24,15 @@ import sun.misc.Queue;
  */
 
 public class GameStage extends MyStage {
+    public enum WorldRotation{
+        r0,
+        r90,
+        r180,
+        r270
+    }
+
+    public WorldRotation worldRotation = WorldRotation.r0;
+
     protected int i =0;
     BgActor bg2;
     CarActor car;
@@ -128,6 +137,8 @@ public class GameStage extends MyStage {
             setCameraMoveToY(car.getY()+getViewport().getScreenHeight()/2.5f);
         }
 
+
+        //TODO: Ehelyett valami más megoldást! Listák? Tömbök?
         if(truckActor!=null){
             if(!(truckActor.isSzembe()))truckActor.setY(truckActor.getY()+truckActor.getSpeed());
             else truckActor.setY(truckActor.getY()-truckActor.getSpeed());
