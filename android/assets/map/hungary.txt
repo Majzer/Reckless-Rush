@@ -1,0 +1,12 @@
+Zalaegerszeg 2 46.827693 16.856428
+#Keszthely 40 1
+#Bak 15 2
+#Lenti 40 1
+Keszthely 1 46.770395, 17.240028
+#Bak 35 2
+#Nagykanizsa 40 1
+Bak 46.728229, 16.857852
+Nagykanizsa 46.464300, 16.981125
+#Letenye 35 2
+Lentenye 1 46.419779, 16.715816
+#Lenti 30 2
