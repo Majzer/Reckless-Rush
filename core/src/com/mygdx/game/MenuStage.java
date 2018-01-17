@@ -3,9 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
@@ -17,8 +20,9 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class MenuStage extends MyStage {
 
-    TextButton btnStart, btnExit;
-    OneSpriteStaticActor bg;
+    //TextButton btnStart, btnExit;
+    OneSpriteStaticActor bg, btnStart , btnExit ;
+    boolean plusz=false,minusz=true;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
@@ -32,16 +36,34 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
-            btnStart.setRotation(90);
+
+        if (minusz == true && plusz == false){
+            btnStart.rotateBy(-0.12f);
+            btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
+            btnExit.rotateBy(-0.12f);
+            if(btnStart.getRotation() < -6){
+                minusz=false;
+                plusz = true;
+            }
+        }else if (minusz == false && plusz == true){
+            btnStart.rotateBy(0.12f);
+            btnStart.setPosition(btnStart.getX()-0.19f , btnStart.getY()-0.19f);
+            btnExit.rotateBy(0.12f);
+            if(btnStart.getRotation() > 6){
+                minusz = true; plusz = false;
+            }
+        }
 
     }
 
     @Override
     public void init() {
-        btnStart = new MyButton("", game.btnStart());
+        btnStart = new ButtonActor(Assets.manager.get(Assets.BTN_START_TEXTURE));
+        // TODO: 2018. 01. 17. Itt is.
         btnStart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                //btnStart.setTexture(Assets.manager.get(Assets.BTN_START_DOWN_TEXTURE));
                 super.clicked(event, x, y);
                 game.setScreen(new MainScreen(game));
             }
@@ -51,10 +73,12 @@ public class MenuStage extends MyStage {
         btnStart.setPosition((getViewport().getScreenWidth()/2)-(btnStart.getWidth()/2),(getViewport().getScreenHeight()/2)-150);
 
 
-        btnExit = new MyButton("", game.btnExit());
+        btnExit = new ButtonActor(Assets.manager.get(Assets.BTN_EXIT_TEXTURE));
+        // TODO: 2018. 01. 17. Rámutatáskor másik textura
         btnExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                //btnExit.setTexture(Assets.manager.get(Assets.BTN_EXIT_DOWN_TEXTURE));
                 super.clicked(event, x, y);
                 Gdx.app.exit();
             }
