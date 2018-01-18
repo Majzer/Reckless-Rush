@@ -9,12 +9,9 @@ import java.util.Random;
 /**
  * Created by tanulo on 2018. 01. 15..
  */
-public class TruckActor extends MultiSpriteActor {
+public class TruckActor extends Vehicle {
 
-    int[] destinations;
-    Random rand;
-    float speed=10, magas;
-    boolean szembe;
+
 
     public TruckActor(float y, boolean szembe) {
         super(523,1003);
@@ -37,34 +34,6 @@ public class TruckActor extends MultiSpriteActor {
         setSize(getWidth()/4,getHeight()/4);
         setOrigintoCenter();
         if(szembe) setRotation(180);
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public void setSzembe(boolean szembe) {
-        this.szembe = szembe;
-        if(szembe){
-            setPosition(destinations[rand.nextInt(2)],magas);
-            setRotation(180);
-        }
-        else {
-            setPosition(destinations[rand.nextInt(2)+2],magas);
-            setRotation(0);
-        }
-    }
-
-    public void setMagas(float magas) {
-        this.magas = magas;
-    }
-
-    public boolean isSzembe() {
-        return szembe;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
     }
 
     @Override
