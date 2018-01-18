@@ -13,6 +13,7 @@ import com.mygdx.game.MyBaseClasses.RoadFrameActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.City;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
+import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -210,6 +211,58 @@ public class GameStage extends MyStage {
             actors.removeValue(a,true);
         }
 
+        for(String s: car.getMyOverlappedShapeKeys(truckActor)){
+            try{
+                System.out.println(s);
+                if(!(s.equals("Frustum"))) truckActor.setGoToSide(true);
+                car.changeSprite(s,new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
+            }catch(Exception e){
+
+            }
+        }
+
+        for(String s: car.getMyOverlappedShapeKeys(truckActor2)){
+            try{
+                System.out.println(s);
+                if(!(s.equals("Frustum"))) truckActor2.setGoToSide(true);
+                car.changeSprite(s,new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
+            }catch(Exception e){
+
+            }
+        }
+
+        for(String s: car.getMyOverlappedShapeKeys(blueCarActor)){
+            try{
+                System.out.println(s);
+                if(!(s.equals("Frustum"))) blueCarActor.setGoToSide(true);
+                car.changeSprite(s,new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
+            }catch(Exception e){
+
+            }
+        }
+
+        for(String s: car.getMyOverlappedShapeKeys(blueCarActor2)){
+            try{
+                System.out.println(s);
+                if(!(s.equals("Frustum"))) blueCarActor2.setGoToSide(true);
+                car.changeSprite(s,new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
+            }catch(Exception e){
+
+            }
+        }
+
+        for(Vehicle vehicle :vehicles){
+            if(!(vehicle.isInFrustum())) vehicle.setGoToSide(false);
+            for(Vehicle vehicle2 : vehicles){
+                //if(!(vehicle instanceof CarActor) && !(vehicle2 instanceof CarActor))
+                for(String s: vehicle.getMyOverlappedShapeKeys(vehicle2)){
+                    if(!(s.equals("Frustum"))) {
+                        vehicle.setY(vehicle.getY()-1);
+                        vehicle2.setY(vehicle2.getY()+1);
+                    }
+                }
+            }
+        }
 
     }
 }

@@ -50,6 +50,7 @@ public class CarActor extends Vehicle {
         addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),283,361),"JOBB_OLDAL");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.J_SEGG_EP),283,0),"JOBB_SEGG");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.J_HATSO_EP),283,55),"JOBB_HATSO");
+        addBaseCollisionRectangleShapeForAllSprites();
         setSize(getWidth()/5.5f,getHeight()/5.5f);
         //setOrigintoCenter();
         /*
@@ -79,7 +80,6 @@ public class CarActor extends Vehicle {
         changeSprite("JOBB_SEGG",new OffsetSprite(Assets.manager.get(Assets.J_SEGG_TOROTT),57,0));
         changeSprite("JOBB_HATSO",new OffsetSprite(Assets.manager.get(Assets.J_HATSO_TOROTT),57,11));
         super.originChanged();
-        addBaseCollisionRectangleShapeForAllSprites();
     }
 
     public float getSpeed() {
@@ -135,7 +135,7 @@ public class CarActor extends Vehicle {
         }
 
         if(mehetBalra){
-            if(getRotation()<20) rotateBy(1);
+            if(getRotation()<90) rotateBy(1);
             if(!(contains(destinations,(int)getX()))){
                 setX(getX()-2);
                 mehetBalraAlap=false;
@@ -149,7 +149,7 @@ public class CarActor extends Vehicle {
 
         }
         if(mehetJobbra) {
-            if (getRotation() > -20) rotateBy(-1);
+            if (getRotation() > -90) rotateBy(-1);
                 if(!(contains(destinations,(int)getX()))){
                     setX(getX()+2);
                     mehetJobbraAlap=false;

@@ -3,7 +3,9 @@ package com.mygdx.game.MyBaseClasses.Scene2D;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.CarActor;
 import com.mygdx.game.MyBaseClasses.InitableInterface;
+import com.mygdx.game.Vehicle;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -140,6 +142,7 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
 
     public void addSprite(OffsetSprite sprite, String key) {
         spriteMap.put(key, sprite);
+        sprite.setCollision(key);
         sprite.setPosition(getX() + sprite.getOffsetVector().x, getY() + sprite.getOffsetVector().y);
         sprite.setOrigin(getOriginX() - sprite.getOffsetVector().x, getOriginY() - sprite.getOffsetVector().y);
     }
@@ -156,7 +159,7 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
             addCollisionShape(key, new MyCircle((float)Math.sqrt(sprite.getWidth() * sprite.getHeight())/2.0f, sprite.getOffsetVector().x, sprite.getOffsetVector().y, getOriginX(), getOriginY(), getX(), getY(), true));
         }
     }
-
+    
 
     public void changeSprite(String key, OffsetSprite sprite){
         for(OffsetSprite offsetSprite : spriteMap.values()){

@@ -15,6 +15,7 @@ public class OffsetSprite extends Sprite {
 
     static protected float PI = (float) Math.PI;
     float xOffset,yOffset;
+    String collision;
 
     public OffsetSprite(Texture texture, float xOffset, float yOffset) {
         super(texture);
@@ -47,6 +48,13 @@ public class OffsetSprite extends Sprite {
         setSize(width, height);
     }
 
+    public String getCollision() {
+        return collision;
+    }
+
+    public void setCollision(String collision) {
+        this.collision = collision;
+    }
 
     public Vector2 getOffsetVector() {
         return offsetVector;

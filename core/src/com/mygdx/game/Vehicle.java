@@ -53,7 +53,22 @@ public class Vehicle extends MultiSpriteActor {
 
     public void addBaseCollisionRectangleShapeForAllSprites(){
         for(OffsetSprite offsetSprite : getSprites()){
-            addCollisionShape((Math.random()*(1000-10+1)+10)+"",new MyRectangle(offsetSprite.getWidth(),offsetSprite.getHeight(),offsetSprite.getxOffset(),offsetSprite.getyOffset(),getOriginX(),getOriginY()));
+            addCollisionShape(offsetSprite.getCollision(),new MyRectangle(offsetSprite.getWidth(),offsetSprite.getHeight(),offsetSprite.getxOffset(),offsetSprite.getyOffset(),getOriginX(),getOriginY()));
+        }
+    }
+
+    boolean goToSide=false;
+
+
+    public void setGoToSide(boolean goToSide) {
+        this.goToSide = goToSide;
+    }
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(goToSide){
+            if((int)getY()==destinations[0] || (int)getY()==destinations[1]) setX(getX()-2);
+            else setX(getX()+2);
         }
     }
 }

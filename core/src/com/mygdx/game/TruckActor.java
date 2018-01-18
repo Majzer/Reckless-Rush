@@ -31,14 +31,15 @@ public class TruckActor extends Vehicle {
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_OLDAL_EP),262,435),"JOBB OLDAL");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_ELSO_EP),262,727),"JOBB ELSO");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_ORR_EP),262,966),"JOBB ORR");
+        addBaseCollisionRectangleShapeForAllSprites();
         setSize(getWidth()/4,getHeight()/4);
         setOrigintoCenter();
         if(szembe) setRotation(180);
-        addBaseCollisionRectangleShapeForAllSprites();
     }
 
     @Override
     public void init() {
 
     }
+
 }
