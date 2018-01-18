@@ -1,7 +1,11 @@
 package com.mygdx.game;
 
 import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
+import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
+import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -45,5 +49,11 @@ public class Vehicle extends MultiSpriteActor {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public void addBaseCollisionRectangleShapeForAllSprites(){
+        for(OffsetSprite offsetSprite : getSprites()){
+            addCollisionShape((Math.random()*(1000-10+1)+10)+"",new MyRectangle(offsetSprite.getWidth(),offsetSprite.getHeight(),offsetSprite.getxOffset(),offsetSprite.getyOffset(),getOriginX(),getOriginY()));
+        }
     }
 }

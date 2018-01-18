@@ -34,6 +34,7 @@ public class TruckActor extends Vehicle {
         setSize(getWidth()/4,getHeight()/4);
         setOrigintoCenter();
         if(szembe) setRotation(180);
+        addBaseCollisionRectangleShapeForAllSprites();
     }
 
     @Override

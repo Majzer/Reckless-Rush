@@ -32,5 +32,6 @@ public class BlueCarActor extends Vehicle {
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KEK_J_HATSO_EP),225,53),"JOBB_HATSO");
         setSize(getWidth()/5.5f,getHeight()/5.5f);
         if(szembe) setRotation(180);
+        addBaseCollisionRectangleShapeForAllSprites();
     }
 }

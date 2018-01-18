@@ -13,7 +13,7 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 
 
-public class CarActor extends MultiSpriteActor {
+public class CarActor extends Vehicle {
 
     GameStage gameStage;
     float speed=10;
@@ -25,8 +25,8 @@ public class CarActor extends MultiSpriteActor {
 
         this.gameStage=gameStage;
         setPosition(destinations[2],gameStage.getViewport().getScreenHeight()/3);
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0),"BAL_SEGG_");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_HATSO_EP),0,55),"BAL_HATSO_");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0),"BAL_SEGG");
+        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_HATSO_EP),0,55),"BAL_HATSO");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_EP),0,361),"BAL_OLDAL");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ELSO_EP),0,745),"BAL_ELSO");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ORR_EP),0,1013),"BAL_ORR");
@@ -64,7 +64,7 @@ public class CarActor extends MultiSpriteActor {
         changeSprite("JOBB_SEGG",new OffsetSprite(Assets.manager.get(Assets.J_SEGG_TOROTT),57,0));
         changeSprite("JOBB_HATSO",new OffsetSprite(Assets.manager.get(Assets.J_HATSO_TOROTT),57,11));
         super.originChanged();
-
+        addBaseCollisionRectangleShapeForAllSprites();
     }
 
     public float getSpeed() {
@@ -92,45 +92,56 @@ public class CarActor extends MultiSpriteActor {
         super.act(delta);
         setRotation(0);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            if(mostani>0&&!mehetJobbra)
+            //if(mostani>0&&!mehetJobbra)
+            if(mehetJobbra){
+                mehetJobbra=false;
+                mostani--;
+            }
+
             mehetBalra=true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            if(mostani<3&&!mehetBalra)
+            //if(mostani<3&&!mehetBalra)
+            if(mehetBalra) {
+                mehetBalra = false;
+                mostani++;
+            }
            mehetJobbra=true;
         }
         if(mehetBalra){
             if(getRotation()<20) rotateBy(1);
-            if(getX()>destinations[mostani-1]){
-                System.out.println(getX());
-                for (int aaa = 0; aaa<5;aaa++){
-                    setX(getX()-1);
-                    if(getX()==destinations[mostani-1]){
-                        break;
+
+                if (getX() > destinations[mostani - 1]) {
+                    System.out.println(getX());
+                    for (int aaa = 0; aaa < 5; aaa++) {
+                        setX(getX() - 1);
+                        if (getX() == destinations[mostani - 1]) {
+                            break;
+                        }
                     }
+                } else {
+                    mehetBalra = false;
+                    mostani--;
+                }
+
+        }
+        if(mehetJobbra) {
+            if (getRotation() > -20) rotateBy(-1);
+
+                if (getX() < destinations[mostani + 1]) {
+                    System.out.println(getX());
+                    for (int aaa = 0; aaa < 5; aaa++) {
+                        setX(getX() + 1);
+                        if (getX() == destinations[mostani + 1]) {
+                            break;
+                        }
+                    }
+                } else {
+                    mehetJobbra = false;
+                    mostani++;
                 }
             }
-            else {
-                mehetBalra=false;
-                mostani--;
-            }
-        }
-        if(mehetJobbra){
-            if(getRotation()>-20) rotateBy(-1);
-            if(getX()<destinations[mostani+1]){
-                System.out.println(getX());
-                for (int aaa = 0; aaa<5;aaa++){
-                    setX(getX()+1);
-                    if(getX()==destinations[mostani+1]){
-                        break;
-                    }
-                }
-            }
-            else {
-                mehetJobbra=false;
-                mostani++;
-            }
-        }
+
 
     }
 }

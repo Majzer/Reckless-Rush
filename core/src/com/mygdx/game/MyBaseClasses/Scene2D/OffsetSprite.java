@@ -14,26 +14,35 @@ public class OffsetSprite extends Sprite {
     private Vector2 offsetVector;
 
     static protected float PI = (float) Math.PI;
+    float xOffset,yOffset;
 
     public OffsetSprite(Texture texture, float xOffset, float yOffset) {
         super(texture);
+        this.xOffset=xOffset;
+        this.yOffset=yOffset;
         offsetVector = new Vector2(xOffset, yOffset);
     }
 
     public OffsetSprite(TextureRegion texture, float xOffset, float yOffset) {
         super(texture);
+        this.xOffset=xOffset;
+        this.yOffset=yOffset;
         offsetVector = new Vector2(xOffset, yOffset);
     }
 
 
     public OffsetSprite(Texture texture, float xOffset, float yOffset, float width, float height) {
         super(texture);
+        this.xOffset=xOffset;
+        this.yOffset=yOffset;
         offsetVector = new Vector2(xOffset, yOffset);
         setSize(width, height);
     }
 
     public OffsetSprite(TextureRegion texture, float xOffset, float yOffset, float width, float height) {
         super(texture);
+        this.xOffset=xOffset;
+        this.yOffset=yOffset;
         offsetVector = new Vector2(xOffset, yOffset);
         setSize(width, height);
     }
@@ -66,4 +75,11 @@ public class OffsetSprite extends Sprite {
         return vector2;
     }
 
+    public float getxOffset() {
+        return xOffset;
+    }
+
+    public float getyOffset() {
+        return yOffset;
+    }
 }
