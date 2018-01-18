@@ -27,6 +27,8 @@ public class MenuStage extends MyStage {
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
         addActor(bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_HATTER_TEXTURE)));
+        bg.setPosition(0,0);
+        //bg.stretchToViewportRealWorldSizeWithoutBlackBars();
         bg.setZIndex(0);
         setDebugAll(true);
     }
