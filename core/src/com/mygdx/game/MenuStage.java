@@ -38,17 +38,17 @@ public class MenuStage extends MyStage {
 
 
         if (minusz == true && plusz == false){
-            btnStart.rotateBy(-0.12f);
-            btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
-            btnExit.rotateBy(-0.12f);
+            btnStart.rotateBy(-0.05f);
+            //btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
+            btnExit.rotateBy(-0.05f);
             if(btnStart.getRotation() < -6){
                 minusz=false;
                 plusz = true;
             }
         }else if (minusz == false && plusz == true){
-            btnStart.rotateBy(0.12f);
-            btnStart.setPosition(btnStart.getX()-0.19f , btnStart.getY()-0.19f);
-            btnExit.rotateBy(0.12f);
+            btnStart.rotateBy(0.05f);
+           //btnStart.setPosition(btnStart.getX()-0.19f , btnStart.getY()-0.19f);
+            btnExit.rotateBy(0.05f);
             if(btnStart.getRotation() > 6){
                 minusz = true; plusz = false;
             }
@@ -59,8 +59,17 @@ public class MenuStage extends MyStage {
     @Override
     public void init() {
         btnStart = new ButtonActor(Assets.manager.get(Assets.BTN_START_TEXTURE));
-        // TODO: 2018. 01. 17. Itt is.
         btnStart.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                super.enter(event, x, y, pointer, fromActor);
+                btnStart.setTexture(Assets.manager.get(Assets.BTN_START_DOWN_TEXTURE));
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                super.exit(event, x, y, pointer, toActor);
+                btnStart.setTexture(Assets.manager.get(Assets.BTN_START_TEXTURE));
+            }
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //btnStart.setTexture(Assets.manager.get(Assets.BTN_START_DOWN_TEXTURE));
@@ -74,8 +83,19 @@ public class MenuStage extends MyStage {
 
 
         btnExit = new ButtonActor(Assets.manager.get(Assets.BTN_EXIT_TEXTURE));
-        // TODO: 2018. 01. 17. Rámutatáskor másik textura
         btnExit.addListener(new ClickListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                super.enter(event, x, y, pointer, fromActor);
+                btnExit.setTexture(Assets.manager.get(Assets.BTN_EXIT_DOWN_TEXTURE));
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                super.exit(event, x, y, pointer, toActor);
+                btnExit.setTexture(Assets.manager.get(Assets.BTN_EXIT_TEXTURE));
+            }
+
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //btnExit.setTexture(Assets.manager.get(Assets.BTN_EXIT_DOWN_TEXTURE));
@@ -92,4 +112,5 @@ public class MenuStage extends MyStage {
     public void dispose() {
         super.dispose();
     }
+
 }
