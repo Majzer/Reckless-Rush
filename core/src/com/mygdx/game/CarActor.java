@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.GlobalClasses.Assets;
-import com.mygdx.game.MyBaseClasses.Scene2D.MultiSpriteActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
@@ -17,6 +16,22 @@ public class CarActor extends Vehicle {
 
     GameStage gameStage;
     float speed=10;
+
+    public boolean contains(int[] t, int i){
+        for(int ii : t){
+            if(ii==i) return true;
+        }
+        return false;
+    }
+
+    public boolean isLastElementOfArray(int[] t, int i){
+        int length = t.length;
+        return t[length-1]==i;
+    }
+
+    public boolean isFirstElementOfArray(int[] t, int i){
+        return t[0]==i;
+    }
 
     public CarActor(GameStage gameStage) {
         super(566,1068);
@@ -80,65 +95,70 @@ public class CarActor extends Vehicle {
 
     }
 
-    int[] destinations = new int[]{171-57,377-57,642-57,850-57};
+    int[] destinations = new int[]{171-57,377-57,642-56,850-56};
     int mostani=2;
     boolean mehetBalra=false;
     boolean mehetJobbra=false;
-
+    boolean mehetJobbraAlap=true;
+    boolean mehetBalraAlap=true;
+    int cel=0;
 
 
     @Override
     public void act(float delta) {
         super.act(delta);
         setRotation(0);
+        if(mehetBalraAlap)
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             //if(mostani>0&&!mehetJobbra)
-            if(mehetJobbra){
-                mehetJobbra=false;
-                mostani--;
+            if(!(isFirstElementOfArray(destinations,(int)getX()))){
+                setX(getX()-2);
+                if(mehetJobbra){
+                    mehetJobbra=false;
             }
-
-            mehetBalra=true;
+                mehetBalra=true;
         }
+        mehetBalraAlap=false;
+
+        }
+        if(mehetJobbraAlap)
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             //if(mostani<3&&!mehetBalra)
-            if(mehetBalra) {
-                mehetBalra = false;
-                mostani++;
+            if(!(isLastElementOfArray(destinations,(int)getX()))) {
+                setX(getX() + 2);
+                if (mehetBalra) {
+                    mehetBalra = false;
+                }
+                mehetJobbra = true;
             }
-           mehetJobbra=true;
+            mehetJobbraAlap=false;
         }
+
         if(mehetBalra){
             if(getRotation()<20) rotateBy(1);
-
-                if (getX() > destinations[mostani - 1]) {
-                    System.out.println(getX());
-                    for (int aaa = 0; aaa < 5; aaa++) {
-                        setX(getX() - 1);
-                        if (getX() == destinations[mostani - 1]) {
-                            break;
-                        }
-                    }
-                } else {
-                    mehetBalra = false;
-                    mostani--;
-                }
+            if(!(contains(destinations,(int)getX()))){
+                setX(getX()-2);
+                mehetBalraAlap=false;
+                mehetJobbraAlap=true;
+            }
+            else{
+                setRotation(0);
+                mehetBalraAlap=true;
+                mehetJobbraAlap=true;
+            }
 
         }
         if(mehetJobbra) {
             if (getRotation() > -20) rotateBy(-1);
-
-                if (getX() < destinations[mostani + 1]) {
-                    System.out.println(getX());
-                    for (int aaa = 0; aaa < 5; aaa++) {
-                        setX(getX() + 1);
-                        if (getX() == destinations[mostani + 1]) {
-                            break;
-                        }
-                    }
-                } else {
-                    mehetJobbra = false;
-                    mostani++;
+                if(!(contains(destinations,(int)getX()))){
+                    setX(getX()+2);
+                    mehetJobbraAlap=false;
+                    mehetBalraAlap=true;
+                }
+                else {
+                    setRotation(0);
+                    mehetJobbraAlap=true;
+                    mehetBalraAlap=true;
                 }
             }
 
