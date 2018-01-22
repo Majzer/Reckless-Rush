@@ -57,18 +57,46 @@ public class Vehicle extends MultiSpriteActor {
         }
     }
 
-    boolean goToSide=false;
+    boolean goToSide=false, goToLeftSide=false, goToRightSide=false;
 
 
     public void setGoToSide(boolean goToSide) {
         this.goToSide = goToSide;
     }
+
+    public void setGoToRightSide(boolean goToRightSide) {
+        this.goToRightSide = goToRightSide;
+    }
+
+    public void setGoToLeftSide(boolean goToLeftSide) {
+
+        this.goToLeftSide = goToLeftSide;
+    }
+
+    public boolean isGoToSide() {
+        return goToSide;
+    }
+
+    public boolean isGoToLeftSide() {
+        return goToLeftSide;
+    }
+
+    public boolean isGoToRightSide() {
+        return goToRightSide;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
         if(goToSide){
             if((int)getY()==destinations[0] || (int)getY()==destinations[1]) setX(getX()-2);
             else setX(getX()+2);
+        }
+        if(goToLeftSide){
+            setX(getX()-2);
+        }
+        if(goToRightSide){
+            setX(getX()+2);
         }
     }
 }

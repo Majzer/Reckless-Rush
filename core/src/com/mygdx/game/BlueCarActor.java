@@ -21,7 +21,7 @@ public class BlueCarActor extends Vehicle {
         destinations = new int[]{171-57,377-57,642-57,850-57};
         if (szembe)setPosition(destinations[rand.nextInt(2)],y);
         else setPosition(destinations[rand.nextInt(2)+2],y);
-        addCollisionShape("Slowdown", new MyRectangle(1024,500,-256,-256,getOriginX(), getOriginY()));
+        addCollisionShape("Slowdown", new MyRectangle(getWidth(),500,0,getHeight()+100,getOriginX(), getOriginY()));
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KEK_B_SEGG_EP),0,0),"BAL_SEGG_");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KEK_B_HATSO_EP),0,53),"BAL_HATSO_");
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KEK_B_OLDAL_EP),0,278),"BAL_OLDAL");

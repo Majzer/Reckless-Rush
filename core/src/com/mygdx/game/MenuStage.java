@@ -22,7 +22,7 @@ public class MenuStage extends MyStage {
 
     //TextButton btnStart, btnExit;
     OneSpriteStaticActor bg, btnStart , btnExit ;
-    boolean plusz=false,minusz=true;
+    boolean plusz=false;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
@@ -39,20 +39,19 @@ public class MenuStage extends MyStage {
         super.act(delta);
 
 
-        if (minusz == true && plusz == false){
+        if (!plusz){
             btnStart.rotateBy(-0.05f);
             //btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
             btnExit.rotateBy(-0.05f);
             if(btnStart.getRotation() < -6){
-                minusz=false;
                 plusz = true;
             }
-        }else if (minusz == false && plusz == true){
+        }else if (plusz){
             btnStart.rotateBy(0.05f);
            //btnStart.setPosition(btnStart.getX()-0.19f , btnStart.getY()-0.19f);
             btnExit.rotateBy(0.05f);
             if(btnStart.getRotation() > 6){
-                minusz = true; plusz = false;
+                plusz = false;
             }
         }
 
