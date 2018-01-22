@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -23,6 +24,9 @@ public class MenuStage extends MyStage {
     //TextButton btnStart, btnExit;
     OneSpriteStaticActor bg, btnStart , btnExit ;
     boolean plusz=false;
+    OneSpriteStaticActor bg, btnStart , btnExit;
+    ChangingSpriteActor logo;
+    boolean plusz=false,minusz=true;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
@@ -33,10 +37,12 @@ public class MenuStage extends MyStage {
         setDebugAll(true);
     }
 
-
+    private byte passedFrames = 0;
     @Override
     public void act(float delta) {
         super.act(delta);
+        passedFrames++;
+        if (minusz == true && plusz == false){
 
 
         if (!plusz){
@@ -54,7 +60,9 @@ public class MenuStage extends MyStage {
                 plusz = false;
             }
         }
-
+        passedFrames %= 60;
+        if(passedFrames==0)
+            logo.change();
     }
 
     @Override
@@ -107,6 +115,16 @@ public class MenuStage extends MyStage {
         addActor(btnExit);
         btnExit.setZIndex(2);
         btnExit.setPosition((getViewport().getScreenWidth()/2)-(btnExit.getWidth()/2), btnStart.getY()-170);
+
+        logo = new ChangingSpriteActor(new Texture[]{
+                Assets.manager.get(Assets.LOGO1_TEXTURE),
+                Assets.manager.get(Assets.LOGO2_TEXTURE),
+                Assets.manager.get(Assets.LOGO3_TEXTURE),
+        });
+        addActor(logo);
+        logo.setZIndex(0);
+        logo.setY(170);
+
     }
 
     @Override

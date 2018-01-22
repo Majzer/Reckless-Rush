@@ -204,6 +204,13 @@ public class Assets {
 	public static final AssetDescriptor<Texture> BOKOR_LAPOS_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/damaged_bush_project.png",Texture.class);
 
+	//Logó
+	public static final AssetDescriptor<Texture> LOGO1_TEXTURE
+			=new AssetDescriptor<Texture>("logo/logo-1.png",Texture.class);
+	public static final AssetDescriptor<Texture> LOGO2_TEXTURE
+			=new AssetDescriptor<Texture>("logo/logo-2.png",Texture.class);
+	public static final AssetDescriptor<Texture> LOGO3_TEXTURE
+			=new AssetDescriptor<Texture>("logo/logo-3.png",Texture.class);
 
     public static void prepare() {
 		manager = new AssetManager();
@@ -311,6 +318,11 @@ public class Assets {
 		//Bokor
 		manager.load(BOKOR_EP_TEXTURE);
 		manager.load(BOKOR_LAPOS_TEXTURE);
+
+		//Logó
+		manager.load(LOGO1_TEXTURE);
+		manager.load(LOGO2_TEXTURE);
+		manager.load(LOGO3_TEXTURE);
 
 	}
 
