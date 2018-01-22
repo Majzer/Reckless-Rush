@@ -24,7 +24,7 @@ public class MenuStage extends MyStage {
     //TextButton btnStart, btnExit;
     OneSpriteStaticActor bg, btnStart , btnExit;
     ChangingSpriteActor logo;
-    boolean plusz=false,minusz=true;
+    boolean plusz=false;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
@@ -40,7 +40,7 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         passedFrames++;
-        if (minusz == true && plusz == false) {
+
 
 
             if (!plusz) {
@@ -62,7 +62,7 @@ public class MenuStage extends MyStage {
             if (passedFrames == 0)
                 logo.change();
         }
-    }
+
     @Override
     public void init() {
         btnStart = new ButtonActor(Assets.manager.get(Assets.BTN_START_TEXTURE));
