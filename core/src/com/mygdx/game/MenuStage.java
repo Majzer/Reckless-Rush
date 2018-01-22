@@ -22,8 +22,6 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class MenuStage extends MyStage {
 
     //TextButton btnStart, btnExit;
-    OneSpriteStaticActor bg, btnStart , btnExit ;
-    boolean plusz=false;
     OneSpriteStaticActor bg, btnStart , btnExit;
     ChangingSpriteActor logo;
     boolean plusz=false,minusz=true;
@@ -42,29 +40,29 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         passedFrames++;
-        if (minusz == true && plusz == false){
+        if (minusz == true && plusz == false) {
 
 
-        if (!plusz){
-            btnStart.rotateBy(-0.05f);
-            //btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
-            btnExit.rotateBy(-0.05f);
-            if(btnStart.getRotation() < -6){
-                plusz = true;
+            if (!plusz) {
+                btnStart.rotateBy(-0.05f);
+                //btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
+                btnExit.rotateBy(-0.05f);
+                if (btnStart.getRotation() < -6) {
+                    plusz = true;
+                }
+            } else if (plusz) {
+                btnStart.rotateBy(0.05f);
+                //btnStart.setPosition(btnStart.getX()-0.19f , btnStart.getY()-0.19f);
+                btnExit.rotateBy(0.05f);
+                if (btnStart.getRotation() > 6) {
+                    plusz = false;
+                }
             }
-        }else if (plusz){
-            btnStart.rotateBy(0.05f);
-           //btnStart.setPosition(btnStart.getX()-0.19f , btnStart.getY()-0.19f);
-            btnExit.rotateBy(0.05f);
-            if(btnStart.getRotation() > 6){
-                plusz = false;
-            }
+            passedFrames %= 60;
+            if (passedFrames == 0)
+                logo.change();
         }
-        passedFrames %= 60;
-        if(passedFrames==0)
-            logo.change();
     }
-
     @Override
     public void init() {
         btnStart = new ButtonActor(Assets.manager.get(Assets.BTN_START_TEXTURE));
