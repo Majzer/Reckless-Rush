@@ -58,10 +58,11 @@ public class MenuStage extends MyStage {
                     plusz = false;
                 }
             }
-            passedFrames %= 60;
+            passedFrames %= 6;
             if (passedFrames == 0)
                 logo.change();
         }
+
 
     @Override
     public void init() {
