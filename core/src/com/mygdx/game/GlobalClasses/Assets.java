@@ -257,6 +257,10 @@ public class Assets {
 	public static final AssetDescriptor<Texture> LOGO3_TEXTURE
 			=new AssetDescriptor<Texture>("logo/logo-3.png",Texture.class);
 
+	//Robbanás
+	public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
+			= new AssetDescriptor<TextureAtlas>("explosion.atlas", TextureAtlas.class);
+
     public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
@@ -279,6 +283,7 @@ public class Assets {
 		manager.load(BTN_START_DOWN_TEXTURE);
 		manager.load(BTN_EXIT_TEXTURE);
 		manager.load(BTN_EXIT_DOWN_TEXTURE);
+		manager.load(EXPLOSION_TEXTURE);
 
 		//Autó ép
 		manager.load(B_ELSO_EP);

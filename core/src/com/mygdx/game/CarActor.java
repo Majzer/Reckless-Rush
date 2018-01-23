@@ -108,60 +108,59 @@ public class CarActor extends Vehicle {
     public void act(float delta) {
         super.act(delta);
         setRotation(0);
-        if(mehetBalraAlap)
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            //if(mostani>0&&!mehetJobbra)
-            if(!(isFirstElementOfArray(destinations,(int)getX()))){
-                setX(getX()-2);
-                if(mehetJobbra){
-                    mehetJobbra=false;
-            }
-                mehetBalra=true;
-        }
-        mehetBalraAlap=false;
+        if(mehet) {
+            if (mehetBalraAlap)
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                    //if(mostani>0&&!mehetJobbra)
+                    if (!(isFirstElementOfArray(destinations, (int) getX()))) {
+                        setX(getX() - 2);
+                        if (mehetJobbra) {
+                            mehetJobbra = false;
+                        }
+                        mehetBalra = true;
+                    }
+                    mehetBalraAlap = false;
 
-        }
-        if(mehetJobbraAlap)
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            //if(mostani<3&&!mehetBalra)
-            if(!(isLastElementOfArray(destinations,(int)getX()))) {
-                setX(getX() + 2);
-                if (mehetBalra) {
-                    mehetBalra = false;
                 }
-                mehetJobbra = true;
-            }
-            mehetJobbraAlap=false;
-        }
-
-        if(mehetBalra){
-            if(getRotation()<90) rotateBy(1);
-            if(!(contains(destinations,(int)getX()))){
-                setX(getX()-2);
-                mehetBalraAlap=false;
-                mehetJobbraAlap=true;
-            }
-            else{
-                setRotation(0);
-                mehetBalraAlap=true;
-                mehetJobbraAlap=true;
-            }
-
-        }
-        if(mehetJobbra) {
-            if (getRotation() > -90) rotateBy(-1);
-                if(!(contains(destinations,(int)getX()))){
-                    setX(getX()+2);
-                    mehetJobbraAlap=false;
-                    mehetBalraAlap=true;
+            if (mehetJobbraAlap)
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                    //if(mostani<3&&!mehetBalra)
+                    if (!(isLastElementOfArray(destinations, (int) getX()))) {
+                        setX(getX() + 2);
+                        if (mehetBalra) {
+                            mehetBalra = false;
+                        }
+                        mehetJobbra = true;
+                    }
+                    mehetJobbraAlap = false;
                 }
-                else {
+
+            if (mehetBalra) {
+                if (getRotation() < 90) rotateBy(1);
+                if (!(contains(destinations, (int) getX()))) {
+                    setX(getX() - 2);
+                    mehetBalraAlap = false;
+                    mehetJobbraAlap = true;
+                } else {
                     setRotation(0);
-                    mehetJobbraAlap=true;
-                    mehetBalraAlap=true;
+                    mehetBalraAlap = true;
+                    mehetJobbraAlap = true;
+                }
+
+            }
+            if (mehetJobbra) {
+                if (getRotation() > -90) rotateBy(-1);
+                if (!(contains(destinations, (int) getX()))) {
+                    setX(getX() + 2);
+                    mehetJobbraAlap = false;
+                    mehetBalraAlap = true;
+                } else {
+                    setRotation(0);
+                    mehetJobbraAlap = true;
+                    mehetBalraAlap = true;
                 }
             }
 
-
+        }
     }
 }
