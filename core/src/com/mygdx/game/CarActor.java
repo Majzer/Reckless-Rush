@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
@@ -40,16 +41,70 @@ public class CarActor extends Vehicle {
 
         this.gameStage=gameStage;
         setPosition(destinations[2],gameStage.getViewport().getScreenHeight()/3);
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_SEGG_EP),0,0),"BAL_SEGG");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_HATSO_EP),0,55),"BAL_HATSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_EP),0,361),"BAL_OLDAL");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ELSO_EP),0,745),"BAL_ELSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.B_ORR_EP),0,1013),"BAL_ORR");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_ELSO_EP),283,745),"JOBB_ELSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_ORR_EP),283,1013),"JOBB_ORR");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),283,361),"JOBB_OLDAL");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_SEGG_EP),283,0),"JOBB_SEGG");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.J_HATSO_EP),283,55),"JOBB_HATSO");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.B_SEGG_EP),
+                        Assets.manager.get(Assets.B_SEGG_TOROTT)
+                }
+                ,0, 0), "BAL_SEGG");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.B_HATSO_EP),
+                        Assets.manager.get(Assets.B_HATSO_TOROTT)
+                }
+                ,0, 55), "BAL_HATSO");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.B_OLDAL_EP),
+                        Assets.manager.get(Assets.B_OLDAL_TOROTT)
+                }
+                ,0,361),"BAL_OLDAL");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.B_ELSO_EP),
+                        Assets.manager.get(Assets.B_ELSO_TOROTT)
+                }
+                ,0,745),"BAL_ELSO");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.B_ORR_EP),
+                        Assets.manager.get(Assets.B_ORR_TOROTT)
+                }
+                ,0,1013),"BAL_ORR");
+
+
+
+
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.J_SEGG_EP),
+                        Assets.manager.get(Assets.J_SEGG_TOROTT)
+                }
+                ,283,0),"JOBB_SEGG");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.J_HATSO_EP),
+                        Assets.manager.get(Assets.J_HATSO_TOROTT)
+                }
+                ,283,55),"JOBB_HATSO");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.J_OLDAL_EP),
+                        Assets.manager.get(Assets.J_OLDAL_TOROTT)
+                }
+                ,283,361),"JOBB_OLDAL");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.J_ELSO_EP),
+                        Assets.manager.get(Assets.J_ELSO_TOROTT)
+                }
+                ,283,745),"JOBB_ELSO");
+        addSprite(new ChangingOffsetSprite(
+                new Texture[]{
+                        Assets.manager.get(Assets.J_ORR_EP),
+                        Assets.manager.get(Assets.J_ORR_TOROTT)
+                }
+                ,283,1013),"JOBB_ORR");
         addBaseCollisionRectangleShapeForAllSprites();
         setSize(getWidth()/5.5f,getHeight()/5.5f);
         //setOrigintoCenter();
@@ -68,7 +123,7 @@ public class CarActor extends Vehicle {
         //setSize(getWidth()/5,getHeight()/5);
         //removeSprite("JOBB_OLDAL_EP");
         //addSprite(new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_EP),283,361,5),"JOBB_OLDAL_");
-
+        /*
         changeSprite("BAL_SEGG_",new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT),0,0));
         changeSprite("BAL_HATSO_",new OffsetSprite(Assets.manager.get(Assets.B_HATSO_TOROTT),0,11));
         changeSprite("BAL_OLDAL",new OffsetSprite(Assets.manager.get(Assets.B_OLDAL_TOROTT),0,72));
@@ -79,6 +134,7 @@ public class CarActor extends Vehicle {
         changeSprite("JOBB_OLDAL",new OffsetSprite(Assets.manager.get(Assets.J_OLDAL_TOROTT),57,72));
         changeSprite("JOBB_SEGG",new OffsetSprite(Assets.manager.get(Assets.J_SEGG_TOROTT),57,0));
         changeSprite("JOBB_HATSO",new OffsetSprite(Assets.manager.get(Assets.J_HATSO_TOROTT),57,11));
+        */
         super.originChanged();
     }
 
