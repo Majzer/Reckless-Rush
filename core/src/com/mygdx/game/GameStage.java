@@ -237,17 +237,18 @@ public class GameStage extends MyStage {
                         if(vehicle.isSzembe() && (s.equals("BAL_ORR") || s.equals("JOBB_ORR"))){
 
 
-                                addRobbanas(car.getX(), car.getY());
-                                explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);
-                                if (explosionActor.vege) {
-                                    game.setScreenBackByStackPop();
-                                }
+                            addRobbanas(car.getX(), car.getY());
+                            explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);
+                            if (explosionActor.vege) {
+                                game.setScreenBackByStackPop();
+                            }
                             car.setSpeed(0);
                             vehicle.setSpeed(0);
                             car.mehet = false;
 
                         }
-                        car.changeSprite(s, new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT), 0, 0));
+                        ChangingOffsetSprite changingOffsetSprite = (ChangingOffsetSprite) car.getSprite(s);
+                       changingOffsetSprite.changeOnce();
                     } catch (Exception e) {
 
                     }

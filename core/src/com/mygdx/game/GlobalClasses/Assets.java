@@ -220,25 +220,25 @@ public class Assets {
 
 	//Kamion törött
 	public static final AssetDescriptor<Texture> RENDOR_B_ELSO_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/bal_elso.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/bal_elso.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_B_ORR_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/bal_orr.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/bal_orr.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_B_HATSO_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/bal_hatso.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/bal_hatso.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_B_SEGG_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/bal_segg.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/bal_segg.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_B_OLDAL_RED_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/bal_kozep_red.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/bal_kozep_red.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_J_ELSO_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/jobb_elso.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/jobb_elso.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_J_ORR_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/jobb_orr.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/jobb_orr.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_J_HATSO_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/jobb_hatso.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/jobb_hatso.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_J_SEGG_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/jobb_segg.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/jobb_segg.png",Texture.class);
 	public static final AssetDescriptor<Texture> RENDOR_J_OLDAL_BLUE_TOROTT
-			= new AssetDescriptor<Texture>("police_car_sprite/damage/jobb_kozep_blue.png",Texture.class);
+			= new AssetDescriptor<Texture>("police_car_sprite/damaged/jobb_kozep_blue.png",Texture.class);
 
 	//Háttér
 	public static final AssetDescriptor<Texture> HATTER_TEXTURE
