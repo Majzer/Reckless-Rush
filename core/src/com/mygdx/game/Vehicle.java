@@ -85,6 +85,8 @@ public class Vehicle extends MultiSpriteActor {
         return goToRightSide;
     }
 
+    boolean mehet = true;
+
     @Override
     public void act(float delta) {
         super.act(delta);

@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -45,6 +46,7 @@ public class GameStage extends MyStage {
     TruckActor truckActor, truckActor2;
     BlueCarActor blueCarActor, blueCarActor2;
     Random rand;
+    ExplosionActor explosionActor;
     ArrayList<Vehicle> vehicles = null;
 
     Queue<RoadFrame> roadFrames;
@@ -141,6 +143,7 @@ public class GameStage extends MyStage {
     }
 
     boolean go = false;
+    boolean egyszer = true;
 
     @Override
     public void act(float delta) {
@@ -230,6 +233,20 @@ public class GameStage extends MyStage {
                         if (s.equals("BAL_ORR") || s.equals("JOBB_ORR")) {
                             car.setSpeed(4);
                         }
+
+                        if(vehicle.isSzembe() && (s.equals("BAL_ORR") || s.equals("JOBB_ORR"))){
+
+
+                                addRobbanas(car.getX(), car.getY());
+                                explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);
+                                if (explosionActor.vege) {
+                                    game.setScreenBackByStackPop();
+                                }
+                            car.setSpeed(0);
+                            vehicle.setSpeed(0);
+                            car.mehet = false;
+
+                        }
                         car.changeSprite(s, new OffsetSprite(Assets.manager.get(Assets.B_SEGG_TOROTT), 0, 0));
                     } catch (Exception e) {
 
@@ -285,17 +302,14 @@ public class GameStage extends MyStage {
                 vehicle.setGoToSide(false);
                 vehicle.setGoToLeftSide(false);
                 vehicle.setGoToRightSide(false);
+                vehicle.mehet=true;
             }
             for (Vehicle vehicle2 : vehicles) {
                 if (!(vehicle instanceof CarActor) && !(vehicle2 instanceof CarActor) && (vehicle != vehicle2)) {
                     for (String s : vehicle.getMyOverlappedShapeKeys(vehicle2)) {
 
                         if ((s.equals("Slowdown"))) {
-                            if (vehicle instanceof BlueCarActor && vehicle2 instanceof TruckActor) {
-                                vehicle.setSpeed(truckActor.getSpeed());
-                            } else if (vehicle2 instanceof BlueCarActor && vehicle instanceof BlueCarActor) {
-                                vehicle2.setSpeed(truckActor.getSpeed());
-                            }
+                          vehicle.setSpeed(vehicle2.getSpeed());
                         }
                         if (!(vehicle instanceof TruckActor && (s.equals("BAL_SEGG") || s.equals("JOBB_SEGG")))) {
                             if (s.equals("JOBB_OLDAL") || s.equals("JOBB_ELSO") || s.equals("JOBB_HATSO") || s.equals("JOBB_SEGG")) {
@@ -307,7 +321,20 @@ public class GameStage extends MyStage {
                                     vehicle2.setGoToLeftSide(true);
                             }
                         }
-                        //TODO: Egymásba rakja a járműveket, megoldani
+
+                        if((s.equals("JOBB_ORR") || s.equals("BAL_ORR")) && vehicle2.isSzembe()){
+                            vehicle.setSpeed(0);
+                            vehicle2.setSpeed(0);
+                            vehicle.mehet=false;
+                            vehicle2.mehet=false;
+                            addRobbanas(vehicle.getX(),vehicle.getY());
+//                            explosionActor.setPosition(vehicle.getX()+vehicle.getWidth()-explosionActor.getWidth()/2,vehicle.getY()+vehicle.getHeight()-explosionActor.getHeight()/2);
+
+                        }
+
+                        if(!(s.equals("Slowdown")) && !(vehicle.isGoToRightSide()) && !(vehicle.isGoToLeftSide())){
+
+                        }
                     }
                 }
             }
@@ -322,5 +349,14 @@ public class GameStage extends MyStage {
             if(vehicle.isGoToRightSide() || vehicle.isGoToLeftSide()) return true;
         }
         return false;
+    }
+
+    boolean van = false;
+
+    void addRobbanas(float x, float y){
+        for(Actor actor : getActors()){
+            if(actor instanceof ExplosionActor) van=true;
+        }
+        if(!van)addActor(explosionActor = new ExplosionActor(x,y));
     }
 }
