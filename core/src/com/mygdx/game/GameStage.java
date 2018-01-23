@@ -48,6 +48,7 @@ public class GameStage extends MyStage {
     Random rand;
     ExplosionActor explosionActor;
     ArrayList<Vehicle> vehicles = null;
+    CarActor car2;
 
     Queue<RoadFrame> roadFrames;
     RoadFrameActor lastRoadFrameActor = null;
@@ -101,6 +102,8 @@ public class GameStage extends MyStage {
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1430));
         addActor(car = new CarActor(this));
         car.setSpeed(8);
+        car2 = new CarActor(this);
+        car2.setVisible(false);
         addActor(blueCarActor = new BlueCarActor(1000, rand.nextBoolean()));
         blueCarActor.setSpeed(6.5f);
         blueCarActor.setZIndex(10);
@@ -224,7 +227,7 @@ public class GameStage extends MyStage {
                 for (String s : car.getMyOverlappedShapeKeys(vehicle)) {
                     try {
                         if (!(s.equals("Frustum")))
-                            System.out.println(s);
+                           // System.out.println(s);
                         if (s.equals("JOBB_OLDAL") || s.equals("JOBB_ELSO") || s.equals("JOBB_HATSO") || s.equals("JOBB_SEGG")) {
                             vehicle.setGoToRightSide(true);
                         } else if (s.equals("BAL_OLDAL") || s.equals("BAL_ELSO") || s.equals("BAL_HATSO") || s.equals("BAL_SEGG")) {
@@ -248,7 +251,17 @@ public class GameStage extends MyStage {
 
                         }
                         ChangingOffsetSprite changingOffsetSprite = (ChangingOffsetSprite) car.getSprite(s);
-                       changingOffsetSprite.changeOnce();
+                        changingOffsetSprite.changeOnce();
+                        car2.setVisible(false);
+                        car2
+                        car2.removeCollisionShape("Frustum");
+                        for (String ss : vehicle.getMyOverlappedShapeKeys(car2)){
+                            if(!(vehicle instanceof CarActor) ) {
+                                System.out.println(ss);
+                                ChangingOffsetSprite changingOffsetSprite1 = (ChangingOffsetSprite) vehicle.getSprite(ss);
+                                changingOffsetSprite1.changeOnce();
+                            }
+                        }
                     } catch (Exception e) {
 
                     }

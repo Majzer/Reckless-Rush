@@ -34,6 +34,8 @@ public class CarActor extends Vehicle {
         return t[0]==i;
     }
 
+
+
     public CarActor(GameStage gameStage) {
         super(566,1068);
         setOrigintoCenter();
