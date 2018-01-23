@@ -39,6 +39,10 @@ public class Assets {
 	public static final AssetDescriptor<BitmapFont> ARIAL_30_FONT
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
 
+	//Zene
+	public static final AssetDescriptor<Music> MUSIC
+			= new AssetDescriptor<Music>("musics/Miami_Soul.mp3", Music.class);
+
 	//Animáciok
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("pedestrian_project/no2/walk.atlas", TextureAtlas.class);
@@ -261,6 +265,25 @@ public class Assets {
 	public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("explosion.atlas", TextureAtlas.class);
 
+	//Táblák
+	public static final AssetDescriptor<Texture> BAK_15_TEXTURE
+			=new AssetDescriptor<Texture>("signs/bak_15.png",Texture.class);
+
+	public static final AssetDescriptor<Texture> BAK_35_TEXTURE
+			=new AssetDescriptor<Texture>("signs/bak_35.png",Texture.class);
+
+	public static final AssetDescriptor<Texture> KESZTHELY_TEXTURE
+			=new AssetDescriptor<Texture>("signs/keszthely.png",Texture.class);
+
+	public static final AssetDescriptor<Texture> LENTI_40_TEXTURE
+			=new AssetDescriptor<Texture>("signs/lenti_40.png",Texture.class);
+
+	public static final AssetDescriptor<Texture> LETENYE_35_TEXTURE
+			=new AssetDescriptor<Texture>("signs/letenye_35.png",Texture.class);
+
+	public static final AssetDescriptor<Texture> NAGYKANIZSA_40_TEXTURE
+			=new AssetDescriptor<Texture>("signs/nagykanizsa_40.png",Texture.class);
+
     public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
@@ -398,10 +421,18 @@ public class Assets {
 		manager.load(LOGO2_TEXTURE);
 		manager.load(LOGO3_TEXTURE);
 
+		//Táblák
+		manager.load(BAK_15_TEXTURE);
+		manager.load(BAK_35_TEXTURE);
+		manager.load(KESZTHELY_TEXTURE);
+		manager.load(LENTI_40_TEXTURE);
+		manager.load(LETENYE_35_TEXTURE);
+		manager.load(NAGYKANIZSA_40_TEXTURE);
+
 	}
 
     public static void afterLoaded() {
-        //manager.get(MUSIC).setLooping(true);
+        manager.get(MUSIC).setLooping(true);
     }
 
 	public static void unload() {
