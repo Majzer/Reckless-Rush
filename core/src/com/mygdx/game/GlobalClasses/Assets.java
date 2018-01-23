@@ -308,6 +308,9 @@ public class Assets {
 		manager.load(BTN_EXIT_DOWN_TEXTURE);
 		manager.load(EXPLOSION_TEXTURE);
 
+		//Zene
+		manager.load(MUSIC);
+
 		//Autó ép
 		manager.load(B_ELSO_EP);
 		manager.load(B_ORR_EP);
