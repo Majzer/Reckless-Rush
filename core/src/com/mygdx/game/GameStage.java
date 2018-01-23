@@ -253,7 +253,6 @@ public class GameStage extends MyStage {
                         ChangingOffsetSprite changingOffsetSprite = (ChangingOffsetSprite) car.getSprite(s);
                         changingOffsetSprite.changeOnce();
                         car2.setVisible(false);
-                        car2
                         car2.removeCollisionShape("Frustum");
                         for (String ss : vehicle.getMyOverlappedShapeKeys(car2)){
                             if(!(vehicle instanceof CarActor) ) {
