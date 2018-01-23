@@ -35,11 +35,11 @@ public class MenuStage extends MyStage {
         setDebugAll(true);
     }
 
-    private byte passedFrames = 0;
+    private float passedMilisec = 0;
     @Override
     public void act(float delta) {
         super.act(delta);
-        passedFrames++;
+        passedMilisec += delta;
 
 
 
@@ -58,9 +58,10 @@ public class MenuStage extends MyStage {
                     plusz = false;
                 }
             }
-            passedFrames %= 6;
-            if (passedFrames == 0)
-                logo.change();
+            if (passedFrames > 600){
+               logo.change();
+               passedFrames = 0;
+            }
         }
 
 
