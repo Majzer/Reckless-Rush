@@ -18,6 +18,12 @@ public class ChangingOffsetSprite extends OffsetSprite {
         this.textures = textures;
     }
 
+    public void setBack(){
+        textureIndex = 0;
+        isChanged = false;
+        setTexture(textures[0]);
+    }
+
     public void changeOnce(){
         if(!isChanged)
             changeEveryTime();
