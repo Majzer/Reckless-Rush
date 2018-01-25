@@ -243,7 +243,7 @@ public class GameStage extends MyStage {
                             addRobbanas(car.getX(), car.getY());
                             explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);
                             if (explosionActor.vege) {
-                                game.setScreenBackByStackPop();
+                                game.setScreen(new MenuScreen(game));
                             }
                             car.setSpeed(0);
                             vehicle.setSpeed(0);

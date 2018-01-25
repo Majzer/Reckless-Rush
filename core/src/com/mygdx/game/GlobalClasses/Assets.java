@@ -429,6 +429,9 @@ public class Assets {
 		manager.load(LETENYE_35_TEXTURE);
 		manager.load(NAGYKANIZSA_40_TEXTURE);
 
+
+		//Zene
+		manager.load(MUSIC);
 	}
 
     public static void afterLoaded() {
