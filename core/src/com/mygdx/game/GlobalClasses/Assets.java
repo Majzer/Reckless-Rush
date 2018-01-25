@@ -6,7 +6,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -40,8 +39,12 @@ public class Assets {
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
 
 	//Zene
-	public static final AssetDescriptor<Music> MUSIC
+	public static final AssetDescriptor<Music> Miami_Soul
 			= new AssetDescriptor<Music>("musics/Miami_Soul.mp3", Music.class);
+
+	public static final AssetDescriptor<Music> ThemeSound
+			= new AssetDescriptor<Music>("musics/ThemeSound.mp3", Music.class);
+
 
 	//Animáciok
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
@@ -309,7 +312,7 @@ public class Assets {
 		manager.load(EXPLOSION_TEXTURE);
 
 		//Zene
-		manager.load(MUSIC);
+		manager.load(Miami_Soul);
 
 		//Autó ép
 		manager.load(B_ELSO_EP);
@@ -434,11 +437,11 @@ public class Assets {
 
 
 		//Zene
-		manager.load(MUSIC);
+		manager.load(Miami_Soul);
 	}
 
     public static void afterLoaded() {
-        manager.get(MUSIC).setLooping(true);
+        manager.get(Miami_Soul).setLooping(true);
     }
 
 	public static void unload() {
