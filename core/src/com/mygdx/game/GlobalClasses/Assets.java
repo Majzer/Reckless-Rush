@@ -255,18 +255,18 @@ public class Assets {
 
 	//Út hibák
 	public static final AssetDescriptor<Texture> KATYU1_TEXTURE
-			= new AssetDescriptor<Texture>("sprites/road_object/pothole1.png", Texture.class);
+			= new AssetDescriptor<Texture>("sprites/road_objects/pothole1.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> KATYU2_TEXTURE
-			= new AssetDescriptor<Texture>("sprites/road_object/pothole2.png", Texture.class);
+			= new AssetDescriptor<Texture>("sprites/road_objects/pothole2.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> KATYU3_TEXTURE
-			= new AssetDescriptor<Texture>("sprites/road_object/pothole3.png", Texture.class);
+			= new AssetDescriptor<Texture>("sprites/road_objects/pothole3.png", Texture.class);
 
 
 	//Út melletti objaktumok
 	public static final AssetDescriptor<Texture> HOUSE_TEXTURE
-			= new AssetDescriptor<Texture>("sprites/road_object/house.png", Texture.class);
+			= new AssetDescriptor<Texture>("sprites/road_objects/house.png", Texture.class);
 
 	//Háttér
 	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
