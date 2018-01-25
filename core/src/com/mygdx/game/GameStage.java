@@ -61,7 +61,6 @@ public class GameStage extends MyStage {
         for (int i = 0; i < 5; i++) {
             roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.csaladi));
         }
-        sound = Assets.manager.get(Assets.ThemeSound);
         RoadFrame roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.bokros);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
@@ -98,6 +97,7 @@ public class GameStage extends MyStage {
 
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024, 768), batch, game);
+        sound = Assets.manager.get(Assets.ThemeSound);
         rand = new Random();
 
         sound.setVolume(0.4f);
