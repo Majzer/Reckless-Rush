@@ -14,7 +14,7 @@ public class MainScreen extends MyScreen {
 
     GameStage gameStage;
 
-    Music music = Assets.manager.get(Assets.MUSIC);
+    Music music = Assets.manager.get(Assets.Miami_Soul);
 
     public MainScreen(RecklessRush game) {
         super(game);

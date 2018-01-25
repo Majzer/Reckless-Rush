@@ -313,6 +313,7 @@ public class Assets {
 
 		//Zene
 		manager.load(Miami_Soul);
+		manager.load(ThemeSound);
 
 		//Autó ép
 		manager.load(B_ELSO_EP);
