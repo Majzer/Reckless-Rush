@@ -198,7 +198,7 @@ public class Assets {
 	public static final AssetDescriptor<Texture> KAMION_J_OLDAL_TOROTT
 			= new AssetDescriptor<Texture>("truck_sprite/damage/jobb_kozep.png",Texture.class);
 
-	// TODO: 2018. 01. 23. Jobb közép és bal középre figyelj oda bence
+	// TODO: 2018. 01. 23. Jobb közép és bal középre figyelj oda Bence
 	//Rendőrkocsi ép
 	public static final AssetDescriptor<Texture> RENDOR_B_ELSO_EP
 			= new AssetDescriptor<Texture>("police_car_sprite/intact/bal_elso.png",Texture.class);
@@ -253,9 +253,6 @@ public class Assets {
 	public static final AssetDescriptor<Texture> JO_KANYAR_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/one_lane_good_road.png", Texture.class);
 
-	public static final AssetDescriptor<Texture> ROSSZ_KANYAR_TEXTURE
-			= new AssetDescriptor<Texture>("sprites/road_object/house.png", Texture.class);
-
 	//Út hibák
 	public static final AssetDescriptor<Texture> KATYU1_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/road_object/pothole1.png", Texture.class);
@@ -269,7 +266,7 @@ public class Assets {
 
 	//Út melletti objaktumok
 	public static final AssetDescriptor<Texture> HOUSE_TEXTURE
-			= new AssetDescriptor<Texture>("sprites/one_lane_good_road.png", Texture.class);
+			= new AssetDescriptor<Texture>("sprites/road_object/house.png", Texture.class);
 
 	//Háttér
 	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
@@ -444,7 +441,6 @@ public class Assets {
 		manager.load(ROAD_TEXTURE);
 		manager.load(KANYAR_TEXTURE);
 		manager.load(JO_KANYAR_TEXTURE);
-		manager.load(ROSSZ_KANYAR_TEXTURE);
 
 		//Út hibák
 		manager.load(KATYU1_TEXTURE);
