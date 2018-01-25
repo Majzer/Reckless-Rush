@@ -159,13 +159,30 @@ public class CarActor extends Vehicle {
     boolean mehetJobbra=false;
     boolean mehetJobbraAlap=true;
     boolean mehetBalraAlap=true;
+    boolean worldRotation=false;
     int cel=0;
+float rotationBase = 0;
 
+    public void setWorldRotation(boolean worldRotation) {
+        this.worldRotation = worldRotation;
+    }
+
+    public float getRotationBase() {
+        return rotationBase;
+    }
+
+    public void setRotationBase(float rotationBase) {
+        this.rotationBase = rotationBase;
+    }
+
+    public void rotateByBase(){
+
+    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        setRotation(0);
+        setRotation(rotationBase);
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -194,26 +211,37 @@ public class CarActor extends Vehicle {
                 }
 
             if (mehetBalra) {
-                if (getRotation() < 90) rotateBy(1);
-                if (!(contains(destinations, (int) getX()))) {
-                    setX(getX() - 2);
-                    mehetBalraAlap = false;
-                    mehetJobbraAlap = true;
+                if (getRotation() < rotationBase+90) rotateBy(1);
+                if(!worldRotation) {
+                    if (!(contains(destinations, (int) getX()))) {
+                        setX(getX() - 2);
+                        mehetBalraAlap = false;
+                        mehetJobbraAlap = true;
+                    } else {
+                        setRotation(rotationBase);
+                        mehetBalraAlap = true;
+                        mehetJobbraAlap = true;
+                    }
                 } else {
-                    setRotation(0);
-                    mehetBalraAlap = true;
-                    mehetJobbraAlap = true;
+                    if (!(contains(destinations, (int) getX()))) {
+                        setX(getX() - 2);
+                        mehetBalraAlap = false;
+                        mehetJobbraAlap = true;
+                    } else {
+                        setRotation(rotationBase);
+                        mehetBalraAlap = true;
+                        mehetJobbraAlap = true;
+                    }
                 }
-
             }
             if (mehetJobbra) {
-                if (getRotation() > -90) rotateBy(-1);
+                if (getRotation() > rotationBase-90) rotateBy(-1);
                 if (!(contains(destinations, (int) getX()))) {
                     setX(getX() + 2);
                     mehetJobbraAlap = false;
                     mehetBalraAlap = true;
                 } else {
-                    setRotation(0);
+                    setRotation(rotationBase);
                     mehetJobbraAlap = true;
                     mehetBalraAlap = true;
                 }

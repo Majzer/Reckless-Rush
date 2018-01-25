@@ -58,7 +58,6 @@ public class MenuStage extends MyStage {
                     plusz = false;
                 }
             }
-        System.out.println(passedMilisec);
             if (passedMilisec > 0.06f){
                logo.change();
                passedMilisec = 0;

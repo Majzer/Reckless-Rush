@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -65,7 +66,7 @@ public class GameStage extends MyStage {
         for (int i = 0; i < 5; i++) {
             roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.bokros));
         }
-
+        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
@@ -83,23 +84,38 @@ public class GameStage extends MyStage {
         }
     }
 
+    public void rotate(WorldRotation worldRotation){
+        this.worldRotation = worldRotation;
+        switch (worldRotation){
+            case r90:
+                getCamera().rotate(-90, 0,0,-1);
+                break;
+        }
+    }
+
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024, 768), batch, game);
         rand = new Random();
+
+        switch(worldRotation){
+            case r90:
+                getCamera().rotate(-90, 0,0,-1);
+                break;
+        }
 
         City a = new City("Zalaegerszeg", City.Varostipus.megyeszekhely);
         City b = new City("Keszthely", City.Varostipus.kisvaros);
         roadFrames = generateMap(a, b);
         vehicles = new ArrayList<Vehicle>();
-        //addActor(bg =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,100));
-        //addActor(bg2 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,bg.getY()+bg.getHeight()/1.5f));
+        //addActor(bg =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,100));
+        //addActor(bg2 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,bg.getY()+bg.getHeight()/1.5f));
 
 //        System.out.println(bg.getY());
 //        System.out.println(bg.isInFrustum());
 /*        addActor(ba1 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()));
         addActor(ba2 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470, bg.getY()+250));
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
-        //addActor(bg3 =new BgActor(Assets.manager.get(Assets.HATTER_TEXTURE),0,1430));
+        //addActor(bg3 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,1430));
         addActor(car = new CarActor(this));
         car.setSpeed(8);
         car2 = new CarActor(this);
@@ -147,6 +163,7 @@ public class GameStage extends MyStage {
 
     boolean go = false;
     boolean egyszer = true;
+    boolean voltMarEgyszer=false;
 
     @Override
     public void act(float delta) {
@@ -154,6 +171,18 @@ public class GameStage extends MyStage {
         if (car != null) {
             car.setY(car.getY() + car.getSpeed());
             setCameraMoveToY(car.getY() + getViewport().getScreenHeight() / 2.5f);
+        }
+
+        if(lastRoadFrameActor.getRoadFrame().tipus == RoadFrame.Tipus.elagazojobbra){
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                car.setRotationBase(90);
+                if(voltMarEgyszer){
+                    rotate(worldRotation.r90);
+                    voltMarEgyszer=true;
+                    car.setWorldRotation(true);
+                }
+
+            }
         }
 
         for (Vehicle vehicle : vehicles) {
@@ -238,17 +267,13 @@ public class GameStage extends MyStage {
                         }
 
                         if(vehicle.isSzembe() && (s.equals("BAL_ORR") || s.equals("JOBB_ORR"))){
-
-
                             addRobbanas(car.getX(), car.getY());
-                            explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);
+                            explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);car.setSpeed(0);
+                            vehicle.setSpeed(0);
+                            car.mehet = false;
                             if (explosionActor.vege) {
                                 game.setScreen(new MenuScreen(game));
                             }
-                            car.setSpeed(0);
-                            vehicle.setSpeed(0);
-                            car.mehet = false;
-
                         }
                         ChangingOffsetSprite changingOffsetSprite = (ChangingOffsetSprite) car.getSprite(s);
                         changingOffsetSprite.changeOnce();
@@ -323,6 +348,7 @@ public class GameStage extends MyStage {
 
                         if ((s.equals("Slowdown"))) {
                           vehicle.setSpeed(vehicle2.getSpeed());
+                          vehicle.setX(vehicle.getX());
                         }
                         if (!(vehicle instanceof TruckActor && (s.equals("BAL_SEGG") || s.equals("JOBB_SEGG")))) {
                             if (s.equals("JOBB_OLDAL") || s.equals("JOBB_ELSO") || s.equals("JOBB_HATSO") || s.equals("JOBB_SEGG")) {
@@ -335,18 +361,20 @@ public class GameStage extends MyStage {
                             }
                         }
 
+                        robbanasos = false;
                         if((s.equals("JOBB_ORR") || s.equals("BAL_ORR")) && vehicle2.isSzembe()){
                             vehicle.setSpeed(0);
                             vehicle2.setSpeed(0);
                             vehicle.mehet=false;
                             vehicle2.mehet=false;
                             addRobbanas(vehicle.getX(),vehicle.getY());
-//                            explosionActor.setPosition(vehicle.getX()+vehicle.getWidth()-explosionActor.getWidth()/2,vehicle.getY()+vehicle.getHeight()-explosionActor.getHeight()/2);
-
+                            if(!robbanasos) explosionActor.setPosition(vehicle.getX() + vehicle.getWidth() - explosionActor.getWidth() / 2, vehicle.getY() + vehicle.getHeight() - explosionActor.getHeight() / 2);
+                            robbanasos=true;
                         }
-
-                        if(!(s.equals("Slowdown")) && !(vehicle.isGoToRightSide()) && !(vehicle.isGoToLeftSide())){
-
+                        if(!robbanasos)
+                        if(!(s.equals("Slowdown")) && !(vehicle.isGoToRightSide()) && !(vehicle.isGoToLeftSide())&& !(vehicle2.isGoToRightSide())&& !(vehicle2.isGoToLeftSide())){
+                            if(!(vehicle instanceof TruckActor && (s.equals("BAL_SEGG") || s.equals("JOBB_SEGG"))))
+                            vehicle.setY(vehicle.getY()+100);
                         }
                     }
                 }
@@ -354,7 +382,7 @@ public class GameStage extends MyStage {
         }
     }
 
-
+    boolean robbanasos = false;
 
     boolean isGoingToSide(){
         for(Vehicle vehicle : vehicles){
@@ -370,6 +398,8 @@ public class GameStage extends MyStage {
         for(Actor actor : getActors()){
             if(actor instanceof ExplosionActor) van=true;
         }
-        if(!van)addActor(explosionActor = new ExplosionActor(x,y));
+        if(!van){
+            addActor(explosionActor = new ExplosionActor(x,y));
+        }
     }
 }

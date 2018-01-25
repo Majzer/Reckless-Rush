@@ -6,7 +6,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -240,10 +239,14 @@ public class Assets {
 	public static final AssetDescriptor<Texture> RENDOR_J_OLDAL_BLUE_TOROTT
 			= new AssetDescriptor<Texture>("police_car_sprite/damaged/jobb_kozep_blue.png",Texture.class);
 
-	//Háttér
-	public static final AssetDescriptor<Texture> HATTER_TEXTURE
+	//Út
+	public static final AssetDescriptor<Texture> ROAD_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/road_background_vol2.png",Texture.class);
 
+	public static final AssetDescriptor<Texture> KANYAR_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/right_corner.png",Texture.class);
+
+	//Háttér
 	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/menubg.png",Texture.class);
 
@@ -411,8 +414,11 @@ public class Assets {
 		//Teszt
 		manager.load(TESZT_TEXTURE);
 
+		//Út
+		manager.load(ROAD_TEXTURE);
+		manager.load(KANYAR_TEXTURE);
+
 		//Háttér
-		manager.load(HATTER_TEXTURE);
 		manager.load(MENU_HATTER_TEXTURE);
 
 		//Bokor

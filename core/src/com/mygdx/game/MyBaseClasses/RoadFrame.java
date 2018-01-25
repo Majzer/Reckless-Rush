@@ -8,7 +8,7 @@ public class RoadFrame {
     public enum Utminoseg{
         rosszegysavos,
         joegysavos,
-        joketsavos
+        joketsavos,
     }
 
     public enum Tipus{
@@ -18,7 +18,6 @@ public class RoadFrame {
         bokros,
         erdos,
         elagazojobbra,
-        elagazobalra
     }
 
     public Utminoseg utminoseg;
