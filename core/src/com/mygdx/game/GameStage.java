@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -49,6 +50,7 @@ public class GameStage extends MyStage {
     ExplosionActor explosionActor;
     ArrayList<Vehicle> vehicles = null;
     CarActor car2;
+    Music sound = Assets.manager.get(Assets.ThemeSound);
 
     Queue<RoadFrame> roadFrames;
     RoadFrameActor lastRoadFrameActor = null;
@@ -86,6 +88,10 @@ public class GameStage extends MyStage {
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024, 768), batch, game);
         rand = new Random();
+
+        sound.setVolume(0.4f);
+        sound.setLooping(true);
+        sound.play();
 
         City a = new City("Zalaegerszeg", City.Varostipus.megyeszekhely);
         City b = new City("Keszthely", City.Varostipus.kisvaros);
