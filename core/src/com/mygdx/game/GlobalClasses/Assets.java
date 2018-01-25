@@ -250,6 +250,27 @@ public class Assets {
 	public static final AssetDescriptor<Texture> KANYAR_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/right_corner.png",Texture.class);
 
+	public static final AssetDescriptor<Texture> JO_KANYAR_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/one_lane_good_road.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> ROSSZ_KANYAR_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_object/house.png", Texture.class);
+
+	//Út hibák
+	public static final AssetDescriptor<Texture> KATYU1_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_object/pothole1.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> KATYU2_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_object/pothole2.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> KATYU3_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_object/pothole3.png", Texture.class);
+
+
+	//Út melletti objaktumok
+	public static final AssetDescriptor<Texture> HOUSE_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/one_lane_good_road.png", Texture.class);
+
 	//Háttér
 	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/menubg.png",Texture.class);
@@ -422,6 +443,16 @@ public class Assets {
 		//Út
 		manager.load(ROAD_TEXTURE);
 		manager.load(KANYAR_TEXTURE);
+		manager.load(JO_KANYAR_TEXTURE);
+		manager.load(ROSSZ_KANYAR_TEXTURE);
+
+		//Út hibák
+		manager.load(KATYU1_TEXTURE);
+		manager.load(KATYU2_TEXTURE);
+		manager.load(KATYU3_TEXTURE);
+
+		//Út melletti objektumok
+		manager.load(HOUSE_TEXTURE);
 
 		//Háttér
 		manager.load(MENU_HATTER_TEXTURE);
