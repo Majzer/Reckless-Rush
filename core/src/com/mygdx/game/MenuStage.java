@@ -58,9 +58,10 @@ public class MenuStage extends MyStage {
                     plusz = false;
                 }
             }
-            if (passedFrames > 600){
+        System.out.println(passedMilisec);
+            if (passedMilisec > 0.06f){
                logo.change();
-               passedFrames = 0;
+               passedMilisec = 0;
             }
         }
 
