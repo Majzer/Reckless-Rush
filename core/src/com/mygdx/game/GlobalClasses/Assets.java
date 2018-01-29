@@ -150,10 +150,6 @@ public class Assets {
     public static final AssetDescriptor<Texture> KEK_J_OLDAL_TOROTT
             = new AssetDescriptor<Texture>("car2_sprite/damage/jobb_kozep.png",Texture.class);
 
-    //Teszt
-	public static final AssetDescriptor<Texture> TESZT_TEXTURE
-			= new AssetDescriptor<Texture>("test.png",Texture.class);
-
 	//Kamion ép
 	public static final AssetDescriptor<Texture> KAMION_B_ELSO_EP
 			= new AssetDescriptor<Texture>("truck_sprite/intact/bal_elso.png",Texture.class);
@@ -263,10 +259,18 @@ public class Assets {
 	public static final AssetDescriptor<Texture> KATYU3_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/road_objects/pothole3.png", Texture.class);
 
-
 	//Út melletti objaktumok
 	public static final AssetDescriptor<Texture> HOUSE_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/road_objects/house.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> HOUSE2_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_objects/house2.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BUSH_LINE_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_objects/bush_line.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> FORTRESS_LINE_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_objects/fortress_line.png", Texture.class);
 
 	//Háttér
 	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
@@ -434,9 +438,6 @@ public class Assets {
 		manager.load(RENDOR_J_SEGG_TOROTT);
 		manager.load(RENDOR_J_OLDAL_BLUE_TOROTT);
 
-		//Teszt
-		manager.load(TESZT_TEXTURE);
-
 		//Út
 		manager.load(ROAD_TEXTURE);
 		manager.load(KANYAR_TEXTURE);
@@ -449,6 +450,9 @@ public class Assets {
 
 		//Út melletti objektumok
 		manager.load(HOUSE_TEXTURE);
+		manager.load(HOUSE2_TEXTURE);
+		manager.load(BUSH_LINE_TEXTURE);
+		manager.load(FORTRESS_LINE_TEXTURE);
 
 		//Háttér
 		manager.load(MENU_HATTER_TEXTURE);
@@ -469,7 +473,6 @@ public class Assets {
 		manager.load(LENTI_40_TEXTURE);
 		manager.load(LETENYE_35_TEXTURE);
 		manager.load(NAGYKANIZSA_40_TEXTURE);
-
 
 		//Zene
 		manager.load(Miami_Soul);

@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -51,6 +52,7 @@ public class GameStage extends MyStage {
     ExplosionActor explosionActor;
     ArrayList<Vehicle> vehicles = null;
     CarActor car2;
+    HouseActor house1, house2;
     Music sound;
 
     Queue<RoadFrame> roadFrames;
@@ -153,6 +155,11 @@ public class GameStage extends MyStage {
             }
         });
 
+        // TODO: 2018. 01. 29. Hozzá addolva két ház a többit majd valaki csinálja meg. 
+        addActor(house1 = new HouseActor(Assets.manager.get(Assets.HOUSE_TEXTURE), 0,0));
+        addActor(house2 = new HouseActor(Assets.manager.get(Assets.HOUSE2_TEXTURE), 0,0));
+        
+        
         addRoadFromQueue();
         //fitWorldToWidth();
     }
