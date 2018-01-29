@@ -12,14 +12,15 @@ import java.util.Random;
  */
 public class TruckActor extends Vehicle {
 
+    GameStage gameStage;
 
-
-    public TruckActor(float y, boolean szembe) {
+    public TruckActor(float y, boolean szembe, GameStage gameStage) {
         super(523,1003);
         rand = new Random();
         this.szembe = szembe;
         this.magas = y;
-        destinations = new int[]{171-57,377-57,642-57,850-57};
+        this.gameStage = gameStage;
+        destinations = new int[]{gameStage.getViewport().getScreenX()+200,gameStage.getViewport().getScreenX()+300,gameStage.getViewport().getScreenX()+600,gameStage.getViewport().getScreenX()+800};
         if (szembe)setPosition(destinations[rand.nextInt(2)],y);
         else setPosition(destinations[rand.nextInt(2)+2],y);
         addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_SEGG_EP),0,0),"BAL_SEGG");

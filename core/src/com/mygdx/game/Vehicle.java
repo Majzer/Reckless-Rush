@@ -39,12 +39,18 @@ public class Vehicle extends MultiSpriteActor {
         }
     }
 
+    float rotationBase=0;
+
     public void setMagas(float magas) {
         this.magas = magas;
     }
 
     public float getSpeed() {
         return speed;
+    }
+
+    public void setRotationBase(float rotationBase) {
+        this.rotationBase = rotationBase;
     }
 
     public void setSpeed(float speed) {
@@ -90,7 +96,10 @@ public class Vehicle extends MultiSpriteActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(goToSide){
+        if(!isSzembe())
+        setRotation(rotationBase);
+        else setRotation(180-rotationBase);
+        if(goToSide) {
             if((int)getY()==destinations[0] || (int)getY()==destinations[1]) setX(getX()-2);
             else setX(getX()+2);
         }

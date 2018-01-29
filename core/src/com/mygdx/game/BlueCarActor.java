@@ -12,13 +12,15 @@ import java.util.Random;
  */
 public class BlueCarActor extends Vehicle {
 
+    GameStage gameStage;
 
-    public BlueCarActor(float y, boolean szembe) {
+    public BlueCarActor(float y, boolean szembe, GameStage gameStage) {
         super(450,926);
         rand = new Random();
         this.magas=y;
         this.szembe=szembe;
-        destinations = new int[]{171-57,377-57,642-57,850-57};
+        this.gameStage = gameStage;
+        destinations = new int[]{gameStage.getViewport().getScreenX()+200,gameStage.getViewport().getScreenX()+300,gameStage.getViewport().getScreenX()+600,gameStage.getViewport().getScreenX()+800};
         if (szembe)setPosition(destinations[rand.nextInt(2)],y);
         else setPosition(destinations[rand.nextInt(2)+2],y);
         addCollisionShape("Slowdown", new MyRectangle(getWidth(),500,0,getHeight()+100,getOriginX(), getOriginY()));

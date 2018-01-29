@@ -90,7 +90,7 @@ public class GameStage extends MyStage {
         this.worldRotation = worldRotation;
         switch (worldRotation){
             case r90:
-                getCamera().rotate(-90, 0,0,-1);
+                getCamera().rotate(90, 0,0,-1);
                 break;
         }
     }
@@ -106,7 +106,7 @@ public class GameStage extends MyStage {
 
         switch(worldRotation){
             case r90:
-                getCamera().rotate(-90, 0,0,-1);
+                getCamera().rotate(90, 0,0,-1);
                 break;
         }
 
@@ -127,17 +127,17 @@ public class GameStage extends MyStage {
         car.setSpeed(8);
         car2 = new CarActor(this);
         car2.setVisible(false);
-        addActor(blueCarActor = new BlueCarActor(1000, rand.nextBoolean()));
+        addActor(blueCarActor = new BlueCarActor(1000, rand.nextBoolean(), this));
         blueCarActor.setSpeed(6.5f);
         blueCarActor.setZIndex(10);
-        addActor(blueCarActor2 = new BlueCarActor(1200, rand.nextBoolean()));
+        addActor(blueCarActor2 = new BlueCarActor(1200, rand.nextBoolean(), this));
         blueCarActor2.setSpeed(6.5f);
         blueCarActor2.setZIndex(10);
-        addActor(pedActor = new PedActor(this));
+        addActor(pedActor = new PedActor(this, 0.5f, rand.nextBoolean(), car.getY()+getViewport().getWorldHeight()));
         car.setZIndex(10);
         pedActor.setZIndex(10);
-        addActor(truckActor = new TruckActor(500, rand.nextBoolean()));
-        addActor(truckActor2 = new TruckActor(900, rand.nextBoolean()));
+        addActor(truckActor = new TruckActor(500, rand.nextBoolean(), this));
+        addActor(truckActor2 = new TruckActor(900, rand.nextBoolean(), this));
         truckActor.setZIndex(10);
         truckActor2.setZIndex(10);
         truckActor.setSpeed(5);
@@ -171,21 +171,42 @@ public class GameStage extends MyStage {
     boolean go = false;
     boolean egyszer = true;
     boolean voltMarEgyszer=false;
+    long ido = System.currentTimeMillis();
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (car != null) {
-            car.setY(car.getY() + car.getSpeed());
-            setCameraMoveToY(car.getY() + getViewport().getScreenHeight() / 2.5f);
+        if(System.currentTimeMillis()-ido>2500){
+            addActor(new PedActor(this, 0.5f, rand.nextBoolean(), car.getY()+getViewport().getWorldHeight()));
+            ido=System.currentTimeMillis();
         }
+
+        if (car != null) {
+            if(worldRotation == worldRotation.r0) {
+                car.setY(car.getY() + car.getSpeed());
+                setCameraMoveToY(car.getY() + getViewport().getScreenHeight() / 2.5f);
+                getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+(int)car.getSpeed());
+            } else if (worldRotation == worldRotation.r90){
+                if(car.kenyszerithet)
+                car.intteKenyszerit();
+                car.setX(car.getX() + car.getSpeed());
+                setCameraMoveToX(car.getX() + getViewport().getScreenWidth() / 3);
+                getViewport().setScreenPosition(getViewport().getScreenX()+(int)car.getSpeed(), getViewport().getScreenY());
+            }
+        }
+
+        System.out.println("getViewport().getScreenX() = " + getViewport().getScreenX());
+        System.out.println("getViewport().getScreenY() = " + getViewport().getScreenY());
 
         if(lastRoadFrameActor.getRoadFrame().tipus == RoadFrame.Tipus.elagazojobbra){
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                car.setRotationBase(90);
-                if(voltMarEgyszer){
+                if(worldRotation!=worldRotation.r90){
+                    car.setRotationBase(-90);
+                    for(Vehicle vehicle : vehicles){
+                        vehicle.setRotationBase(-90);
+                    }
+                    worldRotation = worldRotation.r90;
                     rotate(worldRotation.r90);
-                    voltMarEgyszer=true;
                     car.setWorldRotation(true);
                 }
 
@@ -248,6 +269,11 @@ public class GameStage extends MyStage {
 
         ArrayList<Actor> deleteActor = new ArrayList<>();
         for (Actor a : actors) {
+            if(a instanceof PedActor){
+                if(a.getY()<car.getY()-200){
+                    deleteActor.add(a);
+                }
+            }
             if (a instanceof RoadFrameActor) {
                 if (!car.overlaps((MyActor) a)) {
                     deleteActor.add(a);

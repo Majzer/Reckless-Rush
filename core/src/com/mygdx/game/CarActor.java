@@ -42,6 +42,7 @@ public class CarActor extends Vehicle {
         addCollisionShape("Frustum", new MyRectangle(1024,22048,-256,-256,getOriginX(), getOriginY()));
 
         this.gameStage=gameStage;
+        destinations = new int[]{gameStage.getViewport().getScreenX()+200,gameStage.getViewport().getScreenX()+300,gameStage.getViewport().getScreenX()+600,gameStage.getViewport().getScreenX()+800};
         setPosition(destinations[2],gameStage.getViewport().getScreenHeight()/3);
         addSprite(new ChangingOffsetSprite(
                 new Texture[]{
@@ -153,7 +154,7 @@ public class CarActor extends Vehicle {
 
     }
 
-    int[] destinations = new int[]{171-57,377-57,642-56,850-56};
+    int [] destinations;
     int mostani=2;
     boolean mehetBalra=false;
     boolean mehetJobbra=false;
@@ -161,38 +162,60 @@ public class CarActor extends Vehicle {
     boolean mehetBalraAlap=true;
     boolean worldRotation=false;
     int cel=0;
-float rotationBase = 0;
 
     public void setWorldRotation(boolean worldRotation) {
         this.worldRotation = worldRotation;
+        if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-200,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
+        for(int i : destinations){
+            System.out.println("i = " + i);
+        }
     }
 
     public float getRotationBase() {
         return rotationBase;
     }
 
-    public void setRotationBase(float rotationBase) {
-        this.rotationBase = rotationBase;
-    }
 
     public void rotateByBase(){
 
     }
 
+    boolean kenyszerithet=true;
+
+    public void intteKenyszerit(){
+        System.out.println("getX() = " + getX());
+        setX((int)getX());
+        System.out.println("getX()2 = " + getX());
+        System.out.println("getY() = " + getY());
+        setY((int)getY());
+        System.out.println("getY()2 = " + getY());
+        kenyszerithet=false;
+    }
+
+
     @Override
     public void act(float delta) {
         super.act(delta);
-        setRotation(rotationBase);
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                     //if(mostani>0&&!mehetJobbra)
-                    if (!(isFirstElementOfArray(destinations, (int) getX()))) {
-                        setX(getX() - 2);
-                        if (mehetJobbra) {
-                            mehetJobbra = false;
+                    if(!worldRotation) {
+                        if (!(isFirstElementOfArray(destinations, (int) getX()))) {
+                            setX(getX() - 1);
+                            if (mehetJobbra) {
+                                mehetJobbra = false;
+                            }
+                            mehetBalra = true;
                         }
-                        mehetBalra = true;
+                    } else {
+                        if (!(isFirstElementOfArray(destinations, (int) getY()))) {
+                            setY(getY() + 1);
+                            if (mehetJobbra) {
+                                mehetJobbra = false;
+                            }
+                            mehetBalra = true;
+                        }
                     }
                     mehetBalraAlap = false;
 
@@ -200,12 +223,24 @@ float rotationBase = 0;
             if (mehetJobbraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                     //if(mostani<3&&!mehetBalra)
-                    if (!(isLastElementOfArray(destinations, (int) getX()))) {
-                        setX(getX() + 2);
-                        if (mehetBalra) {
-                            mehetBalra = false;
+                    if(!worldRotation) {
+                        System.out.println("Mostkénejobbra");
+                        if (!(isLastElementOfArray(destinations, (int) getX()))) {
+                            System.out.println("Mostmegyjobbra");
+                            setX(getX() + 1);
+                            if (mehetBalra) {
+                                mehetBalra = false;
+                            }
+                            mehetJobbra = true;
                         }
-                        mehetJobbra = true;
+                    } else {
+                        if (!(isLastElementOfArray(destinations, (int) getY()))) {
+                            setY(getY() - 1);
+                            if (mehetBalra) {
+                                mehetBalra = false;
+                            }
+                            mehetJobbra = true;
+                        }
                     }
                     mehetJobbraAlap = false;
                 }
@@ -214,7 +249,7 @@ float rotationBase = 0;
                 if (getRotation() < rotationBase+90) rotateBy(1);
                 if(!worldRotation) {
                     if (!(contains(destinations, (int) getX()))) {
-                        setX(getX() - 2);
+                        setX(getX() - 1);
                         mehetBalraAlap = false;
                         mehetJobbraAlap = true;
                     } else {
@@ -223,8 +258,8 @@ float rotationBase = 0;
                         mehetJobbraAlap = true;
                     }
                 } else {
-                    if (!(contains(destinations, (int) getX()))) {
-                        setX(getX() - 2);
+                    if (!(contains(destinations, (int) getY()))) {
+                        setY(getY() + 1);
                         mehetBalraAlap = false;
                         mehetJobbraAlap = true;
                     } else {
@@ -235,18 +270,29 @@ float rotationBase = 0;
                 }
             }
             if (mehetJobbra) {
-                if (getRotation() > rotationBase-90) rotateBy(-1);
-                if (!(contains(destinations, (int) getX()))) {
-                    setX(getX() + 2);
-                    mehetJobbraAlap = false;
-                    mehetBalraAlap = true;
+                if (getRotation() > rotationBase - 90) rotateBy(-1);
+                if (!worldRotation) {
+                    if (!(contains(destinations, (int) getX()))) {
+                        setX(getX() + 1);
+                        mehetJobbraAlap = false;
+                        mehetBalraAlap = true;
+                    } else {
+                        setRotation(rotationBase);
+                        mehetJobbraAlap = true;
+                        mehetBalraAlap = true;
+                    }
                 } else {
-                    setRotation(rotationBase);
-                    mehetJobbraAlap = true;
-                    mehetBalraAlap = true;
+                    if (!(contains(destinations, (int) getY()))) {
+                        setY(getY() + 1);
+                        mehetJobbraAlap = false;
+                        mehetBalraAlap = true;
+                    } else {
+                        setRotation(rotationBase);
+                        mehetJobbraAlap = true;
+                        mehetBalraAlap = true;
+                    }
                 }
             }
-
         }
     }
 }
