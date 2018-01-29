@@ -268,6 +268,15 @@ public class Assets {
 	public static final AssetDescriptor<Texture> HOUSE_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/road_objects/house.png", Texture.class);
 
+	public static final AssetDescriptor<Texture> HOUSE2_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_objects/house2.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BUSH_LINE_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_objects/bush_line.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> FORTRESS_LINE_TEXTURE
+			= new AssetDescriptor<Texture>("sprites/road_objects/fortress_line.png", Texture.class);
+
 	//Háttér
 	public static final AssetDescriptor<Texture> MENU_HATTER_TEXTURE
 			=new AssetDescriptor<Texture>("sprites/menubg.png",Texture.class);
@@ -449,6 +458,9 @@ public class Assets {
 
 		//Út melletti objektumok
 		manager.load(HOUSE_TEXTURE);
+		manager.load(HOUSE2_TEXTURE);
+		manager.load(BUSH_LINE_TEXTURE);
+		manager.load(FORTRESS_LINE_TEXTURE);
 
 		//Háttér
 		manager.load(MENU_HATTER_TEXTURE);
