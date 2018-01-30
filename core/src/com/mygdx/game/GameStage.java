@@ -61,28 +61,45 @@ public class GameStage extends MyStage {
 
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
-        for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi));
+        for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.enqueue(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
         }
-        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.elagazojobbra));
+        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
+    boolean elso = true;
+    boolean mostmehet=false;
+    RoadFrameActor kanyarodos=null;
 
     private void addRoadFromQueue() {
         try {
             RoadFrameActor newRoadFrameActor = new RoadFrameActor(roadFrames.dequeue(), this);
             addActor(newRoadFrameActor);
             newRoadFrameActor.setZIndex(1);
+            if(newRoadFrameActor.roadFrame.tipus == RoadFrame.Tipus.elagazojobbra) kanyarodos = newRoadFrameActor;
             if (lastRoadFrameActor != null) {
-                newRoadFrameActor.setPosition(lastRoadFrameActor.getX(), lastRoadFrameActor.getY() + lastRoadFrameActor.getHeight());
+                System.out.println(worldRotation == worldRotation.r90);
+                System.out.println(worldRotation == worldRotation.r0);
+                if(worldRotation == worldRotation.r0)
+                    newRoadFrameActor.setPosition(lastRoadFrameActor.getX(), lastRoadFrameActor.getY() + lastRoadFrameActor.getHeight());
+                if(worldRotation == worldRotation.r90) {
+                    newRoadFrameActor.setRotation(90);
+                    if(elso){
+                        newRoadFrameActor.setPosition(kanyarodos.getX()+kanyarodos.getWidth(),kanyarodos.getY()+kanyarodos.getHeight());
+                        elso=false;
+                    }
+                    newRoadFrameActor.setPosition(lastRoadFrameActor.getX()+lastRoadFrameActor.getHeight(), lastRoadFrameActor.getY());
+
+                }
+
             }
             lastRoadFrameActor = newRoadFrameActor;
         } catch (InterruptedException e) {
@@ -115,7 +132,7 @@ public class GameStage extends MyStage {
         }
 
         City a = new City("Zalaegerszeg", City.Varostipus.megyeszekhely);
-        City b = new City("Keszthely", City.Varostipus.kisvaros);
+        City b = new City("Bak", City.Varostipus.kisvaros);
         roadFrames = generateMap(a, b);
         vehicles = new ArrayList<Vehicle>();
         //addActor(bg =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,100));
@@ -204,12 +221,9 @@ public class GameStage extends MyStage {
             }
         }
 
-        System.out.println("getViewport().getScreenX() = " + getViewport().getScreenX());
-        System.out.println("getViewport().getScreenY() = " + getViewport().getScreenY());
-
         if(lastRoadFrameActor.getRoadFrame().tipus == RoadFrame.Tipus.elagazojobbra){
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                if(worldRotation!=worldRotation.r90){
+                if(worldRotation!=worldRotation.r90 && car.getY()>(lastRoadFrameActor.getY()+49)){
                     car.setRotationBase(-90);
                     for(Vehicle vehicle : vehicles){
                         vehicle.setRotationBase(-90);
@@ -217,6 +231,8 @@ public class GameStage extends MyStage {
                     worldRotation = worldRotation.r90;
                     rotate(worldRotation.r90);
                     car.setWorldRotation(true);
+                    roadFrames = generateMap(new City("Keszthely", City.Varostipus.nagyvaros),new City("Nagykanizsa", City.Varostipus.nagyvaros));
+                    addRoadFromQueue();
                 }
 
             }
@@ -282,7 +298,7 @@ public class GameStage extends MyStage {
             addRoadFromQueue();
         }
         if (roadFrames.isEmpty()) {
-            generateMap(new City("Keszthely", City.Varostipus.nagyvaros), new City("Kanizsa", City.Varostipus.nagyvaros));
+            //roadFrames = generateMap(new City("Keszthely", City.Varostipus.nagyvaros),new City("Nagykanizsa", City.Varostipus.nagyvaros));
             //TODO: Új térképet generálni az alapértelmezett út fele
         }
 
