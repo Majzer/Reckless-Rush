@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
@@ -8,10 +9,19 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
  */
 
 public class BokorActor extends OneSpriteStaticActor {
-    public BokorActor(Texture texture, float x, float y) {
+    public BokorActor(Texture texture, float x, float y, boolean flipped) {
         super(texture);
         setPosition(x,y);
-        setSize(171/2,228/2);
+        if(texture == Assets.manager.get(Assets.BUSH_LINE_TEXTURE)){
+            setHeight(getHeight()*1.3f);
+        }else if (texture == Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE)){
+            setHeight(getHeight()/2);
+        }
+
+
+        if(flipped){
+            setRotation(180);
+        }
     }
 
     @Override

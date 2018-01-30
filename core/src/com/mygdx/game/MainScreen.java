@@ -26,7 +26,7 @@ public class MainScreen extends MyScreen {
         Gdx.input.setInputProcessor(im);
         music.setVolume(0.4f);
         music.setLooping(true);
-        music.play();
+        //music.play();
     }
 
     @Override
