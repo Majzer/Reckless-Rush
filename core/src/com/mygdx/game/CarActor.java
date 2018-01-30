@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.MyBaseClasses.RoadFrame;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyRectangle;
 import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
@@ -147,6 +148,12 @@ public class CarActor extends Vehicle {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public void refreshDestinations(){
+        if(gameStage.roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos){
+            destinations = new int[]{gameStage.getViewport().getScreenX()-500, gameStage.getViewport().getScreenX()-700};
+        }
     }
 
     @Override

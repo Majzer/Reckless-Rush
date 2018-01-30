@@ -54,6 +54,7 @@ public class GameStage extends MyStage {
     CarActor car2;
     HouseActor house1, house2;
     Music sound;
+    RoadFrame roadFrame;
 
     Queue<RoadFrame> roadFrames;
     RoadFrameActor lastRoadFrameActor = null;
@@ -61,16 +62,16 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.csaladi));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi));
         }
-        RoadFrame roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.bokros);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.bokros);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.enqueue(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.bokros));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.bokros));
         }
-        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
+        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
@@ -183,12 +184,15 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+
         if(System.currentTimeMillis()-ido>2500){
             addActor(new PedActor(this, 0.5f, rand.nextBoolean(), car.getY()+getViewport().getWorldHeight()));
             ido=System.currentTimeMillis();
         }
 
         if (car != null) {
+            car.refreshDestinations();
             if(worldRotation == worldRotation.r0) {
                 car.setY(car.getY() + car.getSpeed());
                 setCameraMoveToY(car.getY() + getViewport().getScreenHeight() / 2.5f);
@@ -239,6 +243,17 @@ public class GameStage extends MyStage {
         }
 
 
+        if(roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos) {
+            try{
+                car.destinations = new int[]{
+                        300, 400
+                };
+            }catch(Exception e){
+
+            }
+
+        }
+
 
 
 /*
@@ -269,6 +284,7 @@ public class GameStage extends MyStage {
             addRoadFromQueue();
         }
         if (roadFrames.isEmpty()) {
+            generateMap(new City("Keszthely", City.Varostipus.nagyvaros), new City("Kanizsa", City.Varostipus.nagyvaros));
             //TODO: Új térképet generálni az alapértelmezett út fele
         }
 

@@ -21,6 +21,7 @@ public class RoadFrameActor extends MultiSpriteActor {
         this.roadFrame = roadFrame;
         switch (roadFrame.utminoseg){
             case joegysavos:
+                addSprite(new OffsetSprite(Assets.manager.get(Assets.JO_KANYAR_TEXTURE),0,0),"Út");
                 break;
             case joketsavos:
                 addSprite(new OffsetSprite(Assets.manager.get(Assets.ROAD_TEXTURE),0,0),"Út");
