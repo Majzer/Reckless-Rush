@@ -230,6 +230,7 @@ public class GameStage extends MyStage {
                     }
                     worldRotation = worldRotation.r90;
                     rotate(worldRotation.r90);
+                    getViewport().setScreenPosition((int)(lastRoadFrameActor.getX()+lastRoadFrameActor.getWidth()),(int)(lastRoadFrameActor.getY()+lastRoadFrameActor.getHeight()));
                     car.setWorldRotation(true);
                     roadFrames = generateMap(new City("Keszthely", City.Varostipus.nagyvaros),new City("Nagykanizsa", City.Varostipus.nagyvaros));
                     addRoadFromQueue();
