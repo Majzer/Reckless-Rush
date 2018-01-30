@@ -203,6 +203,7 @@ public class CarActor extends Vehicle {
     @Override
     public void act(float delta) {
         super.act(delta);
+        
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {

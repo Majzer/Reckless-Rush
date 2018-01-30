@@ -64,20 +64,21 @@ public class GameStage extends MyStage {
         for (int i = 0; i < 5; i++) {
             roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi));
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.bokros);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.enqueue(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.bokros));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.csaladi));
         }
         roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
+
     private void addRoadFromQueue() {
         try {
-            RoadFrameActor newRoadFrameActor = new RoadFrameActor(roadFrames.dequeue());
+            RoadFrameActor newRoadFrameActor = new RoadFrameActor(roadFrames.dequeue(), this);
             addActor(newRoadFrameActor);
             newRoadFrameActor.setZIndex(1);
             if (lastRoadFrameActor != null) {
@@ -156,9 +157,6 @@ public class GameStage extends MyStage {
             }
         });
 
-        // TODO: 2018. 01. 29. Hozzá addolva két ház a többit majd valaki csinálja meg. 
-        addActor(house1 = new HouseActor(Assets.manager.get(Assets.HOUSE_TEXTURE), 0,0));
-        addActor(house2 = new HouseActor(Assets.manager.get(Assets.HOUSE2_TEXTURE), 0,0));
         
         
         addRoadFromQueue();
