@@ -53,6 +53,7 @@ public class GameStage extends MyStage {
     ArrayList<Vehicle> vehicles = null;
     CarActor car2;
     HouseActor house1, house2;
+    BokorActor bokor1 , bokor2 , bokor3 , bokor4;
     Music sound;
     RoadFrame roadFrame;
 
@@ -62,14 +63,14 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.erdos));
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.erdos);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.enqueue(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.erdos));
         }
         roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
@@ -121,6 +122,8 @@ public class GameStage extends MyStage {
         sound = Assets.manager.get(Assets.ThemeSound);
         rand = new Random();
 
+
+
         sound.setVolume(0.4f);
         sound.setLooping(true);
         sound.play();
@@ -144,6 +147,14 @@ public class GameStage extends MyStage {
         addActor(ba2 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470, bg.getY()+250));
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,1430));
+
+            addActor(bokor1 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
+            addActor(bokor2 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
+            addActor(bokor3 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
+            addActor(bokor4 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
+
+
+
         addActor(car = new CarActor(this));
         car.setSpeed(8);
         car2 = new CarActor(this);
@@ -252,7 +263,64 @@ public class GameStage extends MyStage {
                 vehicle.setY(car.getY() + getViewport().getScreenHeight());
                 vehicle.setMagas(vehicle.getY());
                 vehicle.setSzembe(rand.nextBoolean());
+
+
             }
+
+            if(roadFrame.tipus == RoadFrame.Tipus.bokros){
+                if(bokor1.getY()+bokor1.getHeight()+80 < car.getY()){
+                    bokor1.setY(bokor2.getY()+bokor2.getHeight());
+                    bokor1.setZIndex(50);
+                }
+
+                if(bokor2.getY()+bokor2.getHeight()+80 < car.getY()){
+                    bokor2.setY(bokor1.getY()+bokor1.getHeight());
+                    bokor2.setZIndex(50);
+
+                }
+
+                if(bokor3.getY()+bokor3.getHeight()+80 < car.getY()){
+                    bokor3.setY(bokor4.getY()+bokor4.getHeight());
+                    bokor3.setZIndex(50);
+                }
+
+                if(bokor4.getY()+bokor4.getHeight()+80 < car.getY()){
+                    bokor4.setY(bokor3.getY()+bokor3.getHeight());
+                    bokor4.setZIndex(50);
+
+                }
+            }
+
+            if(roadFrame.tipus == RoadFrame.Tipus.erdos){
+                bokor1.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+                bokor2.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+                bokor3.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+                bokor4.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+
+                if(bokor1.getY()+bokor1.getHeight()+80 < car.getY()){
+                    bokor1.setY(bokor2.getY()+bokor2.getHeight());
+                    bokor1.setZIndex(50);
+                }
+
+                if(bokor2.getY()+bokor2.getHeight()+80 < car.getY()){
+                    bokor2.setY(bokor1.getY()+bokor1.getHeight());
+                    bokor2.setZIndex(50);
+
+                }
+
+                if(bokor3.getY()+bokor3.getHeight()+80 < car.getY()){
+                    bokor3.setY(bokor4.getY()+bokor4.getHeight());
+                    bokor3.setZIndex(50);
+                }
+
+                if(bokor4.getY()+bokor4.getHeight()+80 < car.getY()){
+                    bokor4.setY(bokor3.getY()+bokor3.getHeight());
+                    bokor4.setZIndex(50);
+
+                }
+
+            }
+
 
         }
 

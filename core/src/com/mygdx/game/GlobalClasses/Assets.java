@@ -246,7 +246,7 @@ public class Assets {
 	public static final AssetDescriptor<Texture> KANYAR_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/right_corner.png",Texture.class);
 
-	public static final AssetDescriptor<Texture> JO_KANYAR_TEXTURE
+	public static final AssetDescriptor<Texture> JO_UT_TEXTURE
 			= new AssetDescriptor<Texture>("sprites/one_lane_good_road.png", Texture.class);
 
 	//Út hibák
@@ -441,7 +441,7 @@ public class Assets {
 		//Út
 		manager.load(ROAD_TEXTURE);
 		manager.load(KANYAR_TEXTURE);
-		manager.load(JO_KANYAR_TEXTURE);
+		manager.load(JO_UT_TEXTURE);
 
 		//Út hibák
 		manager.load(KATYU1_TEXTURE);
