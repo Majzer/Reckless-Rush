@@ -148,10 +148,10 @@ public class GameStage extends MyStage {
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,1430));
 
-            addActor(bokor1 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
-            addActor(bokor2 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
-            addActor(bokor3 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
-            addActor(bokor4 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
+        addActor(bokor1 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
+        addActor(bokor2 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
+        addActor(bokor3 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
+        addActor(bokor4 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
 
 
 
@@ -185,8 +185,8 @@ public class GameStage extends MyStage {
             }
         });
 
-        
-        
+
+
         addRoadFromQueue();
         //fitWorldToWidth();
     }
@@ -225,7 +225,7 @@ public class GameStage extends MyStage {
                 getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+(int)car.getSpeed());
             } else if (worldRotation == worldRotation.r90){
                 if(car.kenyszerithet)
-                car.intteKenyszerit();
+                    car.intteKenyszerit();
                 car.setX(car.getX() + car.getSpeed());
                 setCameraMoveToX(car.getX() + getViewport().getScreenWidth() / 3);
                 getViewport().setScreenPosition(getViewport().getScreenX()+(int)car.getSpeed(), getViewport().getScreenY());
@@ -242,8 +242,8 @@ public class GameStage extends MyStage {
                     worldRotation = worldRotation.r90;
                     rotate(worldRotation.r90);
                     getViewport().setScreenPosition((int)(lastRoadFrameActor.getX()+lastRoadFrameActor.getWidth()),(int)(lastRoadFrameActor.getY()+lastRoadFrameActor.getHeight()));
-                    car.setWorldRotation(true);e
-                    roadFrames = generateMap(new City("Keszthely", City.Varostipus.nagyvaros),new City("Nagykanizsa", City.Varostipus.nagyvaros));
+                    car.setWorldRotation(true);
+                            roadFrames = generateMap(new City("Keszthely", City.Varostipus.nagyvaros),new City("Nagykanizsa", City.Varostipus.nagyvaros));
                     addRoadFromQueue();
                 }
 
@@ -395,12 +395,12 @@ public class GameStage extends MyStage {
                 for (String s : car.getMyOverlappedShapeKeys(vehicle)) {
                     try {
                         if (!(s.equals("Frustum")))
-                           // System.out.println(s);
-                        if (s.equals("JOBB_OLDAL") || s.equals("JOBB_ELSO") || s.equals("JOBB_HATSO") || s.equals("JOBB_SEGG")) {
-                            vehicle.setGoToRightSide(true);
-                        } else if (s.equals("BAL_OLDAL") || s.equals("BAL_ELSO") || s.equals("BAL_HATSO") || s.equals("BAL_SEGG")) {
-                            vehicle.setGoToLeftSide(true);
-                        }
+                            // System.out.println(s);
+                            if (s.equals("JOBB_OLDAL") || s.equals("JOBB_ELSO") || s.equals("JOBB_HATSO") || s.equals("JOBB_SEGG")) {
+                                vehicle.setGoToRightSide(true);
+                            } else if (s.equals("BAL_OLDAL") || s.equals("BAL_ELSO") || s.equals("BAL_HATSO") || s.equals("BAL_SEGG")) {
+                                vehicle.setGoToLeftSide(true);
+                            }
                         if (s.equals("BAL_ORR") || s.equals("JOBB_ORR")) {
                             car.setSpeed(4);
                         }
@@ -486,8 +486,8 @@ public class GameStage extends MyStage {
                     for (String s : vehicle.getMyOverlappedShapeKeys(vehicle2)) {
 
                         if ((s.equals("Slowdown"))) {
-                          vehicle.setSpeed(vehicle2.getSpeed());
-                          vehicle.setX(vehicle.getX());
+                            vehicle.setSpeed(vehicle2.getSpeed());
+                            vehicle.setX(vehicle.getX());
                         }
                         if (!(vehicle instanceof TruckActor && (s.equals("BAL_SEGG") || s.equals("JOBB_SEGG")))) {
                             if (s.equals("JOBB_OLDAL") || s.equals("JOBB_ELSO") || s.equals("JOBB_HATSO") || s.equals("JOBB_SEGG")) {
@@ -511,10 +511,10 @@ public class GameStage extends MyStage {
                             robbanasos=true;
                         }
                         if(!robbanasos)
-                        if(!(s.equals("Slowdown")) && !(vehicle.isGoToRightSide()) && !(vehicle.isGoToLeftSide())&& !(vehicle2.isGoToRightSide())&& !(vehicle2.isGoToLeftSide())){
-                            if(!(vehicle instanceof TruckActor && (s.equals("BAL_SEGG") || s.equals("JOBB_SEGG"))))
-                            vehicle.setY(vehicle.getY()+100);
-                        }
+                            if(!(s.equals("Slowdown")) && !(vehicle.isGoToRightSide()) && !(vehicle.isGoToLeftSide())&& !(vehicle2.isGoToRightSide())&& !(vehicle2.isGoToLeftSide())){
+                                if(!(vehicle instanceof TruckActor && (s.equals("BAL_SEGG") || s.equals("JOBB_SEGG"))))
+                                    vehicle.setY(vehicle.getY()+100);
+                            }
                     }
                 }
             }
