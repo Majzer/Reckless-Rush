@@ -38,7 +38,7 @@ public class CarActor extends Vehicle {
 
 
     public CarActor(GameStage gameStage) {
-        super(566,1068);
+        super(566,1068, gameStage);
         setOrigintoCenter();
         addCollisionShape("Frustum", new MyRectangle(1024,22048,-256,-256,getOriginX(), getOriginY()));
 
@@ -151,9 +151,9 @@ public class CarActor extends Vehicle {
     }
 
     public void refreshDestinations(){
-//        if(gameStage.roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos){
-      //      destinations = new int[]{gameStage.getViewport().getScreenX()-500, gameStage.getViewport().getScreenX()-700};
-      //  }
+        if(gameStage.roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos){
+            destinations = new int[]{gameStage.getViewport().getScreenX()-500, gameStage.getViewport().getScreenX()-700};
+        }
     }
 
     @Override
@@ -167,12 +167,13 @@ public class CarActor extends Vehicle {
     boolean mehetJobbra=false;
     boolean mehetJobbraAlap=true;
     boolean mehetBalraAlap=true;
-    boolean worldRotation=false;
     int cel=0;
+    boolean worldRotation=false;
 
+    @Override
     public void setWorldRotation(boolean worldRotation) {
         this.worldRotation = worldRotation;
-        if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-200,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
+        if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-100,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
         for(int i : destinations){
             System.out.println("i = " + i);
         }
@@ -190,12 +191,12 @@ public class CarActor extends Vehicle {
     boolean kenyszerithet=true;
 
     public void intteKenyszerit(){
-        System.out.println("getX() = " + getX());
+        //System.out.println("getX() = " + getX());
         setX((int)getX());
-        System.out.println("getX()2 = " + getX());
-        System.out.println("getY() = " + getY());
+       // System.out.println("getX()2 = " + getX());
+        //System.out.println("getY() = " + getY());
         setY((int)getY());
-        System.out.println("getY()2 = " + getY());
+        //System.out.println("getY()2 = " + getY());
         kenyszerithet=false;
     }
 
@@ -203,7 +204,7 @@ public class CarActor extends Vehicle {
     @Override
     public void act(float delta) {
         super.act(delta);
-        
+        System.out.println("getY() = " + getY());
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -232,9 +233,9 @@ public class CarActor extends Vehicle {
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                     //if(mostani<3&&!mehetBalra)
                     if(!worldRotation) {
-                        System.out.println("Mostkénejobbra");
+                        //System.out.println("Mostkénejobbra");
                         if (!(isLastElementOfArray(destinations, (int) getX()))) {
-                            System.out.println("Mostmegyjobbra");
+                           // System.out.println("Mostmegyjobbra");
                             setX(getX() + 1);
                             if (mehetBalra) {
                                 mehetBalra = false;
@@ -291,7 +292,7 @@ public class CarActor extends Vehicle {
                     }
                 } else {
                     if (!(contains(destinations, (int) getY()))) {
-                        setY(getY() + 1);
+                        setY(getY() - 1);
                         mehetJobbraAlap = false;
                         mehetBalraAlap = true;
                     } else {
