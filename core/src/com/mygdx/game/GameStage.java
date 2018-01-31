@@ -52,8 +52,9 @@ public class GameStage extends MyStage {
     ExplosionActor explosionActor;
     ArrayList<Vehicle> vehicles = null;
     CarActor car2;
-    HouseActor house1, house2;
+    HouseActor house1, house2 ,house3, house4;
     BokorActor bokor1 , bokor2 , bokor3 , bokor4;
+    KatyuActor katyu1, katyu2 , katyu3;
     Music sound;
     RoadFrame roadFrame;
 
@@ -63,14 +64,14 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.erdos));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.erdos);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.enqueue(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.erdos));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
         }
         roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
@@ -148,11 +149,21 @@ public class GameStage extends MyStage {
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,1430));
 
+
+        //Út melletti objektumoknak az actorai
         addActor(bokor1 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
         addActor(bokor2 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
         addActor(bokor3 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
         addActor(bokor4 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
+        addActor(house1 = new HouseActor(0,0, false));
+        addActor(house2 = new HouseActor(0,0, false));
+        addActor(house3 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
+        addActor(house4 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
 
+        //Kátyú actorjai
+        addActor(katyu1 = new KatyuActor(100 , 0 , true));
+        addActor(katyu2 = new KatyuActor(100 , 60 , true));
+        addActor(katyu3 = new KatyuActor(200 , 0 , true));
 
 
         addActor(car = new CarActor(this));
@@ -268,61 +279,107 @@ public class GameStage extends MyStage {
 
             }
 
-            if(roadFrame.tipus == RoadFrame.Tipus.bokros){
-                if(bokor1.getY()+bokor1.getHeight()+80 < car.getY()){
-                    bokor1.setY(bokor2.getY()+bokor2.getHeight());
-                    bokor1.setZIndex(50);
-                }
+        }
 
-                if(bokor2.getY()+bokor2.getHeight()+80 < car.getY()){
-                    bokor2.setY(bokor1.getY()+bokor1.getHeight());
-                    bokor2.setZIndex(50);
-
-                }
-
-                if(bokor3.getY()+bokor3.getHeight()+80 < car.getY()){
-                    bokor3.setY(bokor4.getY()+bokor4.getHeight());
-                    bokor3.setZIndex(50);
-                }
-
-                if(bokor4.getY()+bokor4.getHeight()+80 < car.getY()){
-                    bokor4.setY(bokor3.getY()+bokor3.getHeight());
-                    bokor4.setZIndex(50);
-
-                }
+        //Út melletti objektumok kiválasztása és lehelyezése
+        if(roadFrame.tipus == RoadFrame.Tipus.bokros){
+            if(bokor1.getY()+bokor1.getHeight()+80 < car.getY()){
+                bokor1.setY(bokor2.getY()+bokor2.getHeight());
+                bokor1.setZIndex(50);
             }
 
-            if(roadFrame.tipus == RoadFrame.Tipus.erdos){
-                bokor1.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
-                bokor2.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
-                bokor3.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
-                bokor4.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
-
-                if(bokor1.getY()+bokor1.getHeight()+80 < car.getY()){
-                    bokor1.setY(bokor2.getY()+bokor2.getHeight());
-                    bokor1.setZIndex(50);
-                }
-
-                if(bokor2.getY()+bokor2.getHeight()+80 < car.getY()){
-                    bokor2.setY(bokor1.getY()+bokor1.getHeight());
-                    bokor2.setZIndex(50);
-
-                }
-
-                if(bokor3.getY()+bokor3.getHeight()+80 < car.getY()){
-                    bokor3.setY(bokor4.getY()+bokor4.getHeight());
-                    bokor3.setZIndex(50);
-                }
-
-                if(bokor4.getY()+bokor4.getHeight()+80 < car.getY()){
-                    bokor4.setY(bokor3.getY()+bokor3.getHeight());
-                    bokor4.setZIndex(50);
-
-                }
+            if(bokor2.getY()+bokor2.getHeight()+80 < car.getY()){
+                bokor2.setY(bokor1.getY()+bokor1.getHeight());
+                bokor2.setZIndex(50);
 
             }
 
+            if(bokor3.getY()+bokor3.getHeight()+80 < car.getY()){
+                bokor3.setY(bokor4.getY()+bokor4.getHeight());
+                bokor3.setZIndex(50);
+            }
 
+            if(bokor4.getY()+bokor4.getHeight()+80 < car.getY()){
+                bokor4.setY(bokor3.getY()+bokor3.getHeight());
+                bokor4.setZIndex(50);
+
+            }
+        }
+
+        if(roadFrame.tipus == RoadFrame.Tipus.erdos){
+            bokor1.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+            bokor2.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+            bokor3.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+            bokor4.setTexture(Assets.manager.get(Assets.FORTRESS_LINE_TEXTURE));
+
+            if(bokor1.getY()+bokor1.getHeight()+80 < car.getY()){
+                bokor1.setY(bokor2.getY()+bokor2.getHeight());
+                bokor1.setZIndex(50);
+            }
+
+            if(bokor2.getY()+bokor2.getHeight()+80 < car.getY()){
+                bokor2.setY(bokor1.getY()+bokor1.getHeight());
+                bokor2.setZIndex(50);
+
+            }
+
+            if(bokor3.getY()+bokor3.getHeight()+80 < car.getY()){
+                bokor3.setY(bokor4.getY()+bokor4.getHeight());
+                bokor3.setZIndex(50);
+            }
+
+            if(bokor4.getY()+bokor4.getHeight()+80 < car.getY()){
+                bokor4.setY(bokor3.getY()+bokor3.getHeight());
+                bokor4.setZIndex(50);
+
+            }
+
+        }
+
+        if (roadFrame.tipus == RoadFrame.Tipus.csaladi){
+
+            if(house1.getY()+house1.getHeight()+80 < car.getY()){
+                house1.setY(house2.getY()+house2.getHeight());
+                house1.setZIndex(50);
+            }
+
+            if(house2.getY()+house2.getHeight()+80 < car.getY()){
+                house2.setY(house1.getY()+house1.getHeight());
+                house2.setZIndex(50);
+
+            }
+
+            if(house3.getY()+house3.getHeight()+80 < car.getY()){
+                house3.setY(house4.getY()+house4.getHeight());
+                house3.setZIndex(50);
+            }
+
+            if(house4.getY()+house4.getHeight()+80 < car.getY()){
+                house4.setY(house3.getY()+house3.getHeight());
+                house4.setZIndex(50);
+
+            }
+
+        }
+        //Eddig tart!
+
+        //Katyú csökkenti az autó sebbeségét
+        // TODO: 2018. 01. 31. Sérülést itt kellene szerintem hozzá tenni - Berghoffer
+        if(katyu1.overlaps(car) || katyu2.overlaps(car) || katyu3.overlaps(car)){
+            car.setSpeed(4);
+        }
+
+        // TODO: 2018. 01. 31. Normálisan lepakolni őket
+        if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
+            if(katyu1.getY() + katyu1.getHeight() < car.getY()){
+                katyu1.setY(1000);
+            }
+            if(katyu2.getY() + katyu2.getHeight() < car.getY()){
+                katyu2.setY(1000);
+            }
+            if(katyu3.getY() + katyu3.getHeight() < car.getY()){
+                katyu3.setY(1000);
+            }
         }
 
 

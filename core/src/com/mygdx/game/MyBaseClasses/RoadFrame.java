@@ -18,6 +18,7 @@ public class RoadFrame {
         bokros,
         erdos,
         elagazojobbra,
+        szukolo,
     }
 
     public Utminoseg utminoseg;
