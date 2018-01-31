@@ -23,16 +23,6 @@ public class TruckActor extends Vehicle {
         destinations = new int[]{gameStage.getViewport().getScreenX()+200,gameStage.getViewport().getScreenX()+300,gameStage.getViewport().getScreenX()+600,gameStage.getViewport().getScreenX()+800};
         if (szembe)setPosition(destinations[rand.nextInt(2)],y);
         else setPosition(destinations[rand.nextInt(2)+2],y);
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_SEGG_EP),0,0),"BAL_SEGG");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_HATSO_EP),0,46),"BAl_HATSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_OLDAL_EP),0,435),"BAL_OLDAL");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_ELSO_EP),0,727),"BAL_ELSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_B_ORR_EP),0,966),"BAL_ORR");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_SEGG_EP),262,0),"JOBB_SEGG");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_HATSO_EP),262,46),"JOBB_HATSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_OLDAL_EP),262,435),"JOBB_OLDAL");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_ELSO_EP),262,727),"JOBB_ELSO");
-        addSprite(new OffsetSprite(Assets.manager.get(Assets.KAMION_J_ORR_EP),262,966),"JOBB_ORR");
 
         addSprite(new ChangingOffsetSprite(
                 new Texture[]{
