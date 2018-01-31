@@ -151,9 +151,9 @@ public class CarActor extends Vehicle {
     }
 
     public void refreshDestinations(){
-        if(gameStage.roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos){
-            destinations = new int[]{gameStage.getViewport().getScreenX()-500, gameStage.getViewport().getScreenX()-700};
-        }
+//        if(gameStage.roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos){
+      //      destinations = new int[]{gameStage.getViewport().getScreenX()-500, gameStage.getViewport().getScreenX()-700};
+      //  }
     }
 
     @Override
