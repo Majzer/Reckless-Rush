@@ -15,7 +15,7 @@ public class TruckActor extends Vehicle {
     GameStage gameStage;
 
     public TruckActor(float y, boolean szembe, GameStage gameStage) {
-        super(523,1003);
+        super(523,1003, gameStage);
         rand = new Random();
         this.szembe = szembe;
         this.magas = y;

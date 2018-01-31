@@ -15,7 +15,7 @@ public class BlueCarActor extends Vehicle {
     GameStage gameStage;
 
     public BlueCarActor(float y, boolean szembe, GameStage gameStage) {
-        super(450,926);
+        super(450,926, gameStage);
         rand = new Random();
         this.magas=y;
         this.szembe=szembe;
