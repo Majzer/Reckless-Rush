@@ -22,6 +22,8 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.smartcardio.CardTerminal;
+
 import sun.misc.Queue;
 
 /**
@@ -88,8 +90,8 @@ public class GameStage extends MyStage {
             newRoadFrameActor.setZIndex(1);
             if(newRoadFrameActor.roadFrame.tipus == RoadFrame.Tipus.elagazojobbra) kanyarodos = newRoadFrameActor;
             if (lastRoadFrameActor != null) {
-                System.out.println(worldRotation == worldRotation.r90);
-                System.out.println(worldRotation == worldRotation.r0);
+               // System.out.println(worldRotation == worldRotation.r90);
+               // System.out.println(worldRotation == worldRotation.r0);
                 if(worldRotation == worldRotation.r0)
                     newRoadFrameActor.setPosition(lastRoadFrameActor.getX(), lastRoadFrameActor.getY() + lastRoadFrameActor.getHeight());
                 if(worldRotation == worldRotation.r90) {
@@ -250,6 +252,7 @@ public class GameStage extends MyStage {
                     for(Vehicle vehicle : vehicles){
                         vehicle.setRotationBase(-90);
                     }
+
                     worldRotation = worldRotation.r90;
                     rotate(worldRotation.r90);
                     getViewport().setScreenPosition((int)(lastRoadFrameActor.getX()+lastRoadFrameActor.getWidth()),(int)(lastRoadFrameActor.getY()+lastRoadFrameActor.getHeight()));
@@ -263,20 +266,35 @@ public class GameStage extends MyStage {
 
         for (Vehicle vehicle : vehicles) {
             if (vehicle != null) {
-                if (!(vehicle.isSzembe())) vehicle.setY(vehicle.getY() + vehicle.getSpeed());
-                else vehicle.setY(vehicle.getY() - vehicle.getSpeed());
+                if(worldRotation == worldRotation.r0) {
+                    if (!(vehicle.isSzembe())) vehicle.setY(vehicle.getY() + vehicle.getSpeed());
+                    else {vehicle.setY(vehicle.getY() - vehicle.getSpeed());}
+                    if(!(vehicle instanceof CarActor))vehicle.setWorldRotation(false);
+                }
+                else {
+                    if (!(vehicle.isSzembe())) vehicle.setX(vehicle.getX() + vehicle.getSpeed());
+                    else {vehicle.setX(vehicle.getX() - vehicle.getSpeed());}
+                    if(!(vehicle instanceof CarActor))vehicle.setWorldRotation(true);
+                }
                 vehicle.setZIndex(10);
             }
 
             if (vehicle instanceof BlueCarActor) vehicle.setSpeed(6.5f);
             else if (vehicle instanceof TruckActor) vehicle.setSpeed(5);
 
+            if(worldRotation == worldRotation.r0){
             if (vehicle.getY() + getViewport().getScreenHeight() < car.getY()) {
                 vehicle.setY(car.getY() + getViewport().getScreenHeight());
                 vehicle.setMagas(vehicle.getY());
                 vehicle.setSzembe(rand.nextBoolean());
+            }
 
-
+            } else {
+                if (vehicle.getX() + getViewport().getScreenHeight() < car.getX()) {
+                    vehicle.setX(car.getX() + getViewport().getScreenHeight());
+                    vehicle.setMagas(vehicle.getX());
+                    vehicle.setSzembe(rand.nextBoolean());
+                }
             }
 
         }
@@ -477,7 +495,7 @@ public class GameStage extends MyStage {
                         car2.removeCollisionShape("Frustum");
                         for (String ss : vehicle.getMyOverlappedShapeKeys(car2)){
                             if(!(vehicle instanceof CarActor) ) {
-                                System.out.println(ss);
+                               // System.out.println(ss);
                                 ChangingOffsetSprite changingOffsetSprite1 = (ChangingOffsetSprite) vehicle.getSprite(ss);
                                 changingOffsetSprite1.changeOnce();
                             }
@@ -582,7 +600,7 @@ public class GameStage extends MyStage {
 
     boolean isGoingToSide(){
         for(Vehicle vehicle : vehicles){
-            System.out.println(vehicle.isGoToRightSide() || vehicle.isGoToLeftSide());
+           // System.out.println(vehicle.isGoToRightSide() || vehicle.isGoToLeftSide());
             if(vehicle.isGoToRightSide() || vehicle.isGoToLeftSide()) return true;
         }
         return false;

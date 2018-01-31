@@ -18,9 +18,11 @@ public class Vehicle extends MultiSpriteActor {
     Random rand;
     float speed=10, magas;
     boolean szembe;
+    GameStage gameStage;
 
-    public Vehicle(float width, float height) {
+    public Vehicle(float width, float height, GameStage gameStage) {
         super(width, height);
+        this.gameStage = gameStage;
     }
 
     public boolean isSzembe() {
@@ -30,12 +32,30 @@ public class Vehicle extends MultiSpriteActor {
     public void setSzembe(boolean szembe) {
         this.szembe = szembe;
         if(szembe){
-            setPosition(destinations[rand.nextInt(2)],magas);
-            setRotation(180);
+            if(!worldRotation) {
+                setPosition(destinations[rand.nextInt(2)], magas);
+                setRotation(180);
+            } else{
+                setPosition(magas, destinations[rand.nextInt(2)]);
+                setRotation(0);
+            }
         }
         else {
+            if(!worldRotation) {
             setPosition(destinations[rand.nextInt(2)+2],magas);
+            } else setPosition(magas, destinations[rand.nextInt(2)+2]);
             setRotation(0);
+        }
+    }
+
+
+    boolean worldRotation=false;
+
+    public void setWorldRotation(boolean worldRotation) {
+        this.worldRotation = worldRotation;
+        if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-100,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
+        for(int i : destinations){
+            System.out.println("i = " + i);
         }
     }
 
