@@ -66,16 +66,16 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.enqueue(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
         }
-        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
+        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
@@ -390,10 +390,10 @@ public class GameStage extends MyStage {
         // TODO: 2018. 01. 31. Normálisan lepakolni őket
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
             if(katyu1.getY() + katyu1.getHeight() < car.getY()){
-                katyu1.setY(1000);
+                katyu1.setY(katyu1.getY()+katyu2.getHeight());
             }
             if(katyu2.getY() + katyu2.getHeight() < car.getY()){
-                katyu2.setY(1000);
+                katyu2.setY(katyu2.getY()+katyu1.getHeight());
             }
             if(katyu3.getY() + katyu3.getHeight() < car.getY()){
                 katyu3.setY(1000);

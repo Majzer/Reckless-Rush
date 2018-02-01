@@ -59,10 +59,8 @@ public class RoadFrameActor extends MultiSpriteActor {
             case joegysavos:
                 break;
             case joketsavos:
-
                 break;
             case rosszegysavos:
-
                 break;
         }
         return null; //TODO: befejezni

@@ -16,7 +16,7 @@ public class KatyuActor extends OneSpriteStaticActor {
 
     public KatyuActor(int x, int y, boolean rotation) {
         super(Assets.manager.get(Assets.KATYU1_TEXTURE));
-
+        setPosition(x ,y);
         Random rand = new Random();
         float fok = rand.nextInt(45);
         int text = rand.nextInt(150);
