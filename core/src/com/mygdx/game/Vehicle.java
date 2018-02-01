@@ -55,7 +55,7 @@ public class Vehicle extends MultiSpriteActor {
         this.worldRotation = worldRotation;
         if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-100,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
         for(int i : destinations){
-            System.out.println("i = " + i);
+            //System.out.println("i = " + i);
         }
     }
 
@@ -116,18 +116,23 @@ public class Vehicle extends MultiSpriteActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(!isSzembe())
-        setRotation(rotationBase);
-        else setRotation(180-rotationBase);
+        if(!isSzembe()) setRotation(rotationBase);
+        else if(isSzembe() && !worldRotation)setRotation(180-rotationBase);
+        else if(isSzembe() && worldRotation) setRotation(0-rotationBase);
+        //else if (!isSzembe() && worldRotation)
         if(goToSide) {
             if((int)getY()==destinations[0] || (int)getY()==destinations[1]) setX(getX()-2);
             else setX(getX()+2);
         }
         if(goToLeftSide){
+            if(!worldRotation)
             setX(getX()-2);
+            else setY(getY()+2);
         }
         if(goToRightSide){
+            if(!worldRotation)
             setX(getX()+2);
+            else setY(getY()-2);
         }
     }
 }
