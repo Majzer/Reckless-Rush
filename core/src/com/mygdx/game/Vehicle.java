@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Vehicle extends MultiSpriteActor {
 
-    int[] destinations;
+    static int[] destinations;
     Random rand;
     float speed=10, magas;
     boolean szembe;
@@ -31,20 +31,36 @@ public class Vehicle extends MultiSpriteActor {
 
     public void setSzembe(boolean szembe) {
         this.szembe = szembe;
-        if(szembe){
-            if(!worldRotation) {
-                setPosition(destinations[rand.nextInt(2)], magas);
-                setRotation(180);
-            } else{
-                setPosition(magas, destinations[rand.nextInt(2)]);
+        if (destinations.length == 4) {
+            if (szembe) {
+                if (!worldRotation) {
+                    setPosition(destinations[rand.nextInt(2)], magas);
+                    setRotation(180);
+                } else {
+                    setPosition(magas, destinations[rand.nextInt(2)]);
+                    setRotation(0);
+                }
+            } else {
+                if (!worldRotation) {
+                    setPosition(destinations[rand.nextInt(2) + 2], magas);
+                } else setPosition(magas, destinations[rand.nextInt(2) + 2]);
                 setRotation(0);
             }
-        }
-        else {
-            if(!worldRotation) {
-            setPosition(destinations[rand.nextInt(2)+2],magas);
-            } else setPosition(magas, destinations[rand.nextInt(2)+2]);
-            setRotation(0);
+        }else{
+            if (szembe){
+                if (!worldRotation) {
+                    setPosition(destinations[0], magas);
+                    setRotation(180);
+                } else {
+                    setPosition(magas, destinations[0]);
+                    setRotation(0);
+                }
+            }else{
+                if (!worldRotation) {
+                    setPosition(destinations[1], magas);
+                } else setPosition(magas, destinations[1]);
+                setRotation(0);
+            }
         }
     }
 

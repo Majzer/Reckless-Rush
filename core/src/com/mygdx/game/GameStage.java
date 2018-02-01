@@ -71,9 +71,9 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new LinkedList<>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
             try {
-                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
             } catch(Exception e){
 
             }
