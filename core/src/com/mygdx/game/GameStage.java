@@ -60,7 +60,6 @@ public class GameStage extends MyStage {
     HouseActor house1, house2 ,house3, house4;
     BokorActor bokor1 , bokor2 , bokor3 , bokor4;
     Vector<KatyuActor> katyuk = new Vector(1,1);
-    KatyuActor katyu1, katyu2 , katyu3;
     Music sound;
     Music music;
     RoadFrame roadFrame;
@@ -72,9 +71,9 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new LinkedList<>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
             try {
-                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
+                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
             } catch(Exception e){
 
             }
@@ -176,14 +175,6 @@ public class GameStage extends MyStage {
         addActor(house3 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
         addActor(house4 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
 
-        //Kátyú actorjai
-        for (int i = 0; i<4 ; i++){
-            KatyuActor katyu = new KatyuActor(car.destinations);
-            addActor(katyu);
-            katyuk.add(katyu);
-        }
-
-
         addActor(car = new CarActor(this));
         car.setSpeed(8);
         car2 = new CarActor(this);
@@ -214,7 +205,12 @@ public class GameStage extends MyStage {
             }
         });
 
-
+        //Kátyú actorjai
+        for (int i = 0; i<3 ; i++){
+            KatyuActor katyu = new KatyuActor(car.destinations);
+            addActor(katyu);
+            katyuk.add(katyu);
+        }
 
         addRoadFromQueue();
         //fitWorldToWidth();
@@ -399,21 +395,17 @@ public class GameStage extends MyStage {
         //Eddig tart!
 
         //Katyú csökkenti az autó sebbeségét
-        // TODO: 2018. 01. 31. Sérülést itt kellene szerintem hozzá tenni - Berghoffer
-        if(katyu1.overlaps(car) || katyu2.overlaps(car) || katyu3.overlaps(car)){
-            car.setSpeed(4);
-        }
+        for(KatyuActor a : katyuk)
+            if(a.overlaps(car))
+                car.setSpeed(4);
 
-        // TODO: 2018. 01. 31. Normálisan lepakolni őket
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
-            if(katyu1.getY() + katyu1.getHeight() < car.getY()){
-                katyu1.setY(katyu1.getY()+katyu2.getHeight());
-            }
-            if(katyu2.getY() + katyu2.getHeight() < car.getY()){
-                katyu2.setY(katyu2.getY()+katyu1.getHeight());
-            }
-            if(katyu3.getY() + katyu3.getHeight() < car.getY()){
-                katyu3.setY(1000);
+            for(KatyuActor a : katyuk){
+                System.out.println("agyin");
+                if(a.getY() + a.getHeight() < car.getY()){
+                    a.setY(a.getY()+3000);
+                    a.makeNewValues();
+                }
             }
         }
 

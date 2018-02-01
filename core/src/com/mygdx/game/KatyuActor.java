@@ -25,7 +25,7 @@ public class KatyuActor extends OneSpriteStaticActor {
     Random rand;
 
     public KatyuActor(int[] destinations) {
-        super("");
+        super(Assets.manager.get(Assets.KATYU1_TEXTURE));
         this.destinations = destinations;
 
         rand = new Random();
@@ -34,6 +34,7 @@ public class KatyuActor extends OneSpriteStaticActor {
         textures.add(Assets.manager.get(Assets.KATYU1_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU2_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU3_TEXTURE));
+         makeNewValues();
     }
 
     public int aroundByNumber(int number, int plusminus){
