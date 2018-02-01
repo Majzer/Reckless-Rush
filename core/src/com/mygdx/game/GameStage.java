@@ -60,6 +60,7 @@ public class GameStage extends MyStage {
     BokorActor bokor1 , bokor2 , bokor3 , bokor4;
     KatyuActor katyu1, katyu2 , katyu3;
     Music sound;
+    Music music;
     RoadFrame roadFrame;
 
     Queue<RoadFrame> roadFrames;
@@ -69,13 +70,14 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new LinkedList<>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
+            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
             try {
                 roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
             } catch(Exception e){
 
             }
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.add(roadFrame);
@@ -130,10 +132,11 @@ public class GameStage extends MyStage {
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024, 768), batch, game);
         sound = Assets.manager.get(Assets.ThemeSound);
+        music =Assets.manager.get(Assets.Miami_Soul);
         rand = new Random();
 
 
-
+        music.pause();
         sound.setVolume(0.4f);
         sound.setLooping(true);
         sound.play();
@@ -398,10 +401,10 @@ public class GameStage extends MyStage {
         // TODO: 2018. 01. 31. Normálisan lepakolni őket
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
             if(katyu1.getY() + katyu1.getHeight() < car.getY()){
-                katyu1.setY(1000);
+                katyu1.setY(katyu1.getY()+katyu2.getHeight());
             }
             if(katyu2.getY() + katyu2.getHeight() < car.getY()){
-                katyu2.setY(1000);
+                katyu2.setY(katyu2.getY()+katyu1.getHeight());
             }
             if(katyu3.getY() + katyu3.getHeight() < car.getY()){
                 katyu3.setY(1000);

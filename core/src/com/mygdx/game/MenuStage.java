@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -25,6 +26,7 @@ public class MenuStage extends MyStage {
     OneSpriteStaticActor bg, btnStart , btnExit;
     ChangingSpriteActor logo;
     boolean plusz=false;
+    Music music;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
@@ -33,6 +35,11 @@ public class MenuStage extends MyStage {
         //bg.stretchToViewportRealWorldSizeWithoutBlackBars();
         bg.setZIndex(0);
         setDebugAll(true);
+        music  = Assets.manager.get(Assets.Miami_Soul);
+
+        music.play();
+        music.setLooping(true);
+        music.play();
     }
 
     private float passedMilisec = 0;
@@ -40,8 +47,6 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         passedMilisec += delta;
-
-
 
             if (!plusz) {
                 btnStart.rotateBy(-0.05f);

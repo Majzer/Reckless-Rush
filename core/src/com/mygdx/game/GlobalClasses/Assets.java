@@ -194,7 +194,6 @@ public class Assets {
 	public static final AssetDescriptor<Texture> KAMION_J_OLDAL_TOROTT
 			= new AssetDescriptor<Texture>("truck_sprite/damage/jobb_kozep.png",Texture.class);
 
-	// TODO: 2018. 01. 23. Jobb közép és bal középre figyelj oda Bence
 	//Rendőrkocsi ép
 	public static final AssetDescriptor<Texture> RENDOR_B_ELSO_EP
 			= new AssetDescriptor<Texture>("police_car_sprite/intact/bal_elso.png",Texture.class);

@@ -53,18 +53,4 @@ public class RoadFrameActor extends MultiSpriteActor {
         }
         addBaseCollisionRectangleShape();
     }
-
-    public int[] getDestinations(){
-        switch (roadFrame.utminoseg){
-            case joegysavos:
-                break;
-            case joketsavos:
-
-                break;
-            case rosszegysavos:
-
-                break;
-        }
-        return null; //TODO: befejezni
-    }
 }

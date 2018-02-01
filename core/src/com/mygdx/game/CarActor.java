@@ -40,7 +40,7 @@ public class CarActor extends Vehicle {
     public CarActor(GameStage gameStage) {
         super(566,1068, gameStage);
         setOrigintoCenter();
-        addCollisionShape("Frustum", new MyRectangle(1024,22048,-256,-256,getOriginX(), getOriginY()));
+        addCollisionShape("Frustum", new MyRectangle(1024,22048,-256,-512,getOriginX(), getOriginY()));
 
         this.gameStage=gameStage;
         destinations = new int[]{gameStage.getViewport().getScreenX()+200,gameStage.getViewport().getScreenX()+300,gameStage.getViewport().getScreenX()+600,gameStage.getViewport().getScreenX()+800};
