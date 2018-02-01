@@ -60,7 +60,6 @@ public class GameStage extends MyStage {
     HouseActor house1, house2 ,house3, house4;
     BokorActor bokor1 , bokor2 , bokor3 , bokor4;
     Vector<KatyuActor> katyuk = new Vector(1,1);
-    KatyuActor katyu1, katyu2 , katyu3;
     Music sound;
     Music music;
     RoadFrame roadFrame;
@@ -177,16 +176,7 @@ public class GameStage extends MyStage {
         addActor(house3 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
         addActor(house4 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
 
-        //Kátyú actorjai
-
-
         addActor(car = new CarActor(this));
-        for (int i = 0; i<4 ; i++){
-            KatyuActor katyu = new KatyuActor(car.destinations);
-            addActor(katyu);
-            katyuk.add(katyu);
-        }
-
         car.setSpeed(8);
         car2 = new CarActor(this);
         car2.setVisible(false);
@@ -216,7 +206,12 @@ public class GameStage extends MyStage {
             }
         });
 
-
+        //Kátyú actorjai
+        for (int i = 0; i<3 ; i++){
+            KatyuActor katyu = new KatyuActor(car.destinations);
+            addActor(katyu);
+            katyuk.add(katyu);
+        }
 
         addRoadFromQueue();
         //fitWorldToWidth();
@@ -401,50 +396,26 @@ public class GameStage extends MyStage {
         //Eddig tart!
 
         //Katyú csökkenti az autó sebbeségét
-        // TODO: 2018. 01. 31. Sérülést itt kellene szerintem hozzá tenni - Berghoffer
-           for(KatyuActor a : katyuk) {
-               if (a.overlaps(car))
-                   car.setSpeed(4);
-           }
+        for(KatyuActor a : katyuk)
+            if(a.overlaps(car))
+                car.setSpeed(4);
 
-        // TODO: 2018. 01. 31. Normálisan lepakolni őket
-        if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos) {
-            for (KatyuActor a : katyuk) {
-                System.out.println("agyin");
-                if (a.getY() + a.getHeight() < car.getY()) {
-                    a.setY(a.getY() + 3000);
-                    a.makeNewValues();
-                }
+        if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
+            for(KatyuActor a : katyuk){
+                float[] pos = a.getPosition();
+                System.out.println(pos[0] + " " + pos[1]);
+                if(a.getY()<car.getY()-500)
+                    a.makeNewValues(car.getY());
             }
         }
 
 
-        // TODO: 2018. 02. 01. Sávokban az autok elosztásást
+
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos) {
             try{
                 car.destinations = new int[]{
-                        350, 560
+                        300, 400
                 };
-                Vehicle.destinations = new int[]{
-                        350, 560
-                };
-            }catch(Exception e){
-
-            }
-
-        }
-
-        if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos) {
-            try{
-                car.destinations = new int[]{
-                        350, 560
-                };
-                for (Vehicle vehicle: vehicles) {
-                    vehicle.destinations = new int[]{
-                      350, 560
-                    };
-                }
-
             }catch(Exception e){
 
             }

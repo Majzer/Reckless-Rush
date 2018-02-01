@@ -34,7 +34,7 @@ public class KatyuActor extends OneSpriteStaticActor {
         textures.add(Assets.manager.get(Assets.KATYU1_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU2_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU3_TEXTURE));
-         makeNewValues();
+         makeNewValues(0);
     }
 
     public int aroundByNumber(int number, int plusminus){
@@ -44,7 +44,7 @@ public class KatyuActor extends OneSpriteStaticActor {
         return result+change;
     }
 
-    public void makeNewValues(){
+    public void makeNewValues(float carYPos){
         //szog
         setRotation(rand.nextInt(45));
         //text
@@ -52,7 +52,7 @@ public class KatyuActor extends OneSpriteStaticActor {
         //hely
         setPosition(
                 aroundByNumber(destinations[rand.nextInt(destinations.length)], 40),
-                0
+                carYPos + rand.nextInt(2000)+500
         );
     }
 
