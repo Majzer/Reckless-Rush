@@ -204,7 +204,7 @@ public class CarActor extends Vehicle {
     @Override
     public void act(float delta) {
         super.act(delta);
-        System.out.println("getY() = " + getY());
+        //System.out.println("getY() = " + getY());
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerY() < -3) {

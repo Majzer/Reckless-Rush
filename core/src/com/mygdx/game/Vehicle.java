@@ -55,7 +55,7 @@ public class Vehicle extends MultiSpriteActor {
         this.worldRotation = worldRotation;
         if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-100,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
         for(int i : destinations){
-            //System.out.println("i = " + i);
+            System.out.println("i = " + i);
         }
     }
 
