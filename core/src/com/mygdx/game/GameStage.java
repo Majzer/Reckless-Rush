@@ -396,19 +396,16 @@ public class GameStage extends MyStage {
 
         //Katyú csökkenti az autó sebbeségét
         for(KatyuActor a : katyuk)
-            if(a.overlaps(car))
+            if(a.overlaps(car)){
                 car.setSpeed(4);
+            }
 
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
             for(KatyuActor a : katyuk){
-                float[] pos = a.getPosition();
-                System.out.println(pos[0] + " " + pos[1]);
                 if(a.getY()<car.getY()-500)
                     a.makeNewValues(car.getY());
             }
         }
-
-
 
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos) {
             try{

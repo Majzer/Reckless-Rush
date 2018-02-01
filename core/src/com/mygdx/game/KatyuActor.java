@@ -35,6 +35,7 @@ public class KatyuActor extends OneSpriteStaticActor {
         textures.add(Assets.manager.get(Assets.KATYU2_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU3_TEXTURE));
          makeNewValues(0);
+         addBaseCollisionRectangleShape();
     }
 
     public int aroundByNumber(int number, int plusminus){

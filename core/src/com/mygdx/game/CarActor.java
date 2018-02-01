@@ -17,7 +17,8 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 public class CarActor extends Vehicle {
 
     GameStage gameStage;
-    float speed=10;
+    float wantedSpeed=10;
+    float currentSpeed=10;
     int life = 200;
 
     public boolean contains(int[] t, int i){
@@ -144,11 +145,11 @@ public class CarActor extends Vehicle {
     }
 
     public float getSpeed() {
-        return speed;
+        return currentSpeed;
     }
 
     public void setSpeed(float speed) {
-        this.speed = speed;
+        this.currentSpeed = speed;
     }
 
     public void refreshDestinations(){
@@ -224,6 +225,8 @@ public class CarActor extends Vehicle {
     public void act(float delta) {
         super.act(delta);
         System.out.println("getY() = " + getY());
+        if(wantedSpeed > currentSpeed)
+            currentSpeed *= 1.1;
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerY() < -3) {
