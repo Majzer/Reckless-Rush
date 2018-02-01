@@ -393,11 +393,15 @@ public class GameStage extends MyStage {
         //Eddig tart!
 
         //Katyú csökkenti az autó sebbeségét
-        for(KatyuActor a : katyuk)
-            if(a.overlaps(car)){
-                car.setSpeed(4);
+        for(KatyuActor a : katyuk) {
+            ArrayList<String> strings;
+            if (!(strings = a.getOtherOverlappedShapeKeys(car)).isEmpty()) {
+                strings.remove("Frustum");
+                if (!strings.isEmpty()) {
+                    car.setSpeed(4);
+                }
             }
-
+        }
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
             for(KatyuActor a : katyuk){
                 if(a.getY()<car.getY()-500)

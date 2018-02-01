@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
@@ -27,15 +28,14 @@ public class KatyuActor extends OneSpriteStaticActor {
     public KatyuActor(int[] destinations) {
         super(Assets.manager.get(Assets.KATYU1_TEXTURE));
         this.destinations = destinations;
-
+        addBaseCollisionRectangleShape();
         rand = new Random();
 
         //katyu texturak hozzarendelese
         textures.add(Assets.manager.get(Assets.KATYU1_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU2_TEXTURE));
         textures.add(Assets.manager.get(Assets.KATYU3_TEXTURE));
-         makeNewValues(0);
-         addBaseCollisionRectangleShape();
+        makeNewValues(0);
     }
 
     public int aroundByNumber(int number, int plusminus){
