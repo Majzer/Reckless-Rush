@@ -224,7 +224,7 @@ public class CarActor extends Vehicle {
     @Override
     public void act(float delta) {
         super.act(delta);
-        System.out.println("getY() = " + getY());
+        //System.out.println("getY() = " + getY());
         if(wantedSpeed > currentSpeed)
             currentSpeed *= 1.1;
         if(mehet) {

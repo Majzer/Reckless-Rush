@@ -4,6 +4,7 @@ import com.mygdx.game.MyBaseClasses.RoadFrame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Vector;
 
 /**
@@ -38,11 +39,11 @@ public class City {
     public final String nev;
     public final Varostipus varostipus;
     public final Vector<RoadToCity> szomszedok = new Vector();
+    public static final Vector<City> varosSzomszedok = new Vector();
 
 
     public int getIndexOfCityByNameFromRoadToCityArrayList(String s){
-        for(int i = 0; i<szomszedok.size()-1;i++){
-            if(szomszedok.get(i).city.nev.equals(s)) return i;
+        for(int i = 0; i<szomszedok.size()-1;i++){            if(szomszedok.get(i).city.nev.equals(s)) return i;
         }
         return -1;
     }
@@ -54,10 +55,22 @@ public class City {
     static City letenye = new City("Letenye", Varostipus.kisvaros);
     static City nagykanizsa = new City("Nagykanizsa", Varostipus.nagyvaros);
 
+    public City getCityFromNeighboursList(Random r){
+        return varosSzomszedok.get(r.nextInt(varosSzomszedok.size()));
+    }
+
     public City(String nev, Varostipus varostipus) {
 
         this.nev = nev;
         this.varostipus = varostipus;
+
+        varosSzomszedok.add(keszthely);
+        varosSzomszedok.add(zalaegerszeg);
+        varosSzomszedok.add(bak);
+        varosSzomszedok.add(lenti);
+        varosSzomszedok.add(letenye);
+        varosSzomszedok.add(nagykanizsa);
+
         if(nev.equals("Zalaegerszeg")) {
             szomszedok.add(new RoadToCity(40, keszthely, RoadFrame.Utminoseg.joketsavos));
             szomszedok.add(new RoadToCity(15, bak, RoadFrame.Utminoseg.rosszegysavos));
