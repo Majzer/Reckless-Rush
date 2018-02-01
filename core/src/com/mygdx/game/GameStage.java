@@ -72,21 +72,22 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new LinkedList<>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
             try {
-                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
             } catch(Exception e){
 
             }
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.add(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
         }
-        roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.elagazojobbra));
+        roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.szukolo));
+        roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
@@ -418,17 +419,15 @@ public class GameStage extends MyStage {
         }
 
 
-        // TODO: 2018. 02. 01. Sávokban az autok elosztásást 
+        // TODO: 2018. 02. 01. Sávokban az autok elosztásást
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos) {
             try{
                 car.destinations = new int[]{
                         350, 560
                 };
-                for (Vehicle vehicle: vehicles) {
-                    vehicle.destinations = new int[]{
-                            350, 560
-                    };
-                }
+                Vehicle.destinations = new int[]{
+                        350, 560
+                };
             }catch(Exception e){
 
             }
