@@ -18,6 +18,7 @@ public class CarActor extends Vehicle {
 
     GameStage gameStage;
     float speed=10;
+    int life = 200;
 
     public boolean contains(int[] t, int i){
         for(int ii : t){
@@ -175,7 +176,7 @@ public class CarActor extends Vehicle {
         this.worldRotation = worldRotation;
         if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-100,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
         for(int i : destinations){
-            System.out.println("i = " + i);
+            //System.out.println("i = " + i);
         }
     }
 
@@ -200,6 +201,24 @@ public class CarActor extends Vehicle {
         kenyszerithet=false;
     }
 
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getLife() {
+
+        return life;
+    }
+
+    public boolean die(int lif) {
+        if(lif == 0) return true;
+        else return false;
+    }
+
+    public int ChangeLife(int num, int lif) {
+        return lif-num;
+    }
 
     @Override
     public void act(float delta) {

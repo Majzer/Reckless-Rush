@@ -416,6 +416,8 @@ public class GameStage extends MyStage {
 
 
 
+
+
 /*
         if(!(bg.isInFrustum(2))){
             //System.out.println("1 kint");
@@ -480,6 +482,12 @@ public class GameStage extends MyStage {
                             }
                         if (s.equals("BAL_ORR") || s.equals("JOBB_ORR")) {
                             car.setSpeed(4);
+                            car.setLife(car.ChangeLife(10, car.getLife()));
+                            System.out.println(car.getLife()+ "********************************************************");
+                        }
+
+                        if(car.die(car.getLife())) {
+                            game.setScreen(new MenuScreen(game));
                         }
 
                         if(vehicle.isSzembe() && (s.equals("BAL_ORR") || s.equals("JOBB_ORR"))){
