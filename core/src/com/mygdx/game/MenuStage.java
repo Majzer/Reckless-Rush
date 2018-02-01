@@ -41,8 +41,6 @@ public class MenuStage extends MyStage {
         super.act(delta);
         passedMilisec += delta;
 
-
-
             if (!plusz) {
                 btnStart.rotateBy(-0.05f);
                 //btnStart.setPosition(btnStart.getX()+0.19f , btnStart.getY()+0.19f);
