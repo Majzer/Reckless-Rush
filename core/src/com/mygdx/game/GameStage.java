@@ -21,6 +21,7 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 import javax.smartcardio.CardTerminal;
 
@@ -56,6 +57,7 @@ public class GameStage extends MyStage {
     CarActor car2;
     HouseActor house1, house2 ,house3, house4;
     BokorActor bokor1 , bokor2 , bokor3 , bokor4;
+    Vector<KatyuActor> katyuk = new Vector(1,1);
     KatyuActor katyu1, katyu2 , katyu3;
     Music sound;
     Music music;
@@ -121,10 +123,12 @@ public class GameStage extends MyStage {
         }
     }
 
+
+
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024, 768), batch, game);
         sound = Assets.manager.get(Assets.ThemeSound);
-        music =Assets.manager.get(Assets.Miami_Soul);
+        music = Assets.manager.get(Assets.Miami_Soul);
         rand = new Random();
 
 
@@ -165,9 +169,11 @@ public class GameStage extends MyStage {
         addActor(house4 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
 
         //Kátyú actorjai
-        addActor(katyu1 = new KatyuActor(100 , 0 , true));
-        addActor(katyu2 = new KatyuActor(100 , 60 , true));
-        addActor(katyu3 = new KatyuActor(200 , 0 , true));
+        for (int i = 0; i<4 ; i++){
+            KatyuActor katyu = new KatyuActor(car.destinations);
+            addActor(katyu);
+            katyuk.add(katyu);
+        }
 
 
         addActor(car = new CarActor(this));
