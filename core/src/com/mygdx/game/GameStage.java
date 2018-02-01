@@ -401,11 +401,10 @@ public class GameStage extends MyStage {
 
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
             for(KatyuActor a : katyuk){
-                System.out.println("agyin");
-                if(a.getY() + a.getHeight() < car.getY()){
-                    a.setY(a.getY()+3000);
-                    a.makeNewValues();
-                }
+                float[] pos = a.getPosition();
+                System.out.println(pos[0] + " " + pos[1]);
+                if(a.getY()<car.getY()-500)
+                    a.makeNewValues(car.getY());
             }
         }
 
