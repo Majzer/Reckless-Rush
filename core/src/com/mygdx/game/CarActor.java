@@ -175,7 +175,7 @@ public class CarActor extends Vehicle {
         this.worldRotation = worldRotation;
         if(worldRotation) destinations = new int[]{gameStage.getViewport().getScreenY()-100,gameStage.getViewport().getScreenY()-300,gameStage.getViewport().getScreenY()-600,gameStage.getViewport().getScreenY()-800};
         for(int i : destinations){
-            System.out.println("i = " + i);
+            //System.out.println("i = " + i);
         }
     }
 
@@ -207,7 +207,7 @@ public class CarActor extends Vehicle {
         System.out.println("getY() = " + getY());
         if(mehet) {
             if (mehetBalraAlap)
-                if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerY() < -3) {
                     //if(mostani>0&&!mehetJobbra)
                     if(!worldRotation) {
                         if (!(isFirstElementOfArray(destinations, (int) getX()))) {
@@ -230,7 +230,7 @@ public class CarActor extends Vehicle {
 
                 }
             if (mehetJobbraAlap)
-                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.getAccelerometerY() > 3) {
                     //if(mostani<3&&!mehetBalra)
                     if(!worldRotation) {
                         //System.out.println("Mostkénejobbra");
