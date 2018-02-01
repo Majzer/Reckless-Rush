@@ -27,6 +27,7 @@ public class MenuStage extends MyStage {
     ChangingSpriteActor logo;
     boolean plusz=false;
     Music music;
+    Music sound;
 
     public MenuStage(Viewport viewport, Batch batch, RecklessRush game) {
         super(viewport, batch, game);
@@ -36,10 +37,12 @@ public class MenuStage extends MyStage {
         bg.setZIndex(0);
         setDebugAll(true);
         music  = Assets.manager.get(Assets.Miami_Soul);
+        sound  = Assets.manager.get(Assets.ThemeSound);
 
+        sound.pause();
         music.play();
         music.setLooping(true);
-        music.play();
+
     }
 
     private float passedMilisec = 0;

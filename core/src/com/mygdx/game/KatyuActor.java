@@ -5,6 +5,7 @@ import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 import java.util.Random;
+import java.util.Vector;
 
 import sun.java2d.pipe.AAShapePipe;
 
@@ -14,31 +15,46 @@ import sun.java2d.pipe.AAShapePipe;
 
 public class KatyuActor extends OneSpriteStaticActor {
 
-    int text=0;
+    Vector<Texture> textures = new Vector();
 
-    public KatyuActor(int x, int y, boolean rotation) {
+    public void setDestinations(int[] destinations) {
+        this.destinations = destinations;
+    }
+
+    private int[] destinations;
+    Random rand;
+
+    public KatyuActor(int[] destinations) {
         super(Assets.manager.get(Assets.KATYU1_TEXTURE));
-        setPosition(x ,y);
-        Random rand = new Random();
-        float fok = rand.nextInt(45);
-        this.text = rand.nextInt(150);
+        this.destinations = destinations;
 
-        if(rotation){
-            setRotation(fok);
-        }
+        rand = new Random();
 
-
+        //katyu texturak hozzarendelese
+        textures.add(Assets.manager.get(Assets.KATYU1_TEXTURE));
+        textures.add(Assets.manager.get(Assets.KATYU2_TEXTURE));
+        textures.add(Assets.manager.get(Assets.KATYU3_TEXTURE));
+         makeNewValues(0);
     }
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        System.out.println(text);
-        if(text > 50 && text < 100){
-            setTexture(Assets.manager.get(Assets.KATYU2_TEXTURE));
-        }else if (text > 100){
-            setTexture(Assets.manager.get(Assets.KATYU3_TEXTURE));
-        } else setTexture(Assets.manager.get(Assets.KATYU1_TEXTURE));
-
+    public int aroundByNumber(int number, int plusminus){
+        int result = number, change = rand.nextInt(plusminus);
+        if(rand.nextBoolean())
+            change *= -1;
+        return result+change;
     }
+
+    public void makeNewValues(float carYPos){
+        //szog
+        setRotation(rand.nextInt(45));
+        //text
+        setTexture(textures.get(rand.nextInt(textures.size())));
+        //hely
+        setPosition(
+                aroundByNumber(destinations[rand.nextInt(destinations.length)], 40),
+                carYPos + rand.nextInt(2000)+500
+        );
+    }
+
+
 }

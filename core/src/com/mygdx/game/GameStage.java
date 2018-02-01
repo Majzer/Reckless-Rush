@@ -21,9 +21,9 @@ import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Vector;
 
 import javax.smartcardio.CardTerminal;
 
@@ -59,7 +59,7 @@ public class GameStage extends MyStage {
     CarActor car2;
     HouseActor house1, house2 ,house3, house4;
     BokorActor bokor1 , bokor2 , bokor3 , bokor4;
-    KatyuActor katyu1, katyu2 , katyu3;
+    Vector<KatyuActor> katyuk = new Vector(1,1);
     Music sound;
     Music music;
     RoadFrame roadFrame;
@@ -127,10 +127,12 @@ public class GameStage extends MyStage {
         }
     }
 
+
+
     public GameStage(final Batch batch, RecklessRush game) {
         super(new ExtendViewport(1024, 768), batch, game);
         sound = Assets.manager.get(Assets.ThemeSound);
-        music =Assets.manager.get(Assets.Miami_Soul);
+        music = Assets.manager.get(Assets.Miami_Soul);
         rand = new Random();
 
 
@@ -170,12 +172,6 @@ public class GameStage extends MyStage {
         addActor(house3 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
         addActor(house4 = new HouseActor(getViewport().getScreenWidth()-127,0, true));
 
-        //Kátyú actorjai
-        addActor(katyu1 = new KatyuActor(100 , 0 , true));
-        addActor(katyu2 = new KatyuActor(100 , 60 , true));
-        addActor(katyu3 = new KatyuActor(200 , 0 , true));
-
-
         addActor(car = new CarActor(this));
         car.setSpeed(8);
         car2 = new CarActor(this);
@@ -206,7 +202,12 @@ public class GameStage extends MyStage {
             }
         });
 
-
+        //Kátyú actorjai
+        for (int i = 0; i<3 ; i++){
+            KatyuActor katyu = new KatyuActor(car.destinations);
+            addActor(katyu);
+            katyuk.add(katyu);
+        }
 
         addRoadFromQueue();
         //fitWorldToWidth();
@@ -392,27 +393,17 @@ public class GameStage extends MyStage {
         //Eddig tart!
 
         //Katyú csökkenti az autó sebbeségét
-        // TODO: 2018. 01. 31. Sérülést itt kellene szerintem hozzá tenni - Berghoffer
-        if(katyu1.overlaps(car) || katyu2.overlaps(car) || katyu3.overlaps(car)){
-            car.setSpeed(4);
+        for(KatyuActor a : katyuk)
+            if(a.overlaps(car))
+                car.setSpeed(4);
+
+        if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
+            for(KatyuActor a : katyuk){
+                if(a.getY()<car.getY()-500)
+                    a.makeNewValues(car.getY());
+            }
         }
 
-        // TODO: 2018. 01. 31. Normálisan lepakolni őket
-        if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
-            if(katyu1.getY() + katyu1.getHeight() < car.getY()){
-                katyu1.setY(katyu1.getY()+katyu2.getHeight());
-                katyu1.setRotation(rand.nextInt(360));
-                katyu1.text=rand.nextInt(150);
-            }
-            if(katyu2.getY() + katyu2.getHeight() < car.getY()){
-                katyu2.setY(katyu2.getY()+katyu1.getHeight());
-                katyu2.setRotation(rand.nextInt(360));
-                katyu2.text=rand.nextInt(150);
-            }
-            if(katyu3.getY() + katyu3.getHeight() < car.getY()){
-                katyu3.setY(1000);
-            }
-        }
 
 
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos) {
@@ -425,6 +416,8 @@ public class GameStage extends MyStage {
             }
 
         }
+
+
 
 
 
@@ -504,6 +497,12 @@ public class GameStage extends MyStage {
                             }
                         if (s.equals("BAL_ORR") || s.equals("JOBB_ORR")) {
                             car.setSpeed(4);
+                            car.setLife(car.ChangeLife(10, car.getLife()));
+                            System.out.println(car.getLife()+ "********************************************************");
+                        }
+
+                        if(car.die(car.getLife())) {
+                            game.setScreen(new MenuScreen(game));
                         }
 
                         if(vehicle.isSzembe() && (s.equals("BAL_ORR") || s.equals("JOBB_ORR"))){
