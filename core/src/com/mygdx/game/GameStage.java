@@ -20,12 +20,14 @@ import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
 import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Vector;
 
 import javax.smartcardio.CardTerminal;
 
-import sun.misc.Queue;
+import java.util.Deque;
 
 /**
  * Created by tanulo on 2018. 01. 08..
@@ -65,20 +67,26 @@ public class GameStage extends MyStage {
 
     Queue<RoadFrame> roadFrames;
     RoadFrameActor lastRoadFrameActor = null;
+    RoadFrameActor lowestRoadFrameActor=null;
 
     public Queue<RoadFrame> generateMap(City a, City b) {
-        Queue<RoadFrame> roadFrames = new Queue<RoadFrame>();
+        Queue<RoadFrame> roadFrames = new LinkedList<>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
             roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+            try {
+                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
+            } catch(Exception e){
+
+            }
         }
         roadFrame = new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
-        roadFrames.enqueue(roadFrame);
+        roadFrames.add(roadFrame);
         for (int i = 0; i < 5; i++) {
-            roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.ures));
+            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
         }
-        roadFrames.enqueue(new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.elagazojobbra));
+        roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra));
         return roadFrames;
     }
 
@@ -88,7 +96,7 @@ public class GameStage extends MyStage {
 
     private void addRoadFromQueue() {
         try {
-            RoadFrameActor newRoadFrameActor = new RoadFrameActor(roadFrames.dequeue(), this);
+            RoadFrameActor newRoadFrameActor = new RoadFrameActor(roadFrames.remove(), this);
             addActor(newRoadFrameActor);
             newRoadFrameActor.setZIndex(1);
             if(newRoadFrameActor.roadFrame.tipus == RoadFrame.Tipus.elagazojobbra) kanyarodos = newRoadFrameActor;
@@ -109,7 +117,7 @@ public class GameStage extends MyStage {
 
             }
             lastRoadFrameActor = newRoadFrameActor;
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             //e.printStackTrace();
         }
     }
@@ -254,16 +262,17 @@ public class GameStage extends MyStage {
         }
 
         if(lastRoadFrameActor.getRoadFrame().tipus == RoadFrame.Tipus.elagazojobbra){
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) ||  Gdx.input.getAccelerometerY() > 3) {
                 if(worldRotation!=worldRotation.r90 && car.getY()>(lastRoadFrameActor.getY()+49)){
                     car.setRotationBase(-90);
                     for(Vehicle vehicle : vehicles){
-                        vehicle.setRotationBase(-90);
+                        vehicle.setRotationBase(270);
                     }
 
                     worldRotation = worldRotation.r90;
                     rotate(worldRotation.r90);
                     getViewport().setScreenPosition((int)(lastRoadFrameActor.getX()+lastRoadFrameActor.getWidth()),(int)(lastRoadFrameActor.getY()+lastRoadFrameActor.getHeight()));
+
                     car.setWorldRotation(true);
                             roadFrames = generateMap(new City("Keszthely", City.Varostipus.nagyvaros),new City("Nagykanizsa", City.Varostipus.nagyvaros));
                     addRoadFromQueue();
@@ -587,6 +596,12 @@ public class GameStage extends MyStage {
                         if((s.equals("JOBB_ORR") || s.equals("BAL_ORR")) && vehicle2.isSzembe()){
                             vehicle.setSpeed(0);
                             vehicle2.setSpeed(0);
+                            vehicle.setGoToRightSide(false);
+                            vehicle2.setGoToRightSide(false);
+                            vehicle.setGoToLeftSide(false);
+                            vehicle2.setGoToLeftSide(false);
+                            vehicle.setGoToSide(false);
+                            vehicle2.setGoToSide(false);
                             vehicle.mehet=false;
                             vehicle2.mehet=false;
                             addRobbanas(vehicle.getX(),vehicle.getY());
