@@ -409,6 +409,7 @@ public class GameStage extends MyStage {
         }
 
 
+
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.joegysavos) {
             try{
                 car.destinations = new int[]{
