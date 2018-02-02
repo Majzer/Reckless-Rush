@@ -226,7 +226,7 @@ public class CarActor extends Vehicle {
         super.act(delta);
         //System.out.println("getY() = " + getY());
         if(wantedSpeed > currentSpeed)
-            currentSpeed *= 1.001;
+            currentSpeed *= 1.01;
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerY() < -3) {
