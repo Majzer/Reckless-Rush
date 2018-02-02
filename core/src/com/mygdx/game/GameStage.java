@@ -152,7 +152,7 @@ public class GameStage extends MyStage {
         roadFrames = generateMap(a, b);
         vehicles = new ArrayList<Vehicle>();
         //addActor(bg =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,100));
-        //addActor(bg2 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,bg.getY()+bg.getHeight()/1.5f));
+        //addActor(bg2 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,bg.getY()+bg.getHeight()/1.s5f));
 
 //        System.out.println(bg.getY());
 //        System.out.println(bg.isInFrustum());
