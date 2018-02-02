@@ -289,7 +289,7 @@ public class CarActor extends Vehicle {
                 }
 
             if (mehetBalra) {
-                if (getRotation() < rotationBase+90) rotateBy(1);
+                if (getRotation() < rotationBase +90) rotateBy(5);
                 if(!worldRotation) {
                     if (!(contains(destinations, (int) getX()))) {
                         setX(getX() - change);
@@ -313,7 +313,7 @@ public class CarActor extends Vehicle {
                 }
             }
             if (mehetJobbra) {
-                if (getRotation() > rotationBase - 90) rotateBy(-1);
+                if (getRotation() > rotationBase - 90) rotateBy(-5);
                 if (!worldRotation) {
                     if (!(contains(destinations, (int) getX()))) {
                         setX(getX() + change);
