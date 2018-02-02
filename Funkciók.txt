@@ -1,0 +1,7 @@
+Funkciók:
+  -Egyedi texturák
+  -Saját fejlesztésú törés model
+  -Kocsi íránytása számítógépen nyílakkal mobil eszközön az eszköz döntögetésével.
+  -80-as évek hangulata
+  -Féktelen száguldás(szó szerint)
+  

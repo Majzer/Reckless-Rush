@@ -2,11 +2,12 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -17,17 +18,12 @@ import com.mygdx.game.MyBaseClasses.RoadFrameActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.City;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyActor;
 import com.mygdx.game.MyBaseClasses.Scene2D.MyStage;
-import com.mygdx.game.MyBaseClasses.Scene2D.OffsetSprite;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Vector;
-
-import javax.smartcardio.CardTerminal;
-
-import java.util.Deque;
 
 /**
  * Created by tanulo on 2018. 01. 08..
@@ -161,8 +157,8 @@ public class GameStage extends MyStage {
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,1430));
 
-
         //Út melletti objektumoknak az actorai
+
         addActor(bokor1 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
         addActor(bokor2 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), getViewport().getScreenWidth()-127 , 0 , false));
         addActor(bokor3 = new BokorActor(Assets.manager.get(Assets.BUSH_LINE_TEXTURE), 0 , 0 , true));
@@ -215,6 +211,7 @@ public class GameStage extends MyStage {
 
     @Override
     public void init() {
+
 
     }
 
@@ -404,8 +401,10 @@ public class GameStage extends MyStage {
         }
         if(roadFrame.utminoseg == RoadFrame.Utminoseg.rosszegysavos){
             for(KatyuActor a : katyuk){
-                if(a.getY()<car.getY()-500)
+                if(a.getY()<car.getY()-500) {
                     a.makeNewValues(car.getY());
+                    a.setZIndex(5);
+                }
             }
         }
 
@@ -453,11 +452,11 @@ public class GameStage extends MyStage {
         }
         if (roadFrames.isEmpty()) {
             try{
-                //if(kanyarodos==null){
-                    //b = a.getCityFromNeighboursList(rand);
-                    //roadFrames = generateMap(a, b);
-                   // a=b;
-                //}
+
+                    b = a.getCityFromNeighboursList(rand);
+                    roadFrames = generateMap(a, b);
+                    a=b;
+
 
             }catch(Exception e){
 
@@ -648,5 +647,13 @@ public class GameStage extends MyStage {
         if(!van){
             addActor(explosionActor = new ExplosionActor(x,y));
         }
+    }
+
+    public Label.LabelStyle getLabelStyle() {
+        Label.LabelStyle style;
+        style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+        style.font = Assets.manager.get(Assets.ARIAL_30_FONT);
+        style.fontColor = Color.PINK;
+        return style;
     }
 }
