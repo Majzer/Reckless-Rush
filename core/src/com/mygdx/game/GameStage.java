@@ -71,14 +71,14 @@ public class GameStage extends MyStage {
     public Queue<RoadFrame> generateMap(City a, City b) {
         Queue<RoadFrame> roadFrames = new LinkedList<>();
         for (int i = 0; i < a.szomszedok.get(a.getIndexOfCityByNameFromRoadToCityArrayList(b.nev)).getDistance(); i++) {
-            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
+            roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
             try {
-                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joegysavos, RoadFrame.Tipus.ures));
+                roadFrames.add(new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.ures));
             } catch(Exception e){
 
             }
         }
-        roadFrame = new RoadFrame(RoadFrame.Utminoseg.rosszegysavos, RoadFrame.Tipus.elagazojobbra);
+        roadFrame = new RoadFrame(RoadFrame.Utminoseg.joketsavos, RoadFrame.Tipus.elagazojobbra);
         roadFrame.telepulestabla = a.nev;
         roadFrame.telepulestablavege = true;
         roadFrames.add(roadFrame);
@@ -156,7 +156,7 @@ public class GameStage extends MyStage {
 
 //        System.out.println(bg.getY());
 //        System.out.println(bg.isInFrustum());
-/*        addActor(ba1 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()));
+/*        addActor(ba1 = new BokorActor(Assets.manager.get(Asses.BOKOR_EP_TEXTURE), 470,bg.getY()));
         addActor(ba2 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470, bg.getY()+250));
         addActor(ba3 = new BokorActor(Assets.manager.get(Assets.BOKOR_EP_TEXTURE), 470,bg.getY()+500));*/
         //addActor(bg3 =new BgActor(Assets.manager.get(Assets.ROAD_TEXTURE),0,1430));
