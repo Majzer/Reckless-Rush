@@ -221,6 +221,14 @@ public class CarActor extends Vehicle {
         return lif-num;
     }
 
+    public float getWantedSpeed() {
+        return wantedSpeed;
+    }
+
+    public void setWantedSpeed(float wantedSpeed) {
+        this.wantedSpeed = wantedSpeed;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -229,13 +237,15 @@ public class CarActor extends Vehicle {
             currentSpeed *= 1.01;
         else
             currentSpeed /= 1.01;
+        int change = 2;
+
         if(mehet) {
             if (mehetBalraAlap)
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerY() < -3) {
                     //if(mostani>0&&!mehetJobbra)
                     if(!worldRotation) {
                         if (!(isFirstElementOfArray(destinations, (int) getX()))) {
-                            setX(getX() - 1);
+                            setX(getX() - change);
                             if (mehetJobbra) {
                                 mehetJobbra = false;
                             }
@@ -243,7 +253,7 @@ public class CarActor extends Vehicle {
                         }
                     } else {
                         if (!(isFirstElementOfArray(destinations, (int) getY()))) {
-                            setY(getY() + 1);
+                            setY(getY() + change);
                             if (mehetJobbra) {
                                 mehetJobbra = false;
                             }
@@ -260,7 +270,7 @@ public class CarActor extends Vehicle {
                         //System.out.println("Mostkénejobbra");
                         if (!(isLastElementOfArray(destinations, (int) getX()))) {
                            // System.out.println("Mostmegyjobbra");
-                            setX(getX() + 1);
+                            setX(getX() + change);
                             if (mehetBalra) {
                                 mehetBalra = false;
                             }
@@ -268,7 +278,7 @@ public class CarActor extends Vehicle {
                         }
                     } else {
                         if (!(isLastElementOfArray(destinations, (int) getY()))) {
-                            setY(getY() - 1);
+                            setY(getY() - change);
                             if (mehetBalra) {
                                 mehetBalra = false;
                             }
@@ -282,7 +292,7 @@ public class CarActor extends Vehicle {
                 if (getRotation() < rotationBase+90) rotateBy(1);
                 if(!worldRotation) {
                     if (!(contains(destinations, (int) getX()))) {
-                        setX(getX() - 1);
+                        setX(getX() - change);
                         mehetBalraAlap = false;
                         mehetJobbraAlap = true;
                     } else {
@@ -292,7 +302,7 @@ public class CarActor extends Vehicle {
                     }
                 } else {
                     if (!(contains(destinations, (int) getY()))) {
-                        setY(getY() + 1);
+                        setY(getY() + change);
                         mehetBalraAlap = false;
                         mehetJobbraAlap = true;
                     } else {
@@ -306,7 +316,7 @@ public class CarActor extends Vehicle {
                 if (getRotation() > rotationBase - 90) rotateBy(-1);
                 if (!worldRotation) {
                     if (!(contains(destinations, (int) getX()))) {
-                        setX(getX() + 1);
+                        setX(getX() + change);
                         mehetJobbraAlap = false;
                         mehetBalraAlap = true;
                     } else {
@@ -316,7 +326,7 @@ public class CarActor extends Vehicle {
                     }
                 } else {
                     if (!(contains(destinations, (int) getY()))) {
-                        setY(getY() - 1);
+                        setY(getY() - change);
                         mehetJobbraAlap = false;
                         mehetBalraAlap = true;
                     } else {

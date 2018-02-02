@@ -23,6 +23,7 @@ public class Vehicle extends MultiSpriteActor {
     public Vehicle(float width, float height, GameStage gameStage) {
         super(width, height);
         this.gameStage = gameStage;
+        setZIndex(Integer.MAX_VALUE);
     }
 
     public boolean isSzembe() {

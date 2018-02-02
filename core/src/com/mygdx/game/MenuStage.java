@@ -35,7 +35,7 @@ public class MenuStage extends MyStage {
         bg.setPosition(0,0);
         //bg.stretchToViewportRealWorldSizeWithoutBlackBars();
         bg.setZIndex(0);
-        setDebugAll(true);
+        //setDebugAll(true);
         music  = Assets.manager.get(Assets.Miami_Soul);
         sound  = Assets.manager.get(Assets.ThemeSound);
 

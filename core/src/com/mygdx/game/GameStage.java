@@ -504,18 +504,17 @@ public class GameStage extends MyStage {
                             System.out.println(car.getLife()+ "********************************************************");
                         }
 
-                        if(car.die(car.getLife())) {
-                            game.setScreen(new MenuScreen(game));
-                        }
-
-                        if(vehicle.isSzembe() && (s.equals("BAL_ORR") || s.equals("JOBB_ORR"))){
+                        if(car.die(car.getLife())){
                             addRobbanas(car.getX(), car.getY());
                             explosionActor.setPosition(car.getX() + car.getWidth() - explosionActor.getWidth() / 2, car.getY() + car.getHeight() - explosionActor.getHeight() / 2);car.setSpeed(0);
                             vehicle.setSpeed(0);
                             car.mehet = false;
-                            if (explosionActor.vege) {
-                                game.setScreen(new MenuScreen(game));
-                            }
+                            car.setWantedSpeed(0);
+
+                        }
+                        if (explosionActor.vege) {
+                            car.setLife(0);
+                            game.setScreen(new MenuScreen(game));
                         }
                         ChangingOffsetSprite changingOffsetSprite = (ChangingOffsetSprite) car.getSprite(s);
                         changingOffsetSprite.changeOnce();

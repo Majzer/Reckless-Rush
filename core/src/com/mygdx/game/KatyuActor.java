@@ -28,6 +28,7 @@ public class KatyuActor extends OneSpriteStaticActor {
     public KatyuActor(int[] destinations) {
         super(Assets.manager.get(Assets.KATYU1_TEXTURE));
         this.destinations = destinations;
+        setZIndex(2);
         addBaseCollisionRectangleShape();
         rand = new Random();
 
