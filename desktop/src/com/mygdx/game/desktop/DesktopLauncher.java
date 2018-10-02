@@ -6,8 +6,8 @@ import com.mygdx.game.RecklessRush;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width=1024;
+		 config = new LwjglApplicationConfiguration();
+		config.width=1920;
 		config.height=768;
 		new LwjglApplication(new RecklessRush(), config);
 	}
