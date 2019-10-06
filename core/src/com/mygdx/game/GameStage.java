@@ -126,7 +126,7 @@ public class GameStage extends MyStage {
 
 
     public GameStage(final Batch batch, RecklessRush game) {
-        super(new ExtendViewport(1024, 768), batch, game);
+        super(new ExtendViewport(game.WORLD_WIDTH, game.WORLD_HEIGHT), batch, game);
         sound = Assets.manager.get(Assets.ThemeSound);
         music = Assets.manager.get(Assets.Miami_Soul);
         rand = new Random();
