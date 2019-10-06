@@ -9,6 +9,9 @@ import com.mygdx.game.MyBaseClasses.MyGame;
 import com.mygdx.game.GlobalClasses.Assets;
 
 public class RecklessRush extends MyGame {
+	
+	public static final int WORLD_WIDTH = 1024;
+	public static final int WORLD_HEIGHT = 768;
 
 	public TextButton.TextButtonStyle btnStart() {
 		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
